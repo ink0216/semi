@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>프로필</title>
+
+  <link rel="stylesheet" href="/css/myPage-style.css">
+</head>
+<body>
+
+  <main>
+
+    <!-- 임시 헤더 -->
+    <header>
+      <h1>헤더</h1>
+      유럽 아시아 아프리카 아메리카 
+    </header>
+    <h1>마이페이지</h1>
+    
+    <section>
+
+      <!-- 임시 사이드메뉴 -->
+          <section class="left-side">
+            사이드 메뉴
+          
+            <ul>
+              <li>프로필</li>
+              <li>내정보</li>
+              <li>비밀번호 변경</li>
+              <li>회원 탈퇴</li>
+              <li>내가 쓴글</li>
+            </ul>
+          </section>
+          <th:block th:replace="~{myPage/sideMenu}"></th:block>
+  
+      <!-- 마이페이지 메인 -->
+      <div class="myPage-main">
+        <h1>프로필</h1>
+        
+        <div>
+          <img src="/images/cat.jpg" alt=""
+            id="profilImg">
+        </div>
+  
+        <div>
+          <button>이미지 변경</button>
+        </div> 
+  
+        <div>
+          닉네임 :
+        </div>
+  
+        <div>이메일 :</div>
+        <div>주소 :</div>
+        <div>
+          <button>비밀번호 변경</button>
+        </div>
+      </div>
+    </section>
+
+
+
+  </main>
+
+  <!--임시 푸터 -->
+  <footer>
+    <p>Copyright &copy; KH Information Educational Institute A-Class</p>
+  
+    <article>
+        <a href="#">프로젝트 소개</a>    
+        <span>|</span>
+        <a href="#">이용약관</a>    
+        <span>|</span>
+        <a href="#">개인정보처리방침</a>    
+        <span>|</span>
+        <a href="#">고객센터</a>    
+    </article>
+  </footer>
+  
+  
+</body>
+</html>
