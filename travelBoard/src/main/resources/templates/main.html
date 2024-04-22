@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"> 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,7 +21,18 @@
             </div>
 
             <button>로그인</button>
+
+
+            <select name="대륙 선택" id="selectContinent">
+                <option value="asia">아시아</option>
+                <option value="europe">유럽</option>
+                <option value="africa">아프리카</option>
+                <option value="northAmerica">북아메리카</option>
+                <option value="southAmerica">남아메리카</option>
+            </select>
         </form>
+
+
     
 </body>
 </html>
