@@ -13,7 +13,7 @@
 body{
     display: flex;
     flex-direction: column; /* 중심축 방향 세로 */
-    align-items: center;    /* 교차축 방향 가운데 정렬 */
+    /* align-items: center;    교차축 방향 가운데 정렬 */
     min-height: 100vh;      /* 최소 높이를 화면 비율 100% */ 
   }
 
@@ -23,6 +23,8 @@ body{
     text-align: center;
     max-width: 320px;
     width: 100%;
+
+
 }
 
 #loginForm h2 {
@@ -54,11 +56,13 @@ body{
 
 #loginForm button {
     background-color: skyblue;
-    color: #fff;
-    border: none;
+    border:blue;
+    
     padding: 10px 0;
     width: 150px;
     cursor: pointer;
+    border-radius:50px;
+    margin-top:40px;
 }
 
 #loginForm button:hover {
