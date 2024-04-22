@@ -33,18 +33,15 @@ body{
     width: 100%;
     padding: 10px;
     margin-bottom: 0px;
-    border: 1px solid #ccc;
    
     box-sizing: border-box;
 }
-
 
 
 #memberPw {
     width: 100%;
     padding: 10px;
     margin-bottom: 0px;
-    border: 1px solid #ccc;
    
     box-sizing: border-box;
 }
@@ -53,18 +50,19 @@ body{
 
 
 
+
+
 #loginForm button {
-    background-color: #007bff;
+    background-color: skyblue;
     color: #fff;
     border: none;
-    border-radius: 4px;
     padding: 10px 0;
     width: 150px;
     cursor: pointer;
 }
 
 #loginForm button:hover {
-    background-color: #0056b3;
+    cursor:pointer;
 }
 
 
