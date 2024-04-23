@@ -1,5 +1,8 @@
 package edu.kh.travel.member.model.mapper;
 
-public class MemberMapper {
+import org.apache.ibatis.annotations.Mapper;
+
+@Mapper
+public interface MemberMapper {
 
 }

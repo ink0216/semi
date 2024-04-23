@@ -83,7 +83,7 @@
             </ul>
           </section>
         
-          <!-- 마이페이지 메인 -->
+          <!-- 마이페이지 본문 -->
         <section class="myPage-main">
           
           <h1 class="myPage-title">프로필</h1>
@@ -94,10 +94,13 @@
                   id="profilImg">
               </div>
         
-              <div>
-                <button class="change-btn">이미지 변경</button>
+              <div class="profile-btn">
+                <label for="imageInput">이미지 선택</label>
+
+                <input type="file" id="imageInput" name="profileImg">
+                <button>이미지 변경</button>
               </div> 
-        
+              
               <div class="myPage-row">
                 <label>닉네임 :</label>
                 <span></span>
