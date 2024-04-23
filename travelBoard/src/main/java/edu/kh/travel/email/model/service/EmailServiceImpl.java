@@ -1,5 +1,8 @@
 package edu.kh.travel.email.model.service;
 
-public class EmailServiceImpl {
+import org.springframework.stereotype.Service;
+
+@Service
+public class EmailServiceImpl implements EmailService {
 
 }
