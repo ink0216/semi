@@ -71,16 +71,18 @@
 
 .myPage-row > * {
   font-size: 17px;
-  font-weight: bold;
 }
 
 /* 행 제목 */
 .myPage-row > label{
-  width: 40%;
+  width: 35%;
+  font-weight: bold;
+  color: rgb(10, 10, 97);
 }
 
+/* 행 내부 span 태그 */
 .myPage-row > span{
-  width: 60%;
+  width:100%;
 }
 
 /* 행 내부 input 태그 */
@@ -172,7 +174,7 @@ button{
   height: 40px;
   border: none;
   background-color: skyblue;
-  color: white;s
+  color: white;
 }
 
 button:hover{
@@ -206,11 +208,29 @@ button:hover{
 /* 내가 쓴 글 */
 
 .list-writing{
-  border: 1px solid black;
   width: 100%;
   min-height: 670px;
+  margin-top: 40px;
 }
 
 .list-table{
   border-collapse: collapse;
+  width: 100%;
+}
+
+.list-table tr > *{
+  height: 50px;
+  text-align: center;
+}
+
+.list-table > thead{
+  font-size: 18px;
+  background-color: rgb(79, 189, 233);
+}
+
+.list-table > tbody  {
+  border-bottom: 1px solid rgb(79, 189, 233);
+}
+.list-table > tbody >tr {
+  border-bottom: 1px solid rgb(79, 189, 233);
 }
