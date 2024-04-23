@@ -75,15 +75,63 @@
             <a href="myPage-secession.html">회원 탈퇴</a>
           </li>
           <li>
-            <a href="">내가 쓴글</a>
+            <a href="myPage-writing.html">내가 쓴글</a>
+
           </li>
         </ul>
       </section>
 
 
       <!-- 화면 -->
+      <section class="myPage-main">
+        <h1 class="myPage-title">내정보</h1>
 
-      <h1 class="myPage-title">내정보</h1>
+
+        <form action="" name="myPageFrm">
+          
+          <div class="myPage-row">
+            <label>닉네임</label>
+
+            <input type="text" name="memberNickname" 
+              maxlength="10" id="memberNickname" 
+              th:value="${session.loginMember.memberNickname}">
+          </div>
+
+          <div class="myPage-row">
+            <label>전화번호</label>
+            <input type="text" name="memberTel" 
+              maxlength="11" id="memberTel"
+              th:value="${session.loginMember.memberTel}">
+          </div>
+
+          <div class="myPage-row info-title">
+            <span>주소</span>
+          </div>
+
+          <div class="myPage-row info-address">
+            <input type="text" name="memberAddress" 
+              placeholder="우편번호" id="postcode"
+              th:value="${postcode}">
+            
+              <button type="button">검색</button>
+          </div>
+
+          <div class="myPage-row info-address">
+            <input type="text" name="memberAddress" 
+              placeholder="도로명/지번 주소" id="address"
+              th:value="${address}">
+          </div>
+          
+          <div class="myPage-row info-address">
+            <input type="text" name="memberAddress" 
+              placeholder="상세 주소" id="detailAddress"
+              th:value="${detailAddress}">
+          </div>
+
+          <button class="myPage-submit">수정하기</button>
+        </form>
+      </section>
+
     </section>
 
   </main>

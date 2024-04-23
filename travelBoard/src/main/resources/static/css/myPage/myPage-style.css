@@ -66,7 +66,7 @@
 
   display: flex;
   align-items: center;
-  border-bottom : 2px solid #ddd;
+  border-bottom : 3px solid rgb(155, 196, 212);
 }
 
 .myPage-row > * {
@@ -77,12 +77,10 @@
 /* 행 제목 */
 .myPage-row > label{
   width: 30%;
-  color: #455ba8;
 }
 
 .myPage-row > span{
   width: 70%;
-  color: #455ba8;
 }
 
 /* 행 내부 input 태그 */
@@ -96,7 +94,7 @@
 
 /* 제출 버튼 */
 .myPage-submit{
-  width: 100%;
+  width: 70%;
   padding: 10px;
   margin: 50px 0;
   
@@ -104,9 +102,14 @@
   font-size: 20px;
   font-weight: bold;
 
-  background-color: #455ba8;
+  background-color: skyblue;
   color: white;
   cursor: pointer;
+}
+
+.myPage-submit:hover{
+  background-color: rgb(182, 203, 211);
+  color: rgb(110, 171, 196);
 }
 
 /* form태그 */
@@ -127,8 +130,32 @@ form[name='myPageFrm']{
     /* 마이페이지 프로필 */
 
 .profile-image{
-  border: 1px solid black;
+  border: 3px solid black;
   width: 200px;
   height: 200px;
   border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+
+  margin: 5px;
+}
+
+.change-btn{
+  width: 150px;
+  height: 40px;
+  border: none;
+  background-color: skyblue;
+  color: white;
+}
+
+/* ***************************************** */
+/* 내정보 변경 */
+button{
+  width: 130px;
+  height: 40px;
+  border: none;
+  background-color: skyblue;
+  color: white;s
 }
