@@ -10,6 +10,6 @@ import lombok.RequiredArgsConstructor;
 @Transactional
 @RequiredArgsConstructor
 public class BoardServiceImpl implements BoardService{
-	private final MemberMapper mapper;
+
 	
 }

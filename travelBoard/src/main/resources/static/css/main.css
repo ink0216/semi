@@ -5,6 +5,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
+    
 }
 
 #loginForm {
@@ -13,6 +14,7 @@ body {
     text-align: center;
     max-width: 320px;
     width: 100%;
+    position:relative;
 
 
 }
@@ -123,10 +125,10 @@ label[for="toggle"]{
     margin-top: 5px;
     border: 2px solid skyblue;
     background-color: white;
-    top:510px;
+    top:250px;
     
     
     border-radius: 10px;
     text-align: left;
-    left: 800px;
+    left: 400px;
 }
