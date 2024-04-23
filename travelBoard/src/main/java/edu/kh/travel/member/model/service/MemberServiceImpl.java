@@ -1,6 +1,5 @@
 package edu.kh.travel.member.model.service;
 
-<<<<<<< HEAD
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -52,12 +51,5 @@ public class MemberServiceImpl implements MemberService {
 		return loginMember;
 	}
 	
-	
-=======
-import org.springframework.stereotype.Service;
-
-@Service
-public class MemberServiceImpl implements MemberService {
->>>>>>> 3e8035eb9d1a32e461dbb7b910db097412cd45de
 
 }
