@@ -1,5 +1,6 @@
 package edu.kh.travel.member.controller;
 
+<<<<<<< HEAD
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +18,11 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @RequestMapping("member")
 @Slf4j
+=======
+import org.springframework.stereotype.Controller;
+
+@Controller
+>>>>>>> 3e8035eb9d1a32e461dbb7b910db097412cd45de
 public class MemberController {
 	
 	@Autowired

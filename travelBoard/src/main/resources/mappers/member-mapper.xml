@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<<<<<<< HEAD
 <mapper namespace = "edu.kh.travel.member.model.mapper.MemberMapper">
 
 <select id="login" resultType = "Member">
@@ -11,4 +12,10 @@ WHERE MEMBER_EMAIL = #{memberEmail}
 AND MEMBER_DEL_FL = 'N'
 
 </select>
+=======
+<mapper namespace="edu.kh.travel.board.model.mapper.BoardMapper">
+
+
+	
+>>>>>>> 3e8035eb9d1a32e461dbb7b910db097412cd45de
 </mapper>

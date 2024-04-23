@@ -1,5 +1,8 @@
 package edu.kh.travel.email.model.mapper;
 
-public class EmailMapper {
+import org.apache.ibatis.annotations.Mapper;
+
+@Mapper
+public interface EmailMapper {
 
 }
