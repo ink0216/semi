@@ -249,3 +249,60 @@ INSERT INTO "CONTINENT" VALUES(
 'NA', '북아메리카'
 );
 COMMIT;
+------------------------------------------------
+--게시글 번호 시퀀스 생성
+CREATE SEQUENCE SEQ_BOARD_NO NOCACHE; --이것만 만듦!
+--게시글 샘플 데이터 삽입
+INSERT INTO BOARD VALUES
+(SEQ_BOARD_NO.NEXTVAL, 
+''
+);
+--댓글 번호 시퀀스 생성
+CREATE SEQUENCE SEQ_COMMENT_NO NOCACHE; --이것만 만듦!
+--댓글 샘플 데이터 삽입
+
+
+--댓글 테이블 부모 댓글 번호 NULL 허용으로 바꾸기!!(아직 안함)
+ALTER TABLE "COMMENT" 
+MODIFY PARENT_COMMENT_NO NUMBER NULL;
+
+--특정 게시판에 삭제되지 않은 게시글 목록 조회
+--단, 최신글이 제일 위에 존재
+--몇 초/분/시간 전 또는 YYYY-MM-DD 형식으로 작성일 조회
+-- + 댓글 개수
+-- + 좋아요 개수
+
+-- 번호 / 제목[댓글개수] / 작성자닉네임 / 작성일  / 조회수 / 좋아요 수
+--상관 서브쿼리
+--1)메인 쿼리 1행 조회
+--2) 1행 조회 결과를 이용해서 서브쿼리 수행
+--	(매안 쿼리 모두 조회할 떄까지 반복한다) 
+SELECT BOARD_NO, BOARD_TITLE, MEMBER_NICKNAME, READ_COUNT,
+	(SELECT COUNT(*) FROM "COMMENT" C
+	WHERE C.BOARD_NO = B.BOARD_NO) COMMENT_COUNT,
+	(SELECT COUNT(*)
+	FROM "LIKE" L
+	WHERE L.BOARD_NO = B.BOARD_NO) LIKE_COUNT,
+	CASE 
+		WHEN SYSDATE-WRITE_DATE <1/24/60
+		THEN FLOOR((SYSDATE-WRITE_DATE)*24*60*60)||'초 전'
+		
+		WHEN SYSDATE-WRITE_DATE <1/24
+		THEN FLOOR((SYSDATE-WRITE_DATE)*24*60)||'분 전'
+		
+		WHEN SYSDATE-WRITE_DATE <1
+		THEN FLOOR((SYSDATE-WRITE_DATE)*24)||'시간 전'
+		--더 오래 지나면 ELSE로 날짜로 나온다
+		ELSE TO_CHAR(WRITE_DATE, 'YYYY-MM-DD')
+	END WRITE_DATE 
+	
+	FROM "BOARD" B
+	JOIN "MEMBER" USING (MEMBER_NO)
+	WHERE BOARD_DEL_FL = 'N'
+	ORDER BY BOARD_NO DESC;
+
+--이 조회 결과 전체 한 행의 정보를 담을 BOARD DTO 만들기!
+
+
+
+
