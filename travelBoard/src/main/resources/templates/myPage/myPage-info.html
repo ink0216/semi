@@ -90,7 +90,7 @@
         <form action="info" method="get" name="myPageFrm">
           
           <div class="myPage-row">
-            <label>닉네임 : </label>
+            <label>닉네임</label>
 
             <input type="text" name="memberNickname" 
               maxlength="10" id="memberNickname" 
@@ -98,14 +98,14 @@
           </div>
 
           <div class="myPage-row">
-            <label>전화번호 : </label>
+            <label>전화번호</label>
             <input type="text" name="memberTel" 
               maxlength="11" id="memberTel"
               th:value="${session.loginMember.memberTel}">
           </div>
 
           <div class="myPage-row info-title">
-            <span>주소  </span>
+            <span>주소</span>
           </div>
 
           <div class="myPage-row info-address">
