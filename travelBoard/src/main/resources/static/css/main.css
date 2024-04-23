@@ -1,21 +1,11 @@
-/* body {
-    margin: auto;
+body {
+    margin: 0;
     padding: 0;
     display: flex;
     justify-content: center;
-    margin-left:auto;
-    flex-direction: column;
-    margin-left:auto;
-    margin-right:50px;
-} */
-
-
-body{
-    display: flex;
-    flex-direction: column; /* 중심축 방향 세로 */
-    /* align-items: center;    교차축 방향 가운데 정렬 */
-    min-height: 100vh;      /* 최소 높이를 화면 비율 100% */ 
-  }
+    align-items: center;
+    height: 100vh;
+}
 
 #loginForm {
     border-radius: 8px;
@@ -32,20 +22,33 @@ body{
 }
 
 #memberEmail {
+    margin-top:70px;
     width: 100%;
     padding: 10px;
-    margin-bottom: 0px;
+    margin-bottom: 20px;
+    border-top:none;
+    border-right:none;
+    border-left:none;
    
     box-sizing: border-box;
+    outline:none;
+    border-color:black;
+    border-width:1px;
 }
 
 
 #memberPw {
     width: 100%;
     padding: 10px;
-    margin-bottom: 0px;
-   
+    margin-bottom: 10px;
     box-sizing: border-box;
+    border-top:none;
+    border-right:none;
+    border-left:none;
+    outline:none;
+    border-color:black;
+    border-width:1px;
+    
 }
 
 
@@ -63,6 +66,7 @@ body{
     cursor: pointer;
     border-radius:50px;
     margin-top:40px;
+    margin-bottom:40px;
 }
 
 #loginForm button:hover {
@@ -70,3 +74,49 @@ body{
 }
 
 
+#selectContinent{
+    width:150px;
+    height:50px;
+    
+    text-align: center;
+}
+
+#loginText{
+    text-decoration: none;
+    text-align:center;
+    
+}
+
+
+/* .fa-circle-info:hover{
+    cursor:pointer
+} */
+
+label[for="toggle"]{
+    cursor:pointer;
+}
+
+#toggle{
+    display:none;
+}
+
+#toggle + div{
+    display:none;
+}
+
+#toggle:checked + div{
+    display:none;
+}
+
+#toggle:checked + div{
+    display:block;
+}
+
+
+.explain{
+    position :absolute;
+    width : 100px;
+    height : 80px;
+    margin-top : 5px;
+    border : 1px solid black;
+}
