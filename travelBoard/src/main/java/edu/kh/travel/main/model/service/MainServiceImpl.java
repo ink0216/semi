@@ -1,5 +1,13 @@
 package edu.kh.travel.main.model.service;
 
-public class MainServiceImpl {
+import org.springframework.stereotype.Service;
+
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
+public class MainServiceImpl implements MainService{
+	
+	
 
 }
