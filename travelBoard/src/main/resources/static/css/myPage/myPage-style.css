@@ -83,14 +83,18 @@
 /* 행 내부 span 태그 */
 .myPage-row > span{
   width:100%;
+
+  border: none;
+  outline: none;
+  font-size: 16px;
+  font-weight: normal;
 }
 
 /* 행 내부 input 태그 */
 .myPage-row > input{
   width: 100%;
   height: 100%;
-  border: none;
-  outline: none;
+  font-size: 16px;
   font-weight: normal;
 }
 
@@ -153,16 +157,19 @@ form[name='myPageFrm']{
   align-items: center;
 }
 
-.profile-btn > *{
+.profile-btn > #pi{
   width: 120px;
   height: 40px;
   margin: 5px;
   
-  border: none;
+  border: 1px solid black;
   background-color: skyblue;
   color: white;
   font-size: 14px;
   text-align: center;
+  
+  justify-content: center;
+  align-content: center;
 }
 
 #imageInput{ display: none;}
