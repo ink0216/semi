@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import edu.kh.travel.board.model.dto.Board;
 import edu.kh.travel.board.model.mapper.BoardMapper;
 import edu.kh.travel.member.model.mapper.MemberMapper;
 import lombok.RequiredArgsConstructor;
@@ -20,5 +21,11 @@ public class BoardServiceImpl implements BoardService{
 		public List<Map<String, Object>> selectBoardTypeList() {
 			return mapper.selectBoardTypeList();
 		}
+	
+	//해당 대륙 게시판으로 이동
+	@Override
+	public List<Board> boardList(String selectContinent) {
+		return mapper.boardList(selectContinent);
+	}
 	
 }

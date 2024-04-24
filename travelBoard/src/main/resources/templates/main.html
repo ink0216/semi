@@ -5,13 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="/css/main.css">
-    <th:block th:replace="~{common/common}"></th:block>
-    
 
 </head>
 <body>
-
-
     
         <form action="/member/login" method="POST" id = "loginForm">
         
@@ -47,7 +43,7 @@
             </div>
             
 
-            <select name="대륙 선택" id="selectContinent">
+            <select name="selectContinent" id="selectContinent">
                 <option value="selectContinent">대륙 선택</option>
                 <option value="AS">아시아</option>
                 <option value="EU">유럽</option>
@@ -57,7 +53,6 @@
                 <option value="OC">오세아니아</option>
             </select>
         </form>
-
 
         <script src="https://kit.fontawesome.com/a373078820.js" crossorigin="anonymous"></script>
         <script src="/js/main.js"></script>

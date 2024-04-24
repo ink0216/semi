@@ -1,10 +1,15 @@
 package edu.kh.travel.board.controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import ch.qos.logback.core.model.Model;
+import edu.kh.travel.board.model.dto.Board;
 import edu.kh.travel.board.model.service.BoardService;
 import lombok.RequiredArgsConstructor;
 
@@ -18,8 +23,13 @@ public class BoardController {
 //	@GetMapping("/{selectContinent:[A-Z]{2}}")
 	@GetMapping("{selectContinent:[A-Z]{2}}")
 	public String afterLogin(
-			@PathVariable("selectContinent") String selectContinent
+			@PathVariable("selectContinent") String selectContinent,
+			@RequestParam(value="cp", required=false, defaultValue="1") int cp,
+			Model model
+			
 			) {
+		List<Board> boardList = service.boardList(selectContinent);
+		
 		return null;
 	}
 }
