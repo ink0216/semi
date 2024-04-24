@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import edu.kh.travel.member.model.dto.Member;
 import edu.kh.travel.member.model.mapper.MemberMapper;
+import lombok.RequiredArgsConstructor;
 
 @Transactional
 @Service
@@ -28,14 +29,19 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public Member login(Member inputMember) {
 		
+	
 		Member loginMember = mapper.login(inputMember.getMemberEmail());
 		
+
 		
-	
 		if(loginMember == null) {
 			
 			return null;
 		}
+		
+		
+		
+	
 		
 
 		if(!bcrypt.matches(inputMember.getMemberPw(), loginMember.getMemberPw())) {
@@ -49,7 +55,13 @@ public class MemberServiceImpl implements MemberService {
 		
 		
 		return loginMember;
+		
+
+
+		
+	
+		
 	}
+}
 	
 
-}
