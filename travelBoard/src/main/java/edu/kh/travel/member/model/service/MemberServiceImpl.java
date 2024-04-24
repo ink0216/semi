@@ -28,7 +28,7 @@ public class MemberServiceImpl implements MemberService{
 	public Member login(Member inputMember) {
 		//테스트(디버그모드로)
 		//bcrypt.encode(문자열) : 문자열을 암호화시켜서 반환해줌!
-		//String bcryptPassword = bcrypt.encode(inputMember.getMemberPw());
+		String bcryptPassword = bcrypt.encode(inputMember.getMemberPw());
 		//아이디랑 비밀번호 둘다 qwer로 했다!! 이걸로 샘플 데이터 집어넣기
 		//암호화된 비밀번호
 		// $2a$10$EvNgaFSGQUygb2DdiiiPS.8JGdJJBx.mcZ3txZ8Hvgo9d2JmFkfTe

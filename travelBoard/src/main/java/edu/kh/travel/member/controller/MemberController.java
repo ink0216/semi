@@ -76,7 +76,6 @@ public class MemberController {
 		
 	}
 	
-	
 	/**
 	 * 회원가입 페이지로 이동
 	 * @return
@@ -144,4 +143,5 @@ public class MemberController {
 		return service.checkNickname(memberNickname);
 	}
 	
+
 }

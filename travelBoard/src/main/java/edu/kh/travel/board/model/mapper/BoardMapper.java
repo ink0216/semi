@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import edu.kh.travel.board.model.dto.Board;
+
 @Mapper
 public interface BoardMapper {
 
@@ -12,5 +14,11 @@ public interface BoardMapper {
 	 * @return boardTypeList
 	 */
 	List<Map<String, Object>> selectBoardTypeList();
+
+	/**해당 대륙 게시판으로 이동
+	 * @param selectContinent
+	 * @return
+	 */
+	List<Board> boardList(String selectContinent);
 
 }
