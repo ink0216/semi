@@ -250,6 +250,8 @@ INSERT INTO "CONTINENT" VALUES(
 );
 COMMIT;
 ------------------------------------------------
+--회원 번호 시퀀스 생성
+CREATE SEQUENCE SEQ_MEMBER_NO NOCACHE; --이것만 만듦!
 --게시글 번호 시퀀스 생성
 CREATE SEQUENCE SEQ_BOARD_NO NOCACHE; --이것만 만듦!
 --게시글 샘플 데이터 삽입
@@ -303,6 +305,20 @@ SELECT BOARD_NO, BOARD_TITLE, MEMBER_NICKNAME, READ_COUNT,
 
 --이 조회 결과 전체 한 행의 정보를 담을 BOARD DTO 만들기!
 
-
-
+--$2a$10$EvNgaFSGQUygb2DdiiiPS.8JGdJJBx.mcZ3txZ8Hvgo9d2JmFkfTe
+--샘플 회원 데이터 삽입
+INSERT INTO "MEMBER"
+VALUES(SEQ_MEMBER_NO.NEXTVAL,
+			'샘플샘플1',
+			DEFAULT,
+			DEFAULT,
+			'qwer',
+			'$2a$10$EvNgaFSGQUygb2DdiiiPS.8JGdJJBx.mcZ3txZ8Hvgo9d2JmFkfTe',
+			'01012345678',
+			NULL,
+			NULL,
+			DEFAULT
+			);
+SELECT * FROM "MEMBER";
+COMMIT;
 
