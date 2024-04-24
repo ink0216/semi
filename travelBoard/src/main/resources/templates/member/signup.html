@@ -34,12 +34,10 @@
     </div>
 </section>
 <section class="nav">
-    <span>아시아</span>
-    <span>유럽</span>
-    <span>북아메리카</span>
-    <span>남아메리카</span>
-    <span>아프리카</span>
-    <span>오세아니아</span>
+    <th:block th:each="boardType : ${application.boardTypeList}">
+        <span>아시아</span>
+    </th:block>
+
 </section>
     <div class="container">
         <div class="colitems">
