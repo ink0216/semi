@@ -4,9 +4,11 @@ package edu.kh.travel.member.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -73,4 +75,73 @@ public class MemberController {
 		
 		
 	}
+	
+	
+	/**
+	 * 회원가입 페이지로 이동
+	 * @return
+	 */
+	@GetMapping("signup")
+	public String signupPage() {
+		
+		return "member/signup";
+	}
+	
+	
+	
+	/**
+	 * 회원가입 서비스
+	 * @return
+	 */
+	@PostMapping("signup")
+	public String signup(Member inputMember,
+			@RequestParam("memberAddress") String[] memberAddress,
+			RedirectAttributes ra) {
+		
+		int result = service.signup(inputMember, memberAddress);
+		
+		String path = null;
+		String message = null;
+		
+		
+		
+		if(result > 0) {
+			message = inputMember.getMemberNickname()+" 님의 회원가입 성공";
+			
+			path = null;
+		} else {
+			
+			message = "회원가입 실패";
+			path = "signup";
+		}
+			ra.addFlashAttribute("message",message);
+		
+	
+		return "redirect:" + path;
+	}
+	
+	
+	
+	
+	
+	@ResponseBody
+	@GetMapping("checkEmail")
+	public int checkEmail(@RequestParam("memberEmail") String memberEmail) {
+		
+		
+		
+		return service.checkEmail(memberEmail);
+		
+		
+	}
+	
+	
+	
+	@ResponseBody 
+	@GetMapping("checkNickname")
+	public int checkNickname(@RequestParam("memberNickname") String memberNickname) {
+		
+		return service.checkNickname(memberNickname);
+	}
+	
 }
