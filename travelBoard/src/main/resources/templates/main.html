@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../static/css/main.css">
-    
+    <link rel="stylesheet" href="/css/main.css">
+    <th:block th:replace="~{common/common}"></th:block>
     
 
 </head>
@@ -27,7 +27,7 @@
                 <input type="checkbox" name="saveId">아이디 저장
             </div>
             <div id="loginText">
-                <a href="#">회원가입</a> | <a href="#">ID/PW 찾기</a>
+                <a href="/member/signup">회원가입</a> | <a href="#">ID/PW 찾기</a>
             </div>
             
             <button id="connectBoard">게시판 접속</button>
@@ -49,16 +49,16 @@
 
             <select name="대륙 선택" id="selectContinent">
                 <option value="selectContinent">대륙 선택</option>
-                <option value="asia">아시아</option>
-                <option value="europe">유럽</option>
-                <option value="africa">아프리카</option>
-                <option value="northAmerica">북아메리카</option>
-                <option value="southAmerica">남아메리카</option>
-                <option value="oceania">오세아니아</option>
+                <option value="AS">아시아</option>
+                <option value="EU">유럽</option>
+                <option value="AF">아프리카</option>
+                <option value="NA">북아메리카</option>
+                <option value="SA">남아메리카</option>
+                <option value="OC">오세아니아</option>
             </select>
         </form>
 
 
         <script src="https://kit.fontawesome.com/a373078820.js" crossorigin="anonymous"></script>
-        <script src="../static/js/main.js"></script>
+        <script src="/js/main.js"></script>
 </html>

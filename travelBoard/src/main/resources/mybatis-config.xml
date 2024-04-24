@@ -14,7 +14,7 @@
 		
 		<!-- DB의 UnderScore (_) 표기법 <-> Java의 Camel 표기법 
 		두    표기법이    서로    변환    될    수    있도록    매핑하여
-		Java 필드명(memberId)과 DB 컬럼명(MEMBER_ID)가    서로    연결되게    함 
+		Java 필드명(memberId)과 DB 컬럼명(MEMBER_ID)	가    서로    연결되게    함 
 		-->
 		<setting name="mapUnderscoreToCamelCase" value="true" /> 
 		<!-- 언더스코어랑 카멜 표기법을 매핑해준다 자바에서는 카멜표기법 쓰고 DB에서는 대문자+언더스코어 씀 ->모양이 달라도 서로 같게 인식하도록 하는 설정

@@ -1,15 +1,13 @@
 
 const selectContinent = document.getElementById("selectContinent");
-const connectBoard = document.querySelector("#connectBoard");
+const connectBoard = document.getElementById("connectBoard");
 
 
 
-connectBoard.addEventListener("submit",()=>{
 
-    if(selectContinent == "대륙 선택"){
 
-        alert("제출할 수 없습니다.");
 
-        return;
-    }
-});
+connectBoard.addEventListener("click",() => {
+    alert("버튼클릭함");
+    location.href = "/board/boardList";
+})
