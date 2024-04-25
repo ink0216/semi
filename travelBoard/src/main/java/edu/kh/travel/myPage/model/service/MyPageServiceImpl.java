@@ -1,6 +1,10 @@
 package edu.kh.travel.myPage.model.service;
 
+import java.io.File;
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -11,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
+@PropertySource("classpath:/config.properties")
 public class MyPageServiceImpl implements MyPageService{
 	
 	private final MyPageMapper mapper;
@@ -24,7 +29,8 @@ public class MyPageServiceImpl implements MyPageService{
 	
 	// 프로필 이미지 변경
 	@Override
-	public int updateProfile(MultipartFile profileImg, Member loginMember) {
+	public int updateProfile(MultipartFile profileImg, Member loginMember) 
+			throws IllegalStateException, IOException {
 		
 		// 수정 경로
 		String updatePath = null;
@@ -34,12 +40,14 @@ public class MyPageServiceImpl implements MyPageService{
 		// 업로드 이미지 있을경우
 		if(!profileImg.isEmpty()) {
 			
+			// updatePath 조합
 			// 파일명 변경
 			rename = Utility.fileRename(profileImg.getOriginalFilename());
-			
+			// /myPage/profile/변경된파일명.jpg
 			updatePath = profileWebPath + rename;
 		}
-		
+
+		// 수정된 프로필에 이미지 경로 + 회원 번호를 저장할 DTO 객체
 		Member temp = Member.builder()
 						.memberNo(loginMember.getMemberNo())
 						.profileImg(updatePath)
@@ -47,8 +55,15 @@ public class MyPageServiceImpl implements MyPageService{
 		
 		int result = mapper.updateProfile(temp);
 		
-		if(result > 0) {
+		if(result > 0) { // 수정 성공
 			
+			if(!profileImg.isEmpty()) {
+				
+				// 파일 서버 지정폴더에 저장
+				profileImg.transferTo(new File(profileFolderPath + rename));
+			}
+			
+			// 세션업데이트
 			loginMember.setProfileImg(updatePath);
 		}
 		
@@ -62,7 +77,6 @@ public class MyPageServiceImpl implements MyPageService{
 	// 비밀번호 수정
 	@Override
 	public int changePw(String nowPw, String newPw, Member loginMember) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
