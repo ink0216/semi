@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.kh.travel.member.model.dto.Member;
 import edu.kh.travel.myPage.model.service.MyPageService;
@@ -48,7 +49,7 @@ public class MyPageController {
 		return "myPage/myPage-writing";
 	}
 	
-// ----- --- ------
+// -----------------------
 	
 	/** 프로필 이미지 변경
 	 * @param profileImg
@@ -58,11 +59,15 @@ public class MyPageController {
 	@PostMapping("profile")
 	public String updateProfile(
 		@RequestParam("profileImg") MultipartFile profileImg,
-		@SessionAttribute("loginMember")Member loginMember) {
+		@SessionAttribute("loginMember")Member loginMember,
+		RedirectAttributes ra) {
 		
-		//service.updateProfile(profileImg,loginMember)
+		// 로그인한 회원번호 얻어오기
+		int memberNo = loginMember.getMemberNo();
 		
-		return null;
+		//int result = service.updateProfile(profileImg,loginMember)
+		
+		return "redirect:profile";
 	}
 	
 	
