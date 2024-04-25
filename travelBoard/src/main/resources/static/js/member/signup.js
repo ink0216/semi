@@ -368,6 +368,108 @@ memberTel.addEventListener("input", e => {
 
 /* 이메일 인증 절차를 위한 JS 작성 공간 */
 
+const sendAuthKeyBtn = document.querySelector("#sendAuthKeyBtn");
+const authKey = document.querySelector("#authkey");
+const authKeyMessage = document.querySelector("#authKeyMessage");
+
+
+
+// 타이머 설정하기
+let authTimer;
+
+const initMin = 4;
+const initSec = 59;
+const initTime = "05:00";
+
+let min = initMin;
+let sec = initSec;
+
+
+// 인증번호 받기 버튼 클릭 시
+sendAuthKeyBtn.addEventListener("click", () => {
+
+    // 이메일 입력 상태를 알아보는 유효성 검사(유효한 경우에만 인증버튼 작동)
+    if(!checkObj.memberEmail){
+
+        alert("유효한 이메일을 먼저 작성하시오.");
+
+        return;
+    }
+    
+
+
+
+    // 인증번호 받기 버튼 클릭하며 타이머가 초기화
+    min = initMin;
+    sec = initSec;
+
+    checkObj.authKey= false;
+
+
+    // 서버에서 이메일을 보내기
+    fetch("/email/signup",{
+        method : "POST",
+        headers : {"Content-Type" : "application/json"},
+        body : memberEmail.value
+    })
+    .then(response => response.text())
+    .then(result => {
+        if(result == 1){
+            console.log("인증번호 발송 성공");
+        }else{
+            console.log("인증번호 발송 실패");
+        }
+    })
+
+
+
+
+    authKeyMessage.innerText = initTime;
+
+    authKeyMessage.classList.remove("confirm","error");
+
+    setInterval(() => {
+
+        authKeyMessage.innerText = `${addZero(min)}:${addZero(sec)}`;
+
+        if( min == 0 && sec == 0){
+
+            // 타이머 0분 0초되면 인증실패+타이머 초기화
+            checkObj.authKey = false;
+
+            clearInterval(authTimer);
+
+            authKeyMessage.classList.add("error");
+
+            authKeyMessage.classList.remove("confirm");
+
+        }
+
+        if(sec == 0){
+
+            sec = 60;
+            min--;
+           
+        }
+        sec--;
+
+    }, 1000)
+
+});
+
+
+function addZero(number){
+    
+    if( number < 10)
+    {
+        return "0" + number;
+
+    } else {
+
+        return number;
+
+    }
+}
 
 
 
@@ -407,7 +509,7 @@ for(let key in checkObj){
 
     document.getElementById(key).focus();
 
-    e.preventDefault;
+    e.preventDefault();
     return;
 }
 }
