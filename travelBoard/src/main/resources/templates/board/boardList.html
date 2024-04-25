@@ -6,6 +6,7 @@
     <title>Document</title>
 
     <th:block th:replace="~{common/common}"></th:block>
+    <link rel="stylesheet" href="../../static/css/board/boardList.css">
 </head>
 <body>
     <th:block th:replace="~{common/header}"></th:block>
@@ -14,13 +15,11 @@
 
         <!-- 인터셉터 이용 방법 (BoardNameInterceptor)
         타임리프는 로직 쓰는 것 안좋아하고 백엔드에서 보내주는 값 출력만 하는 것 좋아함-->
-        <h1 class="board-name" th:text="${boardName}">게시판 이름</h1>
-
         <!-- application, request scope 값 이용 방법 -->
         <th:block th:each=" boardType : ${application.boardTypeList}">
-            <h1 class="board-name" 
+            <a class="board-name" 
             th:if="${boardType.contiCode} == ${contiCode}"
-            th:text="${boardType.contiName}">게시판 이름</h1>
+            th:text="${boardType.contiName}">게시판 이름</a>
             <!-- 반복해서 검색해서 boardType의 boardCode(application scope에서 꺼낸 것)랑
                 request scope에서 꺼낸 거랑 같을 때에만 게시판 이름을 출력하겠다
             근데 인터셉터로도 할 수 있다-->

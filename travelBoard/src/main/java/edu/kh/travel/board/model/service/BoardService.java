@@ -12,7 +12,9 @@ public interface BoardService {
 	 */
 	List<Map<String, Object>> selectBoardTypeList();
 
-	/**해당 게시판 목록 해당 페이지로 이동+검색
+	//------------------------------------------------------------------------------
+	//전체 게시글 조회+검색 게시글 조회 Controller메서드(afterLogin)에서 수행하는 두 서비스
+	/**해당 게시판 목록 해당 페이지로 이동
 	 * @param selectContinent
 	 * @param cp
 	 * @return
@@ -25,5 +27,5 @@ public interface BoardService {
 	 * @return
 	 */
 	Map<String, Object> searchList(Map<String, Object> paramMap, int cp);
-
+	//------------------------------------------------------------------------------
 }
