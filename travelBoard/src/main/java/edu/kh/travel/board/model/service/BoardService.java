@@ -12,10 +12,18 @@ public interface BoardService {
 	 */
 	List<Map<String, Object>> selectBoardTypeList();
 
-	/**해당 대륙 게시판으로 이동
+	/**해당 게시판 목록 해당 페이지로 이동+검색
 	 * @param selectContinent
+	 * @param cp
 	 * @return
 	 */
-	List<Board> boardList(String selectContinent);
+	Map<String, Object> boardList(String selectContinent, int cp);
+
+	/**게시글 검색 서비스
+	 * @param paramMap
+	 * @param cp
+	 * @return
+	 */
+	Map<String, Object> searchList(Map<String, Object> paramMap, int cp);
 
 }
