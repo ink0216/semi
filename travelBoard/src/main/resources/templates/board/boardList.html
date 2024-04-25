@@ -6,24 +6,16 @@
     <title>Document</title>
 
     <th:block th:replace="~{common/common}"></th:block>
-    <link rel="stylesheet" href="../../static/css/board/boardList.css">
+    <link rel="stylesheet" href="/css/common/header.css">
 </head>
 <body>
     <th:block th:replace="~{common/header}"></th:block>
+    <section class="boardSideMenu">
 
+    </section>
     <section class="board-list">
 
-        <!-- 인터셉터 이용 방법 (BoardNameInterceptor)
-        타임리프는 로직 쓰는 것 안좋아하고 백엔드에서 보내주는 값 출력만 하는 것 좋아함-->
-        <!-- application, request scope 값 이용 방법 -->
-        <th:block th:each=" boardType : ${application.boardTypeList}">
-            <a class="board-name" 
-            th:if="${boardType.contiCode} == ${contiCode}"
-            th:text="${boardType.contiName}">게시판 이름</a>
-            <!-- 반복해서 검색해서 boardType의 boardCode(application scope에서 꺼낸 것)랑
-                request scope에서 꺼낸 거랑 같을 때에만 게시판 이름을 출력하겠다
-            근데 인터셉터로도 할 수 있다-->
-        </th:block>
+    
 
 
 
@@ -32,42 +24,21 @@
 
         <div class="list-wrapper">
             <table class="list-table">
-                
-                <thead>
-                    <tr>
-                        <th>글번호</th>
-                        <th>제목</th>
-                        <th>작성자</th>
-                        <th>작성일</th>
-                        <th>조회수</th>
-                        <th>좋아요</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    <th:block th:if="${#lists.size(boardList)==0}">
-                        <!-- 리스트를 조회했다 근데 게시글이 존재하지 않는 경우는
-                        boardList는 null일까 비어있을까
-                    조회 결과가 없어도 List<Board> 만들어져있음(0행)->비어있는 List가 반환된다
-                        여러 행 조회 시 결과가 없을 경우 == List가 비어있음 (null아님!!!)-->
-                        <!-- boardList.size()==0으로 해도 되지만 타임리프에서 권장 안하고
-                        타임리프에서는 #lists 권장! -->
-                        <!-- #lists : 타임리프에서 list 관련 기능을 제공하는 객체 -->
-                        <!-- 게시글이 존재하지 않을 때 -->
-                            <!-- ${boardList.size() == 0} -->
-                    <!-- ${#lists.size(boardList) == 0} -->
-                    <!-- ${#lists.isEmpty(boardList)} --> 
-                    <!-- 이 셋 중에 하나 쓰면 된다 -->
+                <th:block th:unless="${#lists.size(boardList)==0}">
+                    <!-- 게시글이 존재할 때 -->
+                    <thead>
                         <tr>
-                            <th colspan="6">게시글이 존재하지 않습니다.</th>
+                            <th>글번호</th>
+                            <th>제목</th>
+                            <th>작성자</th>
+                            <th>작성일</th>
+                            <th>조회수</th>
+                            <th>좋아요</th>
                         </tr>
-                    </th:block>
-
-
-
-                    <th:block th:unless="${#lists.size(boardList)==0}"> 
-                        <!-- unless : false일 때 수행하는 것 -->
+                    </thead>
                         <!-- 게시글이 존재할 때 -->
+                        <!-- unless : false일 때 수행하는 것 -->
+                    <tbody>
                         <tr th:each=" board: ${boardList}" th:object="${board}">
                             <!-- th:object="${board}" 쓰면 이 tr태그 내에서 *을 이용해서 
                             필드명을 더 쉽게 꺼낼 수 있다 앞에 board. 안써도 된다-->
@@ -117,8 +88,42 @@
                             <td th:text="*{likeCount}">0</td>
 
                         </tr>
+                    </tbody>
+                </th:block>
+                
+
+                
+                    <th:block th:if="${#lists.size(boardList)==0}">
+                        <!-- 게시글이 존재하지 않을 때 -->
+                        <!-- 리스트를 조회했다 근데 게시글이 존재하지 않는 경우는
+                        boardList는 null일까 비어있을까
+                    조회 결과가 없어도 List<Board> 만들어져있음(0행)->비어있는 List가 반환된다
+                        여러 행 조회 시 결과가 없을 경우 == List가 비어있음 (null아님!!!)-->
+                        <!-- boardList.size()==0으로 해도 되지만 타임리프에서 권장 안하고
+                        타임리프에서는 #lists 권장! -->
+                        <!-- #lists : 타임리프에서 list 관련 기능을 제공하는 객체 -->
+                        <!-- 게시글이 존재하지 않을 때 -->
+                            <!-- ${boardList.size() == 0} -->
+                    <!-- ${#lists.size(boardList) == 0} -->
+                    <!-- ${#lists.isEmpty(boardList)} --> 
+                    <!-- 이 셋 중에 하나 쓰면 된다 -->
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="6">게시글이 존재하지 않습니다.</td>
+                        </tr>
+                    </tbody>
                     </th:block>
-                </tbody>
+                
             </table>
         </div>
 
@@ -138,7 +143,6 @@
         <!-- 게시글이 있을 때만 페이지네이션이 보이게 할 예정 -->
         <!-- 페이지 넘길 때 누르는 숫자 -->
         <div class="pagination-area">
-
             <ul class="pagination" th:unless="${param.key}" th:object="${pagination}">
                 <!-- 파라미터중에 key값이 없을 때 == 일반 목록 조회인 경우(검색X) ->이 페이지 네이션이 보이게 할거다 -->
                 <!-- 전달받은 것을 여기서 뜯어서 쓰겠따 -->
@@ -175,23 +179,19 @@
                         <!-- cp는 없으니까 쿼리스트링으로 넣을거야 -->
                     </li>
                 </th:block>
-
-                    <!-- 일치하는 게시글이 없을 경우 -->
+<!--  이게 없어야 함!!!!(안그러면 1이 두 번 나온다!!!)
+                    일치하는 게시글이 없을 경우 
                 <th:block th:unless="*{startPage lt endPage}">
                     <li>
                         <a class="current">1</a>
                     </li>
                 </th:block>
-                
+                -->
                 <!-- <li> <a href="#">3</a> </li>
                 <li> <a href="#">4</a> </li>
                 <li> <a href="#">5</a> </li>
                 <li> <a href="#">6</a> </li>
-                <li> <a href="#">7</a> </li>
-                <li> <a href="#">8</a> </li>
-                <li> <a href="#">9</a> </li>
-                <li> <a href="#">10</a> </li> -->
-                <!-- #numbers.sequence(11,15) -> {11,12,13,14,15} 배열 반환 -> 향상된 for문으로 하나씩 꺼내서 출력 가능 -->
+                #numbers.sequence(11,15) -> {11,12,13,14,15} 배열 반환 -> 향상된 for문으로 하나씩 꺼내서 출력 가능 -->
                 <!-- 다음 목록 시작 번호로 이동 -->
                 <li><a th:href="@{/board/{contiCode}(contiCode=${contiCode},cp=*{nextPage})}">&gt;</a></li>
 

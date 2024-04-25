@@ -1,11 +1,10 @@
-/* 헤더, 푸터 적용 css */
-/* ******************************헤더 시작************************************* */
 *{letter-spacing: -1px;
     /* border: 1px solid black; */
     margin: 0;
     padding: 0;
 }
 
+/* 헤더 */
 .header{
     margin-top: 20px;
     width: 100%;
@@ -58,15 +57,7 @@
     text-decoration: none;
     color : black;
 }
-/* ************************헤더 끝********************************* */
-
-
-
-
-
-
-
-
-
-
-
+#logo{
+    width:150px;
+    height: 150px;
+}

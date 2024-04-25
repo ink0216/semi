@@ -140,6 +140,8 @@ public class Pagination {
 		//최대 48페이지까지만 존재하면
 		//50페이지가 끝이 아니라 48페이지가 끝이 돼야함
 		
+		if(startPage>=endPage) endPage=startPage;
+		
 		//prevPage : "<" 클릭 시 이동할 페이지 번호
 		//			(이전 페이지 목록 번호 중 끝 번호)
 		// 43페이지 보다가 < 클릭 시 40페이지로 이동하도록 만들기

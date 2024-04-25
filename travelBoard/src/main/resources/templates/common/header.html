@@ -35,9 +35,15 @@
         <!-- application, request scope 값 이용 방법 -->
         <th:block th:each=" boardType : ${application.boardTypeList}">
             <a class="board-name" 
-            th:if="${boardType.contiCode} == ${contiCode}"
-            th:text="${boardType.contiName}">게시판 이름</a>
-            하하
+            th:text="${boardType.contiName}"
+            th:href="@{/board/{contiCode}(contiCode=${boardType.contiCode})}"
+            >게시판 이름</a>
+            <!-- 이거 보고 하기!
+                <a th:if="${param.key}" 
+            th:href="@{/board/{contiCode}/{boardNo}
+            (contiCode=${contiCode},boardNo=*{boardNo},cp=${pagination.currentPage}, key=${param.key}, query=${param.query})}" 
+        
+                                        th:text="*{boardTitle}">게시글 제목</a> -->
             <!-- <a class="board-name" 
             th:if="${boardType.contiCode} == ${contiCode}"
             th:text="${boardType.contiName}">게시판 이름</a> -->
