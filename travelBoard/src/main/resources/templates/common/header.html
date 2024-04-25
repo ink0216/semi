@@ -11,11 +11,19 @@
         </div>
         
     </div>
-    <div class="right">
+    <div class="right" th:if="${session.loginMember ==null}">
         <div>
-            <div>메인페이지</div>
+            <a href="/">메인페이지</a>
             |
-            <div>로그인</div>
+            <a href="#">로그인</a>
+        </div>
+    </div>
+
+    <div class="right" th:unless="${session.loginMember ==null}">
+        <div>
+            <a href="/myPage/info">마이페이지</a>
+            |
+            <a href="#">로그아웃</a>
         </div>
     </div>
 </section>
