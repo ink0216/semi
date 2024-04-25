@@ -22,7 +22,7 @@
                 </section>
                 <section class="mid">
                     <input type="text" placeholder="이메일" id="memberEmail" name="memberEmail">
-                    <button>인증번호 받기</button>
+                    <button id="sendAuthKeyBtn">인증번호 받기</button>
                 </section>
                 <section class="bottom" id="emailMessage">
                     메일을 받을 수 있는 이메일을 입력해주세요.
@@ -31,20 +31,20 @@
             </div>
             <div class="colitems">
                 <section class="top">
-                    <div class="required">*</div><label for="authkey">인증번호</label>
+                    <div class="required">*</div><label for="authkey" autocomplete="off">인증번호</label>
                 </section>
                 <section class="mid">
                     <input type="text" placeholder="인증번호 입력" id="authkey" name="authkey">
-                    <button>인증하기</button>
+                    <button id="checkAuthKeyBtn" type="button">인증하기</button>
                 </section>
-                <section class="bottom">
-                    인증번호가 일치하지 않습니다.
+                <section class="bottom" id="authKeyMessage">
+                    <!-- 인증번호가 일치하지 않습니다. -->
                 </section>
                 
             </div>
             <div class="colitems">
                 <section class="top">
-                    <div class="required">*</div><label for="memberPw">비밀</label>
+                    <div class="required">*</div><label for="memberPw">비밀번호</label>
                 </section>
                 <section class="mid">
                     <input type="password" placeholder="비밀번호" id="memberPw" name="memberPw" autocomplete="off"> <br>
@@ -82,7 +82,7 @@
           
              <div class="colitems">
                 <section class="top">
-                    <label for="memberAddress">주</label>
+                    <label for="memberAddress">주소</label>
                 </section>
                 <section class="mid">
                     <input type="text" placeholder="우편번호" name = "memberAddress" id="postcode">
