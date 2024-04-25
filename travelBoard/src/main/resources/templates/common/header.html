@@ -21,15 +21,15 @@
         </div>
     </div>
 
+    <!-- 로그인되었을때 마이페이지 변경 -->
     <div class="right" th:unless="${session.loginMember ==null}">
         <div>
-            <a href="/myPage/info">마이페이지</a>
+            <a href="/myPage/profile">마이페이지</a>
             |
             <a href="#">로그아웃</a>
         </div>
     </div>
 
-    <!-- 로그인되었을때 마이페이지 변경 -->
 </section>
 <section>
     <span>아시아</span>
