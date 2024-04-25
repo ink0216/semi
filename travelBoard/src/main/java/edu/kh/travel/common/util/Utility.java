@@ -41,5 +41,5 @@ public class Utility {
 		
 		
 		return date + "_" + number + ext;
-	} // :: 순수 자바.... 으아아아앙아아아앙ㄱ
+	} // :: 순수 자바
 }

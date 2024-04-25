@@ -1,5 +1,7 @@
 package edu.kh.travel.myPage.model.service;
 
+import java.io.IOException;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import edu.kh.travel.member.model.dto.Member;
@@ -15,11 +17,13 @@ public interface MyPageService {
 	 */
 	int changePw(String nowPw, String newPw, Member loginMember);
 
-	/** 프로필 이미지 수정
+	
+
+	/** 프로필 이미지 변경
 	 * @param profileImg
 	 * @param loginMember
 	 * @return
 	 */
-	int updateProfile(MultipartFile profileImg, Member loginMember);
+	int updateProfile(MultipartFile profileImg, Member loginMember)throws IllegalStateException, IOException;
 
 }
