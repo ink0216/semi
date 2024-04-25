@@ -114,7 +114,7 @@ memberEmail.addEventListener("input", e => {
 
     // 유효한 형식으로 작성된 이메일을 가지고 중복 검사를 수행
 
-    fetch("/member/checkEmail?memberEmail" + inputEmail)
+    fetch("/member/checkEmail?memberEmail=" + inputEmail)
     .then(response => response.text())
     .then(count => {
 
@@ -387,12 +387,12 @@ const signUpForm = document.querySelector("#signUpForm");
 // 회원가입 폼을 제출하는 순간 
 // checkObj에 있는 요소들을 하나하나 검사해서 false가 있으면 제출을 막음
 
-
+signUpForm.addEventListener("submit",e => {
 for(let key in checkObj){
 
     let str; // 메시지 출력용 변수
 
-
+    if(!checkObj[key]){
 
     switch(key){
         case "memberEmail" : str = "이메일이 유효하지 않습니다."; break;
@@ -410,7 +410,8 @@ for(let key in checkObj){
     e.preventDefault;
     return;
 }
-
+}
+});
 
 
 

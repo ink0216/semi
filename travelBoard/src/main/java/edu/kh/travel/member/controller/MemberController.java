@@ -122,7 +122,11 @@ public class MemberController {
 	
 	
 	
-	
+	/**
+	 * 이메일 중복 검사
+	 * @param memberEmail
+	 * @return
+	 */
 	@ResponseBody
 	@GetMapping("checkEmail")
 	public int checkEmail(@RequestParam("memberEmail") String memberEmail) {
@@ -135,13 +139,20 @@ public class MemberController {
 	}
 	
 	
-	
+	/**
+	 * 닉네임 중복 검사
+	 * @param memberNickname
+	 * @return
+	 */
 	@ResponseBody 
 	@GetMapping("checkNickname")
 	public int checkNickname(@RequestParam("memberNickname") String memberNickname) {
 		
 		return service.checkNickname(memberNickname);
 	}
+	
+	
+	
 	
 
 }
