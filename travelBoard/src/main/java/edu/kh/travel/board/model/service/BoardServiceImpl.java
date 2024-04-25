@@ -23,7 +23,8 @@ public class BoardServiceImpl implements BoardService{
 		public List<Map<String, Object>> selectBoardTypeList() {
 			return mapper.selectBoardTypeList();
 		}
-	
+	//------------------------------------------------------------------------------
+	//전체 게시글 조회+검색 게시글 조회 Controller메서드(afterLogin)에서 수행하는 두 서비스
 	//해당 게시판 목록 해당 페이지로 이동+검색
 	@Override
 	public Map<String, Object> boardList(String selectContinent, int cp) {
@@ -43,8 +44,8 @@ public class BoardServiceImpl implements BoardService{
 		//
 //				(offset, Limit)
 //				1페이지 == 0,10
-//				2페이지 == 10,10
-//				3페이지 == 20,10
+//				2페이지 == 10,10 
+//				3페이지 == 20,10 ==20개 게시글 건너 뛰고 그 다음부터 10개 조회할게
 //				4페이지 == 30,10
 				/*ROWBOUNDS 객체 (Mybatis(JDBC 프레임워크(긴 JDBC를 쉽게 쓰게 해주는 것)) 제공 객체)
 				 * - 지정된 크기 (offset)만큼 건너뛰고
@@ -116,7 +117,6 @@ public class BoardServiceImpl implements BoardService{
 						 * - 두 번째 매개변수 -> RowBounds 객체 전달할 자리
 						 * */
 						List<Board> boardList = mapper.selectSearchList(paramMap, rowBounds);
-						
 						// 4. 목록 조회 결과 + Pagination 객체를 Map으로 묶음
 						Map<String, Object> map = new HashMap<>();
 						map.put("pagination", pagination);
@@ -125,5 +125,6 @@ public class BoardServiceImpl implements BoardService{
 						// 5. 결과 반환
 						return map;
 	}
+	//------------------------------------------------------------------------------
 	
 }

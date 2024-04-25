@@ -28,7 +28,7 @@ public class BoardController {
 			@PathVariable("selectContinent") String selectContinent,
 			@RequestParam(value="cp", required=false, defaultValue="1") int cp,
 			Model model,
-			@RequestParam Map<String, Object> paramMap //파라미터 다 한꺼번에 받음
+			@RequestParam Map<String, Object> paramMap //파라미터 다 한꺼번에 받음(key, query 포함)
 			) {
 		//조회 서비스 호출 후 결과 반환 받기
 				//반환돼야 하는 결과가 두 개인데 

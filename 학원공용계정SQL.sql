@@ -282,5 +282,41 @@ VALUES(SEQ_MEMBER_NO.NEXTVAL,
 			DEFAULT
 			);
 SELECT * FROM "MEMBER";
+--국가 샘플 데이터 삽입
+INSERT INTO "COUNTRY"
+VALUES('KO','대한민국','AS');
+
+INSERT INTO "COUNTRY"
+VALUES('JP','일본','AS');
+
+INSERT INTO "COUNTRY"
+VALUES('CN','중국','AS');
+--게시글 번호 시퀀스 생성
+CREATE SEQUENCE SEQ_BOARD_NO NOCACHE;
+--게시글 샘플 데이터 삽입
+INSERT INTO "BOARD"
+VALUES(SEQ_BOARD_NO.NEXTVAL,
+			'중국 1번 게시글입니다.',
+			'중국 1번 게시글 내용입니다.',
+			DEFAULT,
+			0,
+			DEFAULT,
+			3,
+			'CN'
+);
+
+INSERT INTO "BOARD"
+VALUES(SEQ_BOARD_NO.NEXTVAL,
+			'중국 2번 게시글입니다.',
+			'중국 2번 게시글 내용입니다.',
+			DEFAULT,
+			0,
+			DEFAULT,
+			3,
+			'CN'
+);
+SELECT * FROM "BOARD";
+
+
 
 COMMIT;

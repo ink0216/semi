@@ -1,6 +1,6 @@
 <!-- 아시아 아프리카 북아메리카 남아메리카 유럽 오세아니아 -->
 <header>
-<section>
+<section class="header">
     <div class="left">
         <img src="/images/logo.jpg" alt="여행로고">
     </div>
@@ -18,6 +18,7 @@
             <a href="/">메인페이지</a>
             |
             <a href="#">로그인</a>
+            
         </div>
     </div>
 
@@ -31,11 +32,17 @@
 
     <!-- 로그인되었을때 마이페이지 변경 -->
 </section>
-<section>
-    <span>아시아</span>
-    <span>북아메리카</span>
-    <span>남아메리카</span>
-    <span>아프리카</span>
-    <span>오세아니아</span> 
-</section>
+        <!-- application, request scope 값 이용 방법 -->
+        <th:block th:each=" boardType : ${application.boardTypeList}">
+            <a class="board-name" 
+            th:if="${boardType.contiCode} == ${contiCode}"
+            th:text="${boardType.contiName}">게시판 이름</a>
+            하하
+            <!-- <a class="board-name" 
+            th:if="${boardType.contiCode} == ${contiCode}"
+            th:text="${boardType.contiName}">게시판 이름</a> -->
+            <!-- 반복해서 검색해서 boardType의 boardCode(application scope에서 꺼낸 것)랑
+                request scope에서 꺼낸 거랑 같을 때에만 게시판 이름을 출력하겠다
+            근데 인터셉터로도 할 수 있다-->
+        </th:block>
 </header>
