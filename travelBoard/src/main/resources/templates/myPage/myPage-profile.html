@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>프로필</title>
 
-  <link rel="stylesheet" href="../../static/css/member/signup-style.css">
+  <th:block th:replace="~{common/common}"></th:block>
+
   <link rel="stylesheet" href="../../static/css/myPage/myPage-style.css">
 </head>
 <body>
@@ -33,7 +34,7 @@
           <form action="profile" method="PSOT" name="myPageFrm" enctype="multipart/form-data">
               <div class="profile-image">
 
-                <img src="../../../resources/static/images/logo.jpg" alt="임시 프로필 이미지"
+                <img th:src="${session.loginMember.profileImg ?: user }"  alt="프로필 이미지"
                   id="profilImg">
                   
               </div>
@@ -67,20 +68,8 @@
 
   </main>
 
-  <!--임시 푸터 -->
-  <footer>
-    <p>Copyright &copy; KH Information Educational Institute A-Class</p>
-  
-    <article>
-        <a href="#">프로젝트 소개</a>    
-        <span>|</span>
-        <a href="#">이용약관</a>    
-        <span>|</span>
-        <a href="#">개인정보처리방침</a>    
-        <span>|</span>
-        <a href="#">고객센터</a>    
-    </article>
-  </footer>
+  <!-- 푸터 -->
+  <th:block th:replace="~{common/footer}"></th:block>
   
   
 </body>

@@ -35,7 +35,8 @@
 
             <input type="text" name="memberNickname" 
               maxlength="10" id="memberNickname" 
-              th:value="${session.loginMember.memberNickname}">
+              th:value="${session.loginMember.memberNickname}"
+              >
           </div>
 
           <div class="myPage-row">
@@ -46,7 +47,7 @@
           </div>
 
           <div class="myPage-row info-title">
-            <label>주소</label>
+            <span>주소</span>
           </div>
 
           <div class="myPage-row info-address">
@@ -75,7 +76,11 @@
 
     </section>
 
+
   </main>
+
+  <!-- 푸터 -->
+  <th:block th:replace="~{common/footer}"></th:block>
   
 </body>
 </html>

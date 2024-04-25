@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import ch.qos.logback.core.model.Model;
 import edu.kh.travel.member.model.dto.Member;
 import edu.kh.travel.myPage.model.service.MyPageService;
 import lombok.RequiredArgsConstructor;
@@ -65,7 +66,15 @@ public class MyPageController {
 		// 로그인한 회원번호 얻어오기
 		int memberNo = loginMember.getMemberNo();
 		
-		//int result = service.updateProfile(profileImg,loginMember)
+		int result = service.updateProfile(profileImg,loginMember);
+		
+		String message = null;
+		
+		if(result >0) {
+			message = "변경 성공";
+		}else message="변경 실패";
+		
+		ra.addFlashAttribute("message",message);
 		
 		return "redirect:profile";
 	}
@@ -75,7 +84,9 @@ public class MyPageController {
 	 * @return
 	 */
 	@PostMapping("info")
-	public String updateInfo() {
+	public String updateInfo(
+			@SessionAttribute("loginMember")String logString,
+			Model model) {
 		
 		return null;
 	}
@@ -118,3 +129,4 @@ public class MyPageController {
 	
 
 }
+
