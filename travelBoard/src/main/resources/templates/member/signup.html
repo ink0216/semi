@@ -6,43 +6,16 @@
     <title>회원가입</title>
     <!-- <link  rel="stylesheet" href="../../static/css/member/signup-style.css"> -->
     <th:block th:replace="~{common/common}"></th:block>
-    <link rel="stylesheet" href="/static/css/member/signup-style.css"></link>
+    <link rel="stylesheet" href="../../static/css/member/signup-style.css"></link>
+    <link rel="stylesheet" href="../../static/css/common/common.css">
 </head>
 <body>
     <main>
         <th:block th:replace="~{common/header}"></th:block>
     <!-- 아시아 아프리카 북아메리카 남아메리카 유럽 오세아니아 -->
     <div class="fcontainer">
-<section class="header">
-    <div class="left">
-        <a href="/">
-            <img src="../images/logo.jpg" alt="여행로고" id="logo">
-        </a>
-    </div>
-    <div class="center">
-        <div>
-            <input type="text" placeholder="검색어를 입력해 주세요.">
-            <i class="fa-solid fa-magnifying-glass"></i>
-        </div>
-    </div>
-    <div class="right">
-        <div>
-            <a href="/">
-                <div>메인페이지</div>
-            </a>
-            |
-            <a href="/member/login">
-                <div>로그인</div>
-            </a>
-        </div>
-    </div>
-</section>
-<section class="nav">
-    <th:block th:each="boardType : ${application.boardTypeList}">
-        <span>아시아</span>
-    </th:block>
 
-</section>
+
     <div class="container">
         <div class="colitems">
             <form action="/member/signup" method = "POST" name = "signUpForm" id="signUpForm">

@@ -16,7 +16,9 @@ public interface BoardMapper {
 	 */
 	List<Map<String, Object>> selectBoardTypeList();
 
-
+	
+	//------------------------------------------------------------------
+	//게시글 목록 조회 서비스(boardList)에서 사용되는 여러 매퍼들 
 	/**삭제되지 않은 게시글 수 조회
 	 * @param selectContinent
 	 * @return
@@ -26,7 +28,7 @@ public interface BoardMapper {
 	/**특정 게시판의 지정된 페이지 게시글 목록 조회
 	 * @param selectContinent
 	 * @param rowBounds
-	 * @return
+	 * @return count
 	 */
 	List<Board> selectBoardList(String selectContinent, RowBounds rowBounds);
 
@@ -37,5 +39,14 @@ public interface BoardMapper {
 	 */
 	int getSearchCount(Map<String, Object> paramMap);
 	
+
+
+	/**지정된 페이지의 검색 결과 게시글 목록 조회
+	 * @param paramMap
+	 * @param rowBounds
+	 * @return boardList
+	 */
+	List<Board> selectSearchList(Map<String, Object> paramMap, RowBounds rowBounds);
+	//------------------------------------------------------------------
 
 }
