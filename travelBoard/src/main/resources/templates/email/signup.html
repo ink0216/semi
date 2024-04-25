@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+
+
+<body>
+
+  <div style="display: flex; flex-direction: column; align-items: center;">
+
+
+
+    <img src="cid:logo" width="200px">
+    <h3>
+        받으신 인증번호를 제한 시간 내에 <br> 이메일 인증번호 입력란에 입력 후 인증 버튼을 누르세요.
+    </h3>
+
+
+ 
+    <h3 style="text-align: center; border: 2px solid black; color:skyblue; width: 400px; padding:10px;" >
+        <th:block th:text="${authKey}"></th:block>
+    </h3>
+      
+    
+  
+  </div>
+</body>
+</html>
