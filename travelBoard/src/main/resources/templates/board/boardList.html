@@ -17,8 +17,8 @@
         <!-- application, request scope 값 이용 방법 -->
         <th:block th:each=" boardType : ${application.boardTypeList}">
             <h1 class="board-name" 
-            th:if="${boardType.boardCode} == ${boardCode}"
-            th:text="${boardType.boardName}">게시판 이름</h1>
+            th:if="${boardType.contiCode} == ${contiCode}"
+            th:text="${boardType.contiName}">게시판 이름</h1>
             <!-- 반복해서 검색해서 boardType의 boardCode(application scope에서 꺼낸 것)랑
                 request scope에서 꺼낸 거랑 같을 때에만 게시판 이름을 출력하겠다
             근데 인터셉터로도 할 수 있다-->
@@ -77,13 +77,13 @@
                                 <!-- 썸네일 추가 예정 -->
 
     <a th:unless="${param.key}" 
-    th:href="@{/board/{boardCode}/{boardNo}(boardCode=${boardCode},boardNo=*{boardNo},cp=${pagination.currentPage})}" 
+    th:href="@{/board/{contiCode}/{boardNo}(contiCode=${contiCode},boardNo=*{boardNo},cp=${pagination.currentPage})}" 
 
                                 th:text="*{boardTitle}">게시글 제목</a>
                                 <!-- param에 key가 없을 때 (검색이 아닌 경우) -->
     <a th:if="${param.key}" 
-    th:href="@{/board/{boardCode}/{boardNo}
-    (boardCode=${boardCode},boardNo=*{boardNo},cp=${pagination.currentPage}, key=${param.key}, query=${param.query})}" 
+    th:href="@{/board/{contiCode}/{boardNo}
+    (contiCode=${contiCode},boardNo=*{boardNo},cp=${pagination.currentPage}, key=${param.key}, query=${param.query})}" 
 
                                 th:text="*{boardTitle}">게시글 제목</a>
                                 <!-- param에 key가 있을 때(검색인 경우) -->
@@ -107,7 +107,7 @@
                             <td th:text="*{memberNickname}">닉네임</td>
 
                                 <!-- 작성일 -->
-                            <td th:text="*{boardWriteDate}">2023-10-26</td>
+                            <td th:text="*{writeDate}">2023-10-26</td>
 
                             <!-- 조회수 -->
                             <td th:text="*{readCount}">0</td>
@@ -143,7 +143,7 @@
                 <!-- 전달받은 것을 여기서 뜯어서 쓰겠따 -->
             
                 <!-- 첫 페이지로 이동 -->
-                <li><a th:href="@{/board/{boardCode}(boardCode=${boardCode}, cp=1)}">&lt;&lt;</a></li>
+                <li><a th:href="@{/board/{contiCode}(contiCode=${contiCode}, cp=1)}">&lt;&lt;</a></li>
                 <!-- 왼쪽에 boardCode라고 써져있는데 그 boardCode는 @PathVariable이 올린거야 -->
                 <!-- 진짜 @PathVariable이 request scope로 써서 여기서 읽을 수 있다 -->
                 <!-- 왼쪽에 cp없으면 쿼리스트링으로 자동 변환된다 -->
@@ -152,7 +152,7 @@
                 <!-- Spring el에서 주소 조합할 때에는 @를 쓴다 -->
 
                 <!-- 이전 목록의 마지막 번호로 이동 -->
-                <li><a th:href="@{/board/{boardCode}(boardCode=${boardCode},cp=*{prevPage})}">&lt;</a></li>
+                <li><a th:href="@{/board/{contiCode}(contiCode=${contiCode},cp=*{prevPage})}">&lt;</a></li>
                 <!-- 원래 cp=${pagination.prevPage}로 해야되는데 너무 길어서
                 th:object로 하고 $를 *로 바꿔주면 앞의 pagination. 안써도 된다-->
                 <!-- 특정 페이지로 이동 -->
@@ -169,7 +169,7 @@
 
                     <!-- 보고있지 않은 페이지 -->                    
                     <li th:unless="${i == pagination.currentPage}"> 
-                        <a th:href="@{/board/{boardCode}(boardCode=${boardCode},cp=${i})}" 
+                        <a th:href="@{/board/{contiCode}(contiCode=${contiCode},cp=${i})}" 
                         th:text="${i}">이동할 페이지</a> 
                         <!-- cp는 없으니까 쿼리스트링으로 넣을거야 -->
                     </li>
@@ -192,10 +192,10 @@
                 <li> <a href="#">10</a> </li> -->
                 <!-- #numbers.sequence(11,15) -> {11,12,13,14,15} 배열 반환 -> 향상된 for문으로 하나씩 꺼내서 출력 가능 -->
                 <!-- 다음 목록 시작 번호로 이동 -->
-                <li><a th:href="@{/board/{boardCode}(boardCode=${boardCode},cp=*{nextPage})}">&gt;</a></li>
+                <li><a th:href="@{/board/{contiCode}(contiCode=${contiCode},cp=*{nextPage})}">&gt;</a></li>
 
                 <!-- 끝 페이지로 이동 -->
-                <li><a th:href="@{/board/{boardCode}(boardCode=${boardCode},cp=*{maxPage})}">&gt;&gt;</a></li>
+                <li><a th:href="@{/board/{contiCode}(contiCode=${contiCode},cp=*{maxPage})}">&gt;&gt;</a></li>
             </ul>
 
             <ul class="pagination" th:if="${param.key}" th:object="${pagination}">
@@ -203,7 +203,7 @@
                 <!-- 전달받은 것을 여기서 뜯어서 쓰겠따 -->
             
                 <!-- 첫 페이지로 이동 -->
-                <li><a th:href="@{/board/{boardCode}(boardCode=${boardCode}, cp=1, key=${param.key}, query=${param.query})}">&lt;&lt;</a></li>
+                <li><a th:href="@{/board/{contiCode}(contiCode=${contiCode}, cp=1, key=${param.key}, query=${param.query})}">&lt;&lt;</a></li>
                 <!-- 왼쪽에 boardCode라고 써져있는데 그 boardCode는 @PathVariable이 올린거야 -->
                 <!-- 추가한 내용 :  , key=${param.key}, query=${param.query} -->
                 <!-- 진짜 @PathVariable이 request scope로 써서 여기서 읽을 수 있다 -->
@@ -213,7 +213,7 @@
                 <!-- Spring el에서 주소 조합할 때에는 @를 쓴다 -->
 
                 <!-- 이전 목록의 마지막 번호로 이동 -->
-                <li><a th:href="@{/board/{boardCode}(boardCode=${boardCode},cp=*{prevPage}, key=${param.key}, query=${param.query})}">&lt;</a></li>
+                <li><a th:href="@{/board/{contiCode}(contiCode=${contiCode},cp=*{prevPage}, key=${param.key}, query=${param.query})}">&lt;</a></li>
                 <!-- 원래 cp=${pagination.prevPage}로 해야되는데 너무 길어서
                 th:object로 하고 $를 *로 바꿔주면 앞의 pagination. 안써도 된다-->
                 <!-- 특정 페이지로 이동 -->
@@ -230,7 +230,7 @@
 
                     <!-- 보고있지 않은 페이지 -->                    
                     <li th:unless="${i == pagination.currentPage}"> 
-                        <a th:href="@{/board/{boardCode}(boardCode=${boardCode},cp=${i}, key=${param.key}, query=${param.query})}" 
+                        <a th:href="@{/board/{contiCode}(contiCode=${contiCode},cp=${i}, key=${param.key}, query=${param.query})}" 
                         th:text="${i}">이동할 페이지</a> 
                         <!-- cp는 없으니까 쿼리스트링으로 넣을거야 -->
                     </li>
@@ -251,10 +251,10 @@
                 <li> <a href="#">10</a> </li> -->
                 <!-- #numbers.sequence(11,15) -> {11,12,13,14,15} 배열 반환 -> 향상된 for문으로 하나씩 꺼내서 출력 가능 -->
                 <!-- 다음 목록 시작 번호로 이동 -->
-                <li><a th:href="@{/board/{boardCode}(boardCode=${boardCode},cp=*{nextPage}, key=${param.key}, query=${param.query})}">&gt;</a></li>
+                <li><a th:href="@{/board/{contiCode}(contiCode=${contiCode},cp=*{nextPage}, key=${param.key}, query=${param.query})}">&gt;</a></li>
 
                 <!-- 끝 페이지로 이동 -->
-                <li><a th:href="@{/board/{boardCode}(boardCode=${boardCode},cp=*{maxPage}, key=${param.key}, query=${param.query})}">&gt;&gt;</a></li>
+                <li><a th:href="@{/board/{contiCode}(contiCode=${contiCode},cp=*{maxPage}, key=${param.key}, query=${param.query})}">&gt;&gt;</a></li>
             </ul>
         </div>
 
@@ -262,7 +262,7 @@
 
 
         <!-- 검색창 -->
-        <form th:action="@{{boardCode}(boardCode=${boardCode})}" method="get" id="boardSearch">
+        <form th:action="@{{contiCode}(contiCode=${contiCode})}" method="get" id="boardSearch">
             <!-- 주소 조합할 때에는 @붙인다!!(a태그에서도) -->
             <!-- 상대경로 방식! 
             그 boardCode는 request scope에 존재하는 boardCode값을 넣을 거다
