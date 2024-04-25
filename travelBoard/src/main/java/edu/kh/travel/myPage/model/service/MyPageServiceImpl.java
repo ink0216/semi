@@ -12,6 +12,8 @@ public class MyPageServiceImpl implements MyPageService{
 	
 	private final MyPageMapper mapper;
 	
+	// 프로필 이미지 변경
+	
 	
 	// 비밀번호 수정
 	@Override
