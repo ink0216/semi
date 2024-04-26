@@ -4,21 +4,23 @@ import java.io.IOException;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import ch.qos.logback.core.model.Model;
 import edu.kh.travel.member.model.dto.Member;
 import edu.kh.travel.myPage.model.service.MyPageService;
 import lombok.RequiredArgsConstructor;
 
+@SessionAttributes({"loginMember"})
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("myPage")
@@ -31,14 +33,42 @@ public class MyPageController {
 
 	// 프로필 페이지 이동
 	@GetMapping("profile")
-	public String profile() {
+	public String profile(
+		@SessionAttribute("loginMember")Member loginMember,
+		Model model
+		) {
+		String memberAddress = loginMember.getMemberAddress();
+		
+		if(memberAddress !=null) {
+			
+			String[]arr =memberAddress.split("\\^\\^\\^");
+			
+			model.addAttribute("address",arr[1]);
+			model.addAttribute("detailAddress",arr[2]);
+		}
 		return "myPage/myPage-profile";
 	}
+	
 	// 내정보 변경 페이지 이동
 	@GetMapping("info")
-	public String info() {
+	public String info(
+		@SessionAttribute("loginMember")Member loginMember,
+		Model model
+		) {
+		
+		String memberAddress = loginMember.getMemberAddress();
+		
+		if(memberAddress !=null) {
+			
+			String[]arr =memberAddress.split("\\^\\^\\^");
+			
+			model.addAttribute("postcode", arr[0]);
+			model.addAttribute("address", arr[1]);
+			model.addAttribute("detailAddress", arr[2]);
+		}
 		return "myPage/myPage-info";
 	}
+	
 	// 비밀번호 변경 페이지 이동
 	@GetMapping("changePw")
 	public String changePw() {
@@ -152,11 +182,21 @@ public class MyPageController {
 		
 		int memberNo = loginMember.getMemberNo();
 		
-		int result = service.secession(memberId, memberPw, memberNo);
+		int result = service.secession(memberId, memberPw, loginMember);
+
+		String message = null;
 		
+		if(result>0) {
+			message = "탈퇴 되었습니다";
+			ra.addFlashAttribute("message", message);
+			status.setComplete();
+			return "redirect:/";
+		}else {
+			message = "비밀번호가 일치하지 않습니다";
+			ra.addFlashAttribute("message", message);
+			return "redirect:/myPage/secession";
+		}
 		
-		
-		return null;
 	}
 	
 	

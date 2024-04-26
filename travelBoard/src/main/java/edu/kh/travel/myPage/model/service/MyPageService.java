@@ -26,7 +26,7 @@ public interface MyPageService {
 	 * @param memberNo
 	 * @return
 	 */
-	int secession(String memberId, String memberPw, int memberNo);
+	int secession(String memberId, String memberPw, Member loginMember);
 
 
 	/** 비밀번호 수정

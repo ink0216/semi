@@ -78,9 +78,20 @@ public class MyPageServiceImpl implements MyPageService{
 	
 	//회원 탈퇴
 	@Override
-	public int secession(String memberId, String memberPw, int memberNo) {
+	public int secession(String memberId, String memberPw, Member loginMember) {
 		
-		return 0;
+		int memberNo = loginMember.getMemberNo();
+		String memberEmail = loginMember.getMemberEmail();
+		String pw = mapper.selectPw(memberNo);
+		
+		if( !bcrypt.matches(memberPw, pw)) {
+			return 0;
+		} if( memberId != memberEmail) {
+			return 0;
+		} else {
+			return mapper.secession(memberNo);
+		}
+		
 	}
 	
 	// 비밀번호 수정

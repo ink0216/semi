@@ -25,4 +25,10 @@ public interface MyPageMapper {
 	 */
 	int changePw(Member member);
 
+	/** 회원 탈퇴
+	 * @param memberNo
+	 * @return
+	 */
+	int secession(int memberNo);
+
 }

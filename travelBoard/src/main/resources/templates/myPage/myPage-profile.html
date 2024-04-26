@@ -60,12 +60,13 @@
               </div>
               <div class="myPage-row">
                 <label for="">주소 </label>
-                <span th:text="${session.loginMember.memberAddress}"></span>
+                <span th:text="${address + ' ' + detailAddress}"></span>
               </div>
               <div class="myPage-row">
                 <label for="">가입일 </label>
                 <span th:text="${session.loginMember.enrollDate}"></span>
               </div>
+              <!-- 번호 테스트(추후 삭제 예정) -->
               <div class="myPage-row">
                 <label for="">번호 </label>
                 <span th:text="${session.loginMember.memberTel}"></span>
