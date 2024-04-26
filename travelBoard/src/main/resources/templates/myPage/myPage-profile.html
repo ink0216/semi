@@ -66,6 +66,10 @@
                 <label for="">가입일 </label>
                 <span th:text="${session.loginMember.enrollDate}"></span>
               </div>
+              <div class="myPage-row">
+                <label for="">번호 </label>
+                <span th:text="${session.loginMember.memberTel}"></span>
+              </div>
             
           </form>
         </section>
@@ -77,6 +81,7 @@
 
   <!-- 푸터 -->
   <th:block th:replace="~{common/footer}"></th:block>
+
   
   <script src="/js/myPage/myPage.js"></script>
   

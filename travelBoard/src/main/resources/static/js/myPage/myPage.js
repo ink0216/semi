@@ -2,13 +2,13 @@
 
 const profile = document.querySelector("#profile")
 
-let statusCheck = 1;
+let status = 1;
 let backupInput;
 
 if(profile!=null){ // 프로필 이미지 존재할때
   // img
   const profileImg = document.querySelector("#profileImg")
-  // input file
+  // input type =  file
   const imageInput = document.querySelector("#imageInput")
   // X 버튼 
   const deleteImage = document.querySelector("#deleteImage");
@@ -24,7 +24,10 @@ if(profile!=null){ // 프로필 이미지 존재할때
       const some = backupInput.cloneNode(true);
 
       imageInput.after(backupInput);
+
       imageInput.remove(); 
+
+      imai
 
       return;
     }
@@ -38,6 +41,10 @@ if(profile!=null){ // 프로필 이미지 존재할때
       const url = e.target.result;
 
       profileImg.setAttribute("src",url);
+
+      status = 1;
+
+      backupInput = imageInput.cloneNode(true);
     })
   }
   
@@ -50,4 +57,29 @@ if(profile!=null){ // 프로필 이미지 존재할때
     
   })
 
+  profile.addEventListener("submit", e =>{
+
+    let flag = true;
+
+    // 기존 프로필 이미지가 없다가 새 이미지가 선택된 경우
+    if(loginMemberProfileImg == null && status == 1) flag=false;
+
+    // 기존 프로필 이미지가 있다가 삭제한 경우
+    if(loginMemberProfileImg != null && status == 0) flag=false;
+    
+    // 기존 프로필 이미지가 있다가 새 이미지가 선택된 경우
+    if(loginMemberProfileImg != null && status == 1) flag=false;
+
+
+    if(flag){ // flag 값이 true인 경우 
+
+      e.preventDefault();
+      alert("이미지 변경후 클릭하세요");
+    }
+
+  })
+
 }
+
+
+// -----------------------------------------------------------------

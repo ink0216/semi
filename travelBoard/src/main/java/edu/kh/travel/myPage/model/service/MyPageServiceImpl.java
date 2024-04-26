@@ -71,6 +71,13 @@ public class MyPageServiceImpl implements MyPageService{
 		return result;
 	}
 	
+	//회원 탈퇴
+	@Override
+	public int secession(String memberId, String memberPw, int memberNo) {
+		
+		return 0;
+	}
+	
 	
 	
 	

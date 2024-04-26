@@ -26,4 +26,14 @@ public interface MyPageService {
 	 */
 	int updateProfile(MultipartFile profileImg, Member loginMember)throws IllegalStateException, IOException;
 
+
+
+	/** 회원 탈퇴
+	 * @param memberId
+	 * @param memberPw
+	 * @param memberNo
+	 * @return
+	 */
+	int secession(String memberId, String memberPw, int memberNo);
+
 }

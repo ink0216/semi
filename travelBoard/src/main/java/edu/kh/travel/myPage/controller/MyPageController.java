@@ -1,13 +1,16 @@
 package edu.kh.travel.myPage.controller;
 
 import java.io.IOException;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -85,8 +88,14 @@ public class MyPageController {
 	 */
 	@PostMapping("info")
 	public String updateInfo(
-			@SessionAttribute("loginMember")String logString,
+			@ModelAttribute Member member,
+			@SessionAttribute("loginMember")Member loginMember,
 			Model model) {
+		
+		int memberNo = loginMember.getMemberNo();
+		member.setMemberNo(memberNo);
+		
+		int result = service.updateInfo(member);
 		
 		return null;
 	}
@@ -121,7 +130,16 @@ public class MyPageController {
 	@PostMapping("secession")
 	public String secession(
 		@RequestParam("memberId")String memberId,
-		@RequestParam("memberPw")String memberPw) {
+		@RequestParam("memberPw")String memberPw,
+		@SessionAttribute("loginMember")Member loginMember,
+		RedirectAttributes ra,
+		SessionStatus status) {
+		
+		int memberNo = loginMember.getMemberNo();
+		
+		int result = service.secession(memberId, memberPw, memberNo);
+		
+		
 		
 		return null;
 	}
