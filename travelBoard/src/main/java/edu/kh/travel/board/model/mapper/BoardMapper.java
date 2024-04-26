@@ -47,6 +47,36 @@ public interface BoardMapper {
 	 * @return boardList
 	 */
 	List<Board> selectSearchList(Map<String, Object> paramMap, RowBounds rowBounds);
+	
+	/**해당 게시판에 존재하는 게시글의 나라 이름 종류 조회
+	 * @param selectContinent
+	 * @return
+	 */
+	List<String> countryList(String selectContinent);
 	//------------------------------------------------------------------
+
+
+	/**해당 게시글 상세 조회
+	 * @param map
+	 * @return
+	 */
+	Board selectOne(Map<String, Object> map);
+
+
+	/**조회 수 1 증가시키기
+	 * @param boardNo
+	 * @return
+	 */
+	int updateReadCount(int boardNo);
+
+
+	/**조회수를 조회
+	 * @param boardNo
+	 * @return
+	 */
+	int selectReadCount(int boardNo);
+
+
+	
 
 }

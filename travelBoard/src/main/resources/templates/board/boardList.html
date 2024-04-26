@@ -6,30 +6,21 @@
     <title>Document</title>
 
     <th:block th:replace="~{common/common}"></th:block>
-    <link rel="stylesheet" href="/css/common/header.css">
 </head>
 <body>
     <th:block th:replace="~{common/header}"></th:block>
-    <section class="boardSideMenu">
-
-    </section>
     <section class="board-list">
-
-    
-
-
-
         <!-- 검색 구현 후 사용 -->
         <!-- <h3 style="margin:30px">OOO 검색 결과</h3> -->
 
         <div class="list-wrapper">
-            <table class="list-table">
+            <table class="list-table" border="1">
                 <th:block th:unless="${#lists.size(boardList)==0}">
                     <!-- 게시글이 존재할 때 -->
                     <thead>
                         <tr>
                             <th>글번호</th>
-                            <th>제목</th>
+                            <th>제목[댓글수]</th>
                             <th>작성자</th>
                             <th>작성일</th>
                             <th>조회수</th>
@@ -47,7 +38,11 @@
                             <td th:th:text="*{boardNo}">게시글 번호</td>
                             <td> 
                                 <!-- 썸네일 추가 예정 -->
-
+    <!-- 상세 조회 하려고 제목 클릭 시 (1번 게시판의 1988번 글!) 
+        /board/1/1988 이런 요청 주소를 보내게 만들거다 
+        
+    상세 조회 주소에 cp가 포함된 이유 : 상세조회에서 목록으로 버튼 클릭 시
+                                다시 해당 페이지 목록으로 돌아올 때 사용하려고-->
     <a th:unless="${param.key}" 
     th:href="@{/board/{contiCode}/{boardNo}(contiCode=${contiCode},boardNo=*{boardNo},cp=${pagination.currentPage})}" 
 
@@ -289,7 +284,7 @@
         </form>
 
     </section>
-
+<script src="/js/board/boardList.js"></script>
 
 
 
