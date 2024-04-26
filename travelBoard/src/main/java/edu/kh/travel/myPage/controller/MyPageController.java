@@ -65,8 +65,6 @@ public class MyPageController {
 		@SessionAttribute("loginMember")Member loginMember,
 		RedirectAttributes ra)throws IllegalStateException, IOException {
 		
-		// 로그인한 회원번호 얻어오기
-		int memberNo = loginMember.getMemberNo();
 		
 		int result = service.updateProfile(profileImg,loginMember);
 		
