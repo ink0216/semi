@@ -39,10 +39,6 @@ document.querySelector("#searchAddress").addEventListener("click",execDaumPostco
 
 
 
-const memberEmail = document.querySelector("#memberEmail");
-const emailMessage = document.querySelector("#emailMessage");
-
-
 
 /* 유효성 검사를 위한 객체 */
 
@@ -52,8 +48,12 @@ const checkObj = {
     "memberPwConfirm" : false,
     "memberNickname" : false,
     "memberTel" : false,
-    "authkey" : false
-}
+    "authKey" : false
+};
+
+const memberEmail = document.querySelector("#memberEmail");
+const emailMessage = document.querySelector("#emailMessage");
+
 
 
 
@@ -69,8 +69,8 @@ memberEmail.addEventListener("input", e => {
 
   
     // 이메일 인증을 성공하고 이메일이 변경된 경우
-    //checkObj.authkey = false;
-   // document.querySelector("#authKeyMessage").innerText = "";
+    checkObj.authkey = false;
+    document.querySelector("#authKeyMessage").innerText = "";
 
     // 공백을 제거한 이메일 입력이 없는 경우
 
@@ -86,6 +86,8 @@ memberEmail.addEventListener("input", e => {
 
 
         memberEmail.value = "";
+
+
         return;
 
     }
@@ -104,7 +106,7 @@ memberEmail.addEventListener("input", e => {
 
         emailMessage.classList.add('error');
 
-        emailMessage.classList.remove('remove');
+        emailMessage.classList.remove('confirm');
 
         checkObj.memberEmail = false;
 
@@ -161,7 +163,7 @@ const checkPw = () => {
 
     if(memberPw.value === memberPwConfirm.value){
 
-    pwMessage.innerText = "유효한 비밀번호가 서로 같게 입력되었습니다."
+    pwMessage.innerText = "유효한 비밀번호가 서로 같게 입력되었습니다.";
 
     pwMessage.classList.add("confirm");
 
@@ -172,7 +174,7 @@ const checkPw = () => {
     return;
     }
 
-    pwMessage.innerText = "입력한 비밀번호가 서로 불일치합니다."
+    pwMessage.innerText = "입력한 비밀번호가 서로 불일치합니다.";
 
     pwMessage.classList.add("error");
 
@@ -225,7 +227,7 @@ memberPw.addEventListener("input",e => {
 
     // 정규식까지 다 지키고 유효한 비밀번호 입력 끝
 
-    pwMessage.innerText = "유효한 비밀번호 형식입니다.";
+    pwMessage.innerText = "유효한 비밀번호 형식입니다. 비밀번호 확인을 입력하세요.";
 
     pwMessage.classList.add("confirm");
 
@@ -242,6 +244,21 @@ memberPw.addEventListener("input",e => {
     }
 
 });
+
+
+// 비밀번호가 유효할 때, 유효성 검사를 실행함
+memberPwConfirm.addEventListener("input", () => {
+
+    if(checkObj.memberPw){ 
+      checkPw(); 
+      return;
+    }
+  
+ 
+    checkObj.memberPwConfirm = false;
+  });
+
+
 
 
 /* 닉네임 유효성 검사 */
@@ -294,9 +311,9 @@ memberNickname.addEventListener("input",e => {
     .then(response => response.text())
     .then(count =>{
 
-        if(count == 1){
+        if(count >= 1){
 
-            nickMessage.innerText = "중복된 닉네임이 있습니다.";
+            nickMessage.innerText = "이미 사용중인 닉네임입니다.";
 
             nickMessage.classList.add('error');
 
@@ -341,8 +358,8 @@ memberTel.addEventListener("input", e => {
     if(inputTel.trim().length === 0){
         telMessage.innerText = "전화번호를 입력해주세요.(- 제외)";
         telMessage.classList.remove('confirm','error');
-        memberTel.value = "";
         checkObj.memberTel = false;
+        memberTel.value = "";
         return;
     }
 
@@ -369,9 +386,9 @@ memberTel.addEventListener("input", e => {
 /* 이메일 인증 절차를 위한 JS 작성 공간 */
 
 const sendAuthKeyBtn = document.querySelector("#sendAuthKeyBtn");
-const authKey = document.querySelector("#authkey");
+const authKey = document.querySelector("#authKey");
 const authKeyMessage = document.querySelector("#authKeyMessage");
-
+const checkAuthKeyBtn = document.querySelector("#checkAuthKeyBtn");
 
 
 // 타이머 설정하기
@@ -391,7 +408,7 @@ sendAuthKeyBtn.addEventListener("click", () => {
     // 이메일 입력 상태를 알아보는 유효성 검사(유효한 경우에만 인증버튼 작동)
     if(!checkObj.memberEmail){
 
-        alert("유효한 이메일을 먼저 작성하시오.");
+        alert("유효한 이메일을 먼저 작성하세요.");
 
         return;
     }
@@ -403,7 +420,11 @@ sendAuthKeyBtn.addEventListener("click", () => {
     min = initMin;
     sec = initSec;
 
-    checkObj.authKey= false;
+
+
+    clearInterval(authTimer);
+
+    checkObj.authKey = false;
 
 
     // 서버에서 이메일을 보내기
@@ -428,7 +449,9 @@ sendAuthKeyBtn.addEventListener("click", () => {
 
     authKeyMessage.classList.remove("confirm","error");
 
-    setInterval(() => {
+    alert("인증번호가 발송되었습니다.");
+
+    authTimer = setInterval(() => {
 
         authKeyMessage.innerText = `${addZero(min)}:${addZero(sec)}`;
 
@@ -442,6 +465,8 @@ sendAuthKeyBtn.addEventListener("click", () => {
             authKeyMessage.classList.add("error");
 
             authKeyMessage.classList.remove("confirm");
+
+            return;
 
         }
 
@@ -486,15 +511,16 @@ const signUpForm = document.querySelector("#signUpForm");
 
 
 
-// 회원가입 폼을 제출하는 순간 
-// checkObj에 있는 요소들을 하나하나 검사해서 false가 있으면 제출을 막음
+
 
 signUpForm.addEventListener("submit",e => {
 for(let key in checkObj){
 
-    let str; // 메시지 출력용 변수
+   
 
     if(!checkObj[key]){
+    // 메시지 출력용 변수
+        let str; 
 
     switch(key){
         case "memberEmail" : str = "이메일이 유효하지 않습니다."; break;
@@ -513,8 +539,67 @@ for(let key in checkObj){
     return;
 }
 }
-});
 
+
+}
+
+);
+
+
+
+checkAuthKeyBtn.addEventListener("click",() => {
+
+    if(min === 0 && sec === 0){
+        alert("인증번호 입력 제한시간이 지났습니다. 다시 인증버튼을 눌러주세요.");
+        return;
+    }
+
+    if(authKey.value.length < 6){
+        alert("인증번호 형식이 일치하지 않습니다.");
+        return;
+    }
+
+
+    const obj = {
+        "email" : memberEmail.value,
+        "authKey" : authKey.value
+    };
+
+    fetch("/email/checkAuthKey", {
+        method : "POST",
+        headers : {"Content-Type" : "application/json"},
+        body : JSON.stringify(obj)
+    })
+    .then(resp => resp.text())
+    .then(result => {
+
+        if(result == 0){
+            alert("인증번호가 틀립니다.");
+
+            checkObj.authKey = false;
+            
+            return;
+        }
+        
+        
+
+        alert("이메일이 인증되었습니다.");
+
+        clearInterval(authTimer);
+
+        authKeyMessage.classList.innerText = "이메일이 인증되었습니다.";
+
+        authKeyMessage.classList.remove("error");
+
+        authKeyMessage.classList.add("confirm");
+
+        checkObj.authKey = true; // 유효성 검사 인증키 여부를 true로 변환
+
+    })
+
+
+
+});
 
 
 

@@ -38,8 +38,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 30%;
-    margin: 20px 0;
+    width: 70%;
+    margin: 40px 40px 50px 60px;
 }
 .colitems label{
     cursor: pointer;
@@ -64,6 +64,7 @@
     border-bottom: 1px solid gray;
     font-size : 20px;
     margin: 10px 0;
+    width:400px;
 }
 .mid button{
     height: 30px;
@@ -74,6 +75,7 @@
     border: none;
     border-radius: 15px;
     cursor: pointer;
+    
 }
 .mid input:focus-within{
     outline: none;
@@ -87,3 +89,29 @@ body{
 }
 
 
+
+.confirm{color : green;}
+.error{color:red;}
+
+
+
+.bottom button{
+
+    width:140px;
+    height:50px;
+    background-color:skyblue;
+    font-size:18px;
+    border-radius:15px;
+    border:1px solid white;
+    font-weight:bold;
+}
+
+.bottom button:hover{
+
+    cursor:pointer;
+}
+
+.bottom button:active{
+    background-color: #000F75;
+    color:white;
+}

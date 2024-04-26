@@ -1,11 +1,14 @@
 package edu.kh.travel.email.controller;
 
+import java.util.Map;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import edu.kh.travel.email.model.service.EmailService;
@@ -28,7 +31,7 @@ public class EmailController {
 	 */
 	@ResponseBody
 	@PostMapping("signup")
-	public int signup(@RequestBody String email, Model model) {
+	public int signup(@RequestBody String email) {
 		
 		String authKey = service.sendEmail("signup",email);
 		
@@ -36,16 +39,38 @@ public class EmailController {
 		
 		if(authKey != null) {
 			
-			model.addAttribute("authKey", authKey);
+			
 			
 			return 1;
 		}
 		else {
+			
 			return 0;
 		}
 		
 		
 		
+		
+		
 	}
+	
+
+	 /**
+	  * 입력된 인증번호가 맞는지 확인하는 기능
+	  * @param map
+	  * @return
+	  */
+	@PostMapping("checkAuthKey")
+	@ResponseBody
+	public int checkAuthKey(
+			
+			@RequestBody Map<String, Object> map) {
+		
+		
+		return service.checkAuthKey(map);
+		
+		
+	}
+	
 
 }

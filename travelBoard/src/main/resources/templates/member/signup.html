@@ -18,12 +18,12 @@
         <div class="colitems">
             <form action="/member/signup" method = "POST" name = "signUpForm" id="signUpForm">
                 <section class="top">
-                    <div class="required">*</div><label for="memberEmail">이메일</label>
+                    <div class="required">*</div><label for="memberEmail">이메일</label><br>
                 </section>
-                <section class="mid">
-                    <input type="text" placeholder="이메일" id="memberEmail" name="memberEmail">
-                    <button id="sendAuthKeyBtn">인증번호 받기</button>
-                </section>
+                <div class="mid">
+                    <input type="text" placeholder="이메일" autocomplete="off" id="memberEmail" name="memberEmail">
+                    <button id="sendAuthKeyBtn" type = "button">인증번호 받기</button>
+                </div>
                 <section class="bottom" id="emailMessage">
                     메일을 받을 수 있는 이메일을 입력해주세요.
                 </section>
@@ -31,10 +31,10 @@
             </div>
             <div class="colitems">
                 <section class="top">
-                    <div class="required">*</div><label for="authkey" autocomplete="off">인증번호</label>
+                    <div class="required">*</div><label for="authKey" autocomplete="off">인증번호</label>
                 </section>
                 <section class="mid">
-                    <input type="text" placeholder="인증번호 입력" id="authkey" name="authkey">
+                    <input type="text" placeholder="인증번호 입력" id="authKey" name="authKey">
                     <button id="checkAuthKeyBtn" type="button">인증하기</button>
                 </section>
                 <section class="bottom" id="authKeyMessage">
@@ -48,7 +48,7 @@
                 </section>
                 <section class="mid">
                     <input type="password" placeholder="비밀번호" id="memberPw" name="memberPw" autocomplete="off"> <br>
-                    <input type="password" placeholder="비밀번호 확인" id="memberPwConfirm" name="memberPw" autocomplete="off">
+                    <input type="password" placeholder="비밀번호 확인" id="memberPwConfirm" autocomplete="off">
                 </section>
                 <section class="bottom" id="pwMessage">
                     영어, 숫자, 특수문자(!,@,#,-,_) 6~20글자 사이로 입력해주세요.
@@ -75,7 +75,7 @@
                     <input type="text" placeholder="(-없이 숫자만 입력)" id="memberTel" name="memberTel">
                 </section>
                 <section class="bottom" id="telMessage">
-                    전화번호를 입력해주세요.(- 제외)
+                    전화번호를 입력해주세요. (- 제외 최대 11글자)
                 </section>
                  
             </div>
@@ -91,7 +91,8 @@
                     <input type="text" placeholder="상세 주소" name = "memberAddress" id="detailAddress">
                 </section>
             </div>
-            <button id = "signUpBtn">가입하기</button> 
+            <section class="bottom">
+            <button id = "signUpBtn">가입하기</button> </section>
         </form>
 
     </div>
@@ -130,5 +131,11 @@
 
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script src="/js/member/signup.js"></script>
+    <th:block th:replace="~{common/footer}"></th:block>
+    <script th:inline="javascript">
+        const message =  /*[[${message}]]*/ "전달 받은 message";
+    
+        if(message != null) alert(message);
+    </script>
 </body>
 </html>

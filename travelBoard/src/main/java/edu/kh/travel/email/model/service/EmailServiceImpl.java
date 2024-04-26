@@ -1,5 +1,8 @@
 package edu.kh.travel.email.model.service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -7,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring6.SpringTemplateEngine;
 
+import edu.kh.travel.email.model.mapper.EmailMapper;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
 
@@ -17,6 +21,8 @@ public class EmailServiceImpl implements EmailService {
 	private final JavaMailSender mailSender;
 
 	private final SpringTemplateEngine templateEngine;
+	
+	private final EmailMapper mapper;
 
 	/*
 	 * 회원가입을 위한 이메일 인증
@@ -63,6 +69,25 @@ public class EmailServiceImpl implements EmailService {
 			return null;
 		}
 
+		
+		Map<String, String> map = new HashMap<>();
+		map.put("authKey", authKey);
+		map.put("email", email);
+		
+		
+		int result = mapper.updateAuthKey(map);
+		
+		
+		if(result == 0) {
+			result = mapper.insertAuthKey(map);
+			
+		}
+		
+		if(result == 0) return null;
+		
+	
+		
+		
 		
 		return authKey;
 		
@@ -126,6 +151,16 @@ public class EmailServiceImpl implements EmailService {
 		}
 		
 		return key;
+	}
+	
+	
+	/**
+	 * 이메일 입력한 인증번호가 맞는지 확인
+	 */
+	@Override
+	public int checkAuthKey(Map<String, Object> map) {
+		
+		return mapper.checkAuthKey(map);
 	}
 
 }
