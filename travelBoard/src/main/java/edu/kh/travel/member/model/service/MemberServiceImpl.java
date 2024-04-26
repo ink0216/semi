@@ -29,7 +29,7 @@ public class MemberServiceImpl implements MemberService{
 		
 		
 		Member loginMember = mapper.login(inputMember.getMemberEmail());
-		//아이디랑 비밀번호 둘 다 qwer로 했다!!
+		
 		if(loginMember == null) {
 			
 			return null;
@@ -37,8 +37,9 @@ public class MemberServiceImpl implements MemberService{
 		if(!bcrypt.matches(inputMember.getMemberPw(), loginMember.getMemberPw())) {
 			return null;
 		}
+		
 		loginMember.setMemberPw(null);
-		return loginMember; //원래 이거였다
+		return loginMember;
 	}
 
 	

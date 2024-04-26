@@ -5,11 +5,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.kh.travel.member.model.dto.Member;
@@ -39,24 +41,28 @@ public class MemberController {
 			@RequestParam("selectContinent") String selectContinent,
 			HttpServletResponse resp) {
 		
+		
 		Member loginMember = service.login(inputMember);
+		
+		String path = null;
+		
 		// 로그인 정보가 일치하지 않을 경우
 		if(loginMember == null) {
 			
-			ra.addFlashAttribute("message","로그인을 해야 게시판 이용이 가능합니다.");
-			return "redirect:/";
+			ra.addFlashAttribute("message","로그인 정보가 일치하지 않습니다");
+			
+			path = "/";
+			
 		}
-		else {
-			//Session scope에 loginMember 추가 
+		if(loginMember != null) {
+		
 			model.addAttribute("loginMember", loginMember); 
 			
 			
-			// 아이디 저장
+			// 아이디 저장 옵션
 			Cookie cookie = new Cookie("saveId", loginMember.getMemberEmail());
 			
-			//클라이언트가 어떤 요청을 할 때 쿠키가 첨부될 지 지정
-					//ex) "/"   :IP 또는 도메인 또는 localhost 뒤에 "/" -->메인 페이지 + 그 하위 주소들 의미
-					//cookie.setPath("/"); 메인 페이지 및 그 하위 주소들 요청 오면 그때 마다 다 쿠키 담아서 보내주겠다
+		
 			cookie.setPath("/");
 			
 			if(saveId != null ) {
@@ -70,8 +76,14 @@ public class MemberController {
 			}
 			resp.addCookie(cookie);
 			//ra.addFlashAttribute("message","해당 회원이 존재합니다!!!!");
-			return "redirect:/board/"+selectContinent; //selectContinent로 해당 게시판으로 이동되도록 PathVariable
-		} 
+			
+			
+			path = "/board/"+selectContinent;
+			
+		}
+	
+//		return "redirect:/board/"+selectContinent; //selectContinent로 해당 게시판으로 이동되도록 PathVariable
+		return "redirect:" + path;
 		
 		
 	}
@@ -89,11 +101,21 @@ public class MemberController {
 	
 	
 	/**
+	 * 로그인 전용 페이지로 이동
+	 * 
+	 */
+	@GetMapping("login")
+	public String loginPage() {
+		return "member/login"; 
+	}
+	
+	
+	/**
 	 * 회원가입 서비스
 	 * @return
 	 */
 	@PostMapping("signup")
-	public String signup(Member inputMember,
+	public String signup(@ModelAttribute Member inputMember, 
 			@RequestParam("memberAddress") String[] memberAddress,
 			RedirectAttributes ra) {
 		
@@ -105,16 +127,17 @@ public class MemberController {
 		
 		
 		if(result > 0) {
-			message = inputMember.getMemberNickname()+" 님의 회원가입 성공";
 			
-			path = null;
+			message = inputMember.getMemberNickname() + "님의 회원 가입이 완료되었습니다.";
+			
+			path = "/";
 		} else {
 			
-			message = "회원가입 실패";
+			message = "회원 가입 실패";
 			path = "signup";
 		}
-			ra.addFlashAttribute("message",message);
-		
+			
+		ra.addFlashAttribute("message",message);
 	
 		return "redirect:" + path;
 	}
@@ -154,5 +177,17 @@ public class MemberController {
 	
 	
 	
+	
+	/**
+	 * 로그아웃
+	 */
+	@GetMapping("logout")
+	public String logout(SessionStatus status) {
+		
+		status.setComplete();
+		
+		return "redirect:/";
+		
+	}
 
 }

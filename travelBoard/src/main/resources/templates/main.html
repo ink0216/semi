@@ -15,14 +15,14 @@
             <i class="fa-solid fa-plane fa-rotate-by fa-9x" style="color: #87ceeb; --fa-rotate-angle: 315deg;"></i>   
             
             <div>
-                <input type="text" id="memberEmail" name="memberEmail" placeholder="이메일">
+                <input type="text" id="memberEmail" name="memberEmail" placeholder="이메일" autocomplete="off">
             </div>
             <div>
                 <input type="password" id="memberPw" name="memberPw" placeholder="비밀번호">
             </div>
-            <div>
+            <label>
                 <input type="checkbox" name="saveId">아이디 저장
-            </div>
+            </label>
             <div id="loginText">
                 <a href="/member/signup">회원가입</a> | <a href="#">ID/PW 찾기</a>
             </div>
@@ -56,4 +56,9 @@
         </form>
         <script src="https://kit.fontawesome.com/a373078820.js" crossorigin="anonymous"></script>
         <script src="/js/main.js"></script>
+        <script th:inline="javascript">
+            const message =  /*[[${message}]]*/ "전달 받은 message";
+        
+            if(message != null) alert(message);
+        </script>
 </html>
