@@ -262,7 +262,7 @@ INSERT INTO "CONTINENT" VALUES(
 );
 SELECT * FROM BOARD;
 
---댓글 테이블 부모 댓글 번호 NULL 허용으로 바꾸기!!(아직 안함)
+--댓글 테이블 부모 댓글 번호 NULL 허용으로 바꾸기!!(함!!!)
 ALTER TABLE "COMMENT" 
 MODIFY PARENT_COMMENT_NO NUMBER NULL;
 
@@ -317,6 +317,139 @@ VALUES(SEQ_BOARD_NO.NEXTVAL,
 );
 SELECT * FROM "BOARD";
 
-
+--BOARD_IMG 테이블용 시퀀스 생성
+CREATE SEQUENCE SEQ_IMG_NO NOCACHE;
+--BOARD_IMG 테이블에 샘플 데이터 삽입
+INSERT INTO BOARD_IMG 
+VALUES (SEQ_IMG_NO.NEXTVAL,
+				0,
+				'뚱이1.webp',
+				6,
+				'/images/board/'
+);
+INSERT INTO BOARD_IMG 
+VALUES (SEQ_IMG_NO.NEXTVAL,
+				1,
+				'스폰지밥2.gif',
+				6,
+				'/images/board/'
+);
+INSERT INTO BOARD_IMG 
+VALUES (SEQ_IMG_NO.NEXTVAL,
+				2,
+				'뚱이3.gif',
+				6,
+				'/images/board/'
+);
+INSERT INTO BOARD_IMG 
+VALUES (SEQ_IMG_NO.NEXTVAL,
+				3,
+				'박명수4.jpg',
+				6,
+				'/images/board/'
+);
+INSERT INTO BOARD_IMG 
+VALUES (SEQ_IMG_NO.NEXTVAL,
+				4,
+				'박명수5.jpg',
+				6,
+				'/images/board/'
+);
 
 COMMIT;
+--게시글 상세 조회하는 SQL
+SELECT BOARD_NO, BOARD_TITLE , BOARD_CONTENT ,CONTI_CODE,
+			READ_COUNT , MEMBER_NO , MEMBER_NICKNAME,PROFILE_IMG,
+			TO_CHAR(WRITE_DATE, 'YYYY"년" MM"월" DD"일" HH24:MI:SS') WRITE_DATE,
+			(SELECT COUNT(*) FROM "LIKE" 
+				WHERE BOARD_NO=6 ) LIKE_COUNT,
+				(SELECT IMG_PATH||IMG_RENAME 
+					FROM BOARD_IMG 
+					WHERE BOARD_NO=6
+					AND IMG_ORDER=0) THUMBNAIL
+FROM "BOARD"
+JOIN "COUNTRY" USING (COUNTRY_CODE)
+JOIN "CONTINENT" USING (CONTI_CODE)
+JOIN "MEMBER" USING (MEMBER_NO)
+WHERE BOARD_DEL_FL ='N'
+AND CONTI_CODE = 'AS'
+AND BOARD_NO = 6;
+--회원 가입 시 프로필 이미지 지정 안할 경우 디폴트 값 지정->안해도 됨!
+-- /images/profile/
+--ALTER TABLE "MEMBER" MODIFY 
+--(PROFILE_IMG DEFAULT '/images/profile.jpg')
+--이렇게 하면 회원 수 대로 컬럼에 불필요한 값이 insert되게돼서 
+--선생님은 messages.properties에 값 넣어놓고 꺼내왔다 (myPage-profile.html에서 타임리프로!)
+------------------------
+--댓글 테이블 댓글 번호 시퀀스 생성
+CREATE SEQUENCE SEQ_COMMENT_NO NOCACHE;
+--댓글 샘플 데이터 삽입
+INSERT INTO "COMMENT" 
+VALUES (SEQ_COMMENT_NO.NEXTVAL, 
+				'6번 게시글의 1번 부모 댓글',
+				DEFAULT,
+				DEFAULT,
+				3,
+				6,
+				NULL
+				);
+INSERT INTO "COMMENT" 
+VALUES (SEQ_COMMENT_NO.NEXTVAL, 
+				'6번 게시글의 2번 부모의 1번 댓글의 1번 자식 댓글',
+				DEFAULT,
+				DEFAULT,
+				3,
+				6,
+				6
+				);
+			UPDATE "COMMENT"
+			SET COMMENT_CONTENT  = '6번 게시글의 1번 부모의 1번 댓글'
+			WHERE COMMENT_NO =4;
+			SELECT * FROM "COMMENT";
+COMMIT;
+--상세 조회되는 게시글의 모든 이미지 조회하기
+SELECT * 
+FROM "BOARD_IMG" 
+WHERE BOARD_NO =6
+ORDER BY IMG_ORDER ;
+
+/*상세조회되는 게시글의 모든 댓글 조회*/
+/*계층형 쿼리
+ * START WITH
+ * 계층형에서 NULL인 애들이 1레벨이야
+ * CONNECT BY PRIOR 
+ * COMMENT_NO랑 PARENT_COMMENT_NO가 같은 것끼리 연결해줄거야
+ * 정렬은 같은 레벨끼리 정렬하는데 COMMENT_NO 오름차순으로 정렬할거야
+ * */
+
+SELECT LEVEL, C.* 
+FROM
+		(SELECT COMMENT_NO, COMMENT_CONTENT,
+		  TO_CHAR(COMMENT_WRITE_DATE, 'YYYY"년" MM"월" DD"일" HH24"시" MI"분" SS"초"') COMMENT_WRITE_DATE,
+		    BOARD_NO, MEMBER_NO, MEMBER_NICKNAME, PROFILE_IMG, PARENT_COMMENT_NO, COMMENT_DEL_FL
+		FROM "COMMENT"
+		JOIN MEMBER USING(MEMBER_NO)
+		WHERE BOARD_NO = 6) C --서브쿼리의 결과가 테이블 됨
+WHERE COMMENT_DEL_FL = 'N'
+	OR 0 != (SELECT COUNT(*) FROM "COMMENT" SUB
+					WHERE SUB.PARENT_COMMENT_NO = C.COMMENT_NO
+					AND COMMENT_DEL_FL = 'N')
+	START WITH PARENT_COMMENT_NO IS NULL
+	CONNECT BY PRIOR COMMENT_NO = PARENT_COMMENT_NO
+	ORDER SIBLINGS BY COMMENT_NO;
+--이 결과를 저장할 DTO 만들기
+
+--상세조회하면서 SELECT 3회 할거다
+--DTO없는 이미지랑, 댓글에 대한 DTO 만들고 결과 다 가져와서 화면에 꾸미면 된다!!
+
+--해당 게시판에 존재하는 게시글의 나라 이름 종류 조회
+SELECT DISTINCT COUNTRY_NAME
+FROM "BOARD"
+JOIN "COUNTRY" USING (COUNTRY_CODE)
+JOIN "CONTINENT" USING (CONTI_CODE)
+WHERE CONTI_CODE = 'AS';
+
+
+
+
+

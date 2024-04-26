@@ -125,6 +125,34 @@ public class BoardServiceImpl implements BoardService{
 						// 5. 결과 반환
 						return map;
 	}
+	
+	//해당 게시판에 존재하는 게시글의 나라 이름 종류 조회
+	@Override
+	public List<String> countryList(String selectContinent) {
+		return mapper.countryList(selectContinent);
+	}
 	//------------------------------------------------------------------------------
+	//해당 게시글 상세 조회
+	public Board selectOne(Map<String, Object> map) {
+		//select 세 번 할거다!
+		//그러려면 서비스에서 매퍼를 세 번 호출하면 된다!
+		//매퍼 메서드 하나 당 sql 하나만 수행하니까!
+		// 근데 수행하려는 sql이 모두 select이면서 먼저 조회된 결과 일부를 이용해
+		// 다음 sql의 조건으로 삼는 경우
+		// myBatis의 동적 sql이용 가능
+		return mapper.selectOne(map);
+	}
+	//조회 수 증가시키기
+	@Override
+	public int updateReadCount(int boardNo) {
+		// 조회수 1 증가시키기
+		int result = mapper.updateReadCount(boardNo);
+		if(result>0) {
+			return mapper.selectReadCount(boardNo);
+		}
+		return -1;
+	}
+	//------------------------------------------------------------------------------
+	
 	
 }

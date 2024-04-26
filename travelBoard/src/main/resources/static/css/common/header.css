@@ -61,3 +61,22 @@
     width:150px;
     height: 150px;
 }
+/* 네비게이션 바 */
+.board-name{
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+}
+.board-name>a{
+    text-decoration: none;
+}
+
+
+
+
+
+
+
+
+
+
