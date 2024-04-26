@@ -84,9 +84,7 @@ public class MyPageServiceImpl implements MyPageService{
 		String memberEmail = loginMember.getMemberEmail();
 		String pw = mapper.selectPw(memberNo);
 		
-		if( !bcrypt.matches(memberPw, pw)) {
-			return 0;
-		} if( memberId != memberEmail) {
+		if( !bcrypt.matches(memberPw, pw) && memberId != memberEmail) {
 			return 0;
 		} else {
 			return mapper.secession(memberNo);
