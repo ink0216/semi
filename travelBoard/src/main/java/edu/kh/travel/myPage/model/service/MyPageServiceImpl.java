@@ -2,9 +2,12 @@ package edu.kh.travel.myPage.model.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -19,6 +22,8 @@ import lombok.RequiredArgsConstructor;
 public class MyPageServiceImpl implements MyPageService{
 	
 	private final MyPageMapper mapper;
+	
+	private final BCryptPasswordEncoder bcrypt;
 	
 	@Value("${my.profile.web-path}")
 	private String profileWebPath; //  /myPage/profile/
@@ -78,13 +83,29 @@ public class MyPageServiceImpl implements MyPageService{
 		return 0;
 	}
 	
-	
-	
-	
 	// 비밀번호 수정
 	@Override
-	public int changePw(String nowPw, String newPw, Member loginMember) {
-		return 0;
+	public int changePw(Map<String, Object> map, int memberNo) {
+		
+		// 현재 비밀번호 DB조회
+		String pw = mapper.selectPw(memberNo);
+		
+		String nowPw = (String)map.get("nowPw");
+		
+		if( !bcrypt.matches(nowPw,pw)) {
+			return 0;
+		} else {
+			String newPw = bcrypt.encode((String)map.get("newPw"));
+			
+			Member member = new Member();
+			
+			member.setMemberNo(memberNo);
+			member.setMemberPw(newPw);
+			
+			return mapper.changePw(member);
+		}
 	}
-
+	
+	
+	
 }

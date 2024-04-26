@@ -95,7 +95,7 @@ public class MyPageController {
 		int memberNo = loginMember.getMemberNo();
 		member.setMemberNo(memberNo);
 		
-		int result = service.updateInfo(member);
+		//int result = service.updateInfo(member);
 		
 		return null;
 	}
@@ -110,14 +110,29 @@ public class MyPageController {
 	 */
 	@PostMapping("changePw")
 	public String changePw(
-		@RequestParam("nowPw")String nowPw,
-		@RequestParam("newPw")String newPw,
-		@SessionAttribute("lo inMember")Member loginMember) {
+		@RequestParam Map<String, Object> map,
+		@SessionAttribute("loginMember")Member loginMember,
+		RedirectAttributes ra) {
 		
+		int memberNo = loginMember.getMemberNo();
 		
-		int result = service.changePw(nowPw,newPw,loginMember);
+		int result = service.changePw(map,memberNo);
 		
-		return null;
+		String message = null;
+		String path = null;
+		
+		if(result >0) {
+			message = "비밀번호가 변경되었습니다";
+			path = "myPage/profile";
+		} else {
+			message = "비밀번호가 일치 하지 않습니다";
+			path = "myPage/changePw";
+		}
+		
+		ra.addFlashAttribute("message",message);
+		
+		return "redirect:/" + path;
+		
 	}
 	
 	

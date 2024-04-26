@@ -1,6 +1,7 @@
 package edu.kh.travel.myPage.model.service;
 
 import java.io.IOException;
+import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -8,16 +9,7 @@ import edu.kh.travel.member.model.dto.Member;
 
 public interface MyPageService {
 
-	
-	/** 비밀번호 수정
-	 * @param nowPw
-	 * @param newPw
-	 * @param loginMember
-	 * @return
-	 */
-	int changePw(String nowPw, String newPw, Member loginMember);
-
-	
+		
 
 	/** 프로필 이미지 변경
 	 * @param profileImg
@@ -35,5 +27,13 @@ public interface MyPageService {
 	 * @return
 	 */
 	int secession(String memberId, String memberPw, int memberNo);
+
+
+	/** 비밀번호 수정
+	 * @param map
+	 * @param memberNo
+	 * @return
+	 */
+	int changePw(Map<String, Object> map, int memberNo);
 
 }

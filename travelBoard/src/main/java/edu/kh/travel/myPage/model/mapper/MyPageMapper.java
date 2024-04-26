@@ -13,4 +13,16 @@ public interface MyPageMapper {
 	 */
 	int updateProfile(Member temp);
 
+	/** 현재 비밀번호 조회
+	 * @param memberNo
+	 * @return
+	 */
+	String selectPw(int memberNo);
+
+	/** 비밀번호 변경
+	 * @param member
+	 * @return
+	 */
+	int changePw(Member member);
+
 }
