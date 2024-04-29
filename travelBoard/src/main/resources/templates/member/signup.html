@@ -53,6 +53,20 @@
                 <section class="bottom" id="pwMessage">
                     영어, 숫자, 특수문자(!,@,#,-,_) 6~20글자 사이로 입력해주세요.
                 </section>
+            </div>
+
+            <div class= "colitems">
+                <section class="top">
+                    <div class="required">*</div><label for="memberBirth">생년월일</label>
+                </section>
+                <section class="mid">
+                    <input type="text" placeholder="생년월일 (예 : 19901231)" id="memberBirth" name="memberBirth">
+                </section>
+                <section class="bottom" id="birthMessage">
+                    생년월일 8글자를 입력하세요.
+                </section>
+
+            </div>
                 
             </div>
             <div class="colitems">
@@ -131,11 +145,11 @@
 
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script src="/js/member/signup.js"></script>
-    <th:block th:replace="~{common/footer}"></th:block>
-    <script th:inline="javascript">
+   
+    <!-- <script th:inline="javascript">
         const message =  /*[[${message}]]*/ "전달 받은 message";
     
         if(message != null) alert(message);
-    </script>
+    </script> -->
 </body>
 </html>

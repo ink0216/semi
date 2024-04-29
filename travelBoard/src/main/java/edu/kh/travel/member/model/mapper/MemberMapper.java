@@ -1,5 +1,7 @@
 package edu.kh.travel.member.model.mapper;
 
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import edu.kh.travel.member.model.dto.Member;
@@ -38,5 +40,10 @@ public interface MemberMapper {
 	 * @return
 	 */
 	public int checkNickname(String memberNickname);
+
+
+
+
+	public Member selectTelBirth(Map<String, Object> map);
 
 }

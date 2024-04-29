@@ -26,6 +26,7 @@ public class Member {
 	private String memberAddress;
 	private String profileImg;
 	private int authority;
+	private String memberBirth;
 	
 
 }
