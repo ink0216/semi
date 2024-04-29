@@ -14,7 +14,9 @@ const insertBtn = document.querySelector("#insertBtn");
 
         location.pathname.split("/")[2] */
         //alert(boardCode);
-        location.href=`/editBoard/${contiCode}/insert`; //get방식
+        console.log("글쓰기 버튼 클릭됨");
+        
+        location.href="/editBoard/boardWrite?contiCode="+contiCode; //get방식
         // ``안의 ${}은 el구문 아님!그냥 변수명을 적는 것이다
     });
     }

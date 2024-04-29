@@ -25,7 +25,7 @@ public class Board {
 	private int readCount;
 	private String boardDelFl;
 	private int memberNo;
-	private int boardCode;
+	private String countryCode;
 	
 	//MEMBER 테이블 조인
 	private String memberNickname;

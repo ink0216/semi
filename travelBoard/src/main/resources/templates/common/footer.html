@@ -17,4 +17,10 @@
     const message =  /*[[${message}]]*/ "전달 받은 message";
 
     if(message != null) alert(message);
+    const headerLogo = document.querySelector("#headerLogo");
+    if(headerLogo !=null){
+        headerLogo.addEventListener("click", ()=>{
+            location.href="/board/AS";
+        });
+    }
 </script>

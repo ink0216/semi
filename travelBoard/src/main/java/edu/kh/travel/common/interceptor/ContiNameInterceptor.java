@@ -57,25 +57,22 @@ public class ContiNameInterceptor implements HandlerInterceptor{
 			
 		
 		//잘라내기
-		int boardCode = Integer.parseInt(uri.split("/")[2]); //자르면  ["", "board","1"]로 반환됨
-				// /board/1
-				// /board/2
-				//split -> /로 쪼개면 비어있는게 0번인덱스, board가 1번인덱스, 1이 2번인덱스 됨
+		String contiCode = uri.split("/")[2]; //자르면  ["", "board","AS"]로 반환됨
 		
 		//boardTypeList에서 boardCode를 하나씩 꺼내서 비교
 		for(Map<String, Object> boardType : boardTypeList) {
 			//하나씩 꺼내서 boardType이라고 하겠다
-			int temp= //int로 바꼈다
-			Integer.parseInt(String.valueOf(boardType.get("boardCode"))); //얻어올 수 있는데 Object타입인데
+			String temp= //int로 바꼈다
+			String.valueOf(boardType.get("contiCode")); //얻어올 수 있는데 Object타입인데
 			//boardCode랑 비교하려면 int로 바꿔야 한다
 			//parseInt는 String을 int로 바꾸는 것이고
 			//Object를 String으로 바꾸고 그거를 int로 바꾸는 코드 작성
 			// String.valueOf(값) : String으로 변환해줌!
 			//그걸 parseInt하면 int로 바뀐다
 			
-			if(temp==boardCode) {//하나씩 꺼낸 것 비교해서
+			if(temp.equals(contiCode)) {//하나씩 꺼낸 것 비교해서
 				//temp랑, 위에서 잘라서 꺼내온 boardCode랑 같다면
-				request.setAttribute("boardName", boardType.get("boardName")); 
+				request.setAttribute("contiName", boardType.get("contiName")); 
 				//비교 결과가 같다면 request scope에 boardname 을 추가
 				break; //같은 것 찾았다면 그 뒤에 더 검사할 필요 없다
 			}
