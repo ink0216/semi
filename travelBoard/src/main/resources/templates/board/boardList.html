@@ -3,18 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>게시글 목록 페이지</title>
 
     <th:block th:replace="~{common/common}"></th:block>
+    <link rel="stylesheet" href="/css/board/boardList.css">
 </head>
 <body>
     <th:block th:replace="~{common/header}"></th:block>
+    <h1 th:text="|${contiName} 게시판|"></h1>
     <section class="board-list">
         <!-- 검색 구현 후 사용 -->
         <!-- <h3 style="margin:30px">OOO 검색 결과</h3> -->
 
         <div class="list-wrapper">
-            <table class="list-table" border="1">
+            <table class="list-table" >
                 <th:block th:unless="${#lists.size(boardList)==0}">
                     <!-- 게시글이 존재할 때 -->
                     <thead>
@@ -126,7 +128,7 @@
 
         <div class="btn-area">
             <!-- 로그인 상태일 때만 글쓰기 버튼 노출 -->
-            <button id="insertBtn" th:if="${session.loginMember}">글쓰기</button>     
+            <button id="insertBtn">글쓰기</button>     
             <!-- session.loginMember 하면 null아니면 객체인데
             타임리프는 객체가 있으면 true, null이면 false로 하기로 돼있어서 =!null 안써도 된다!!!
             (자동으로 객체가 있을 때 라는 의미로 동작)-->                
@@ -253,7 +255,7 @@
                 <li><a th:href="@{/board/{contiCode}(contiCode=${contiCode},cp=*{maxPage}, key=${param.key}, query=${param.query})}">&gt;&gt;</a></li>
             </ul>
         </div>
-
+        [[${contiCode}]]
 
 
 
@@ -284,7 +286,12 @@
         </form>
 
     </section>
+    <th:block th:replace="~{common/footer}"></th:block>
+    <script th:inline="javascript">
+        let contiCode =/*[[${contiCode}]]*/"대륙번호";
+    </script>
 <script src="/js/board/boardList.js"></script>
+
 
 
 

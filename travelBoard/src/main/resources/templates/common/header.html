@@ -3,7 +3,7 @@
 <section class="header">
     <div class="left">
         
-        <img src="/images/logo.jpg" alt="여행로고" >
+        <img src="/images/logo.jpg" alt="여행로고" id="headerLogo" >
     </div>
     <div class="center">
         <div>
@@ -34,23 +34,16 @@
 
 </section>
         <!-- application, request scope 값 이용 방법 -->
+        <div id="navContainer">
         <th:block th:each=" boardType : ${application.boardTypeList}"
         class="board-name" >
+        
             <a 
             th:text="${boardType.contiName}"
             th:href="@{/board/{contiCode}(contiCode=${boardType.contiCode})}"
             >게시판 이름</a>
-            <!-- 이거 보고 하기!
-                <a th:if="${param.key}" 
-            th:href="@{/board/{contiCode}/{boardNo}
-            (contiCode=${contiCode},boardNo=*{boardNo},cp=${pagination.currentPage}, key=${param.key}, query=${param.query})}" 
         
-                                        th:text="*{boardTitle}">게시글 제목</a> -->
-            <!-- <a class="board-name" 
-            th:if="${boardType.contiCode} == ${contiCode}"
-            th:text="${boardType.contiName}">게시판 이름</a> -->
-            <!-- 반복해서 검색해서 boardType의 boardCode(application scope에서 꺼낸 것)랑
-                request scope에서 꺼낸 거랑 같을 때에만 게시판 이름을 출력하겠다
-            근데 인터셉터로도 할 수 있다-->
+    
         </th:block>
+    </div>
 </header>
