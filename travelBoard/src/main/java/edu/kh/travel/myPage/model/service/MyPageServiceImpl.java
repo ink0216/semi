@@ -85,7 +85,7 @@ public class MyPageServiceImpl implements MyPageService{
 		String memberEmail = loginMember.getMemberEmail();
 		String pw = mapper.selectPw(memberNo);
 		
-		if( !bcrypt.matches(memberPw, pw) || memberId != memberEmail) {
+		if( !bcrypt.matches(memberPw, pw) && memberId != memberEmail) {
 			return 0;
 		} else {
 			return mapper.secession(memberNo);
@@ -117,7 +117,7 @@ public class MyPageServiceImpl implements MyPageService{
 	}
 
 	
-	// 내정보 수정
+	// 회원정보 수정
 	@Override
 	public int updateInfo(Member inputMember, String[] memberAddress) {
 		
