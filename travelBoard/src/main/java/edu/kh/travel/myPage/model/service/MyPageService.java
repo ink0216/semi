@@ -36,4 +36,17 @@ public interface MyPageService {
 	 */
 	int changePw(Map<String, Object> map, int memberNo);
 
+
+
+	/** 내정보 수정
+	 * @param inputMember
+	 * @param memberAddress
+	 * @return
+	 */
+	int updateInfo(Member inputMember, String[] memberAddress);
+
+
+
+
+
 }

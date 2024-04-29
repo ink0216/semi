@@ -10,12 +10,12 @@
 	</update>
 	
 	<!-- 내정보 수정 -->
-	<update id="">
+	<update id="updateInfo">
 		UPDATE "MEMBER" SET
-		MEMBER_NICKNAME = #{memberNickname}
-		MEMBER_TEL = #{memberTel}
+		MEMBER_NICKNAME = #{memberNickname},
+		MEMBER_TEL = #{memberTel},
 		MEMBER_ADDRESS = #{memberAddress}
-		WHERE MEMBER_NO =#{memberNo}
+		WHERE MEMBER_NO = #{memberNo}
 	</update>
 	
 	<!-- 현재 비밀번호 조회 -->

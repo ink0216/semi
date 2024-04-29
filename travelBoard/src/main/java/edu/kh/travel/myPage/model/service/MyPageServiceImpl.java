@@ -40,6 +40,7 @@ public class MyPageServiceImpl implements MyPageService{
 		// 수정 경로
 		String updatePath = null;
 		
+		
 		String rename = null;
 		
 		// 업로드 이미지 있을경우
@@ -84,7 +85,7 @@ public class MyPageServiceImpl implements MyPageService{
 		String memberEmail = loginMember.getMemberEmail();
 		String pw = mapper.selectPw(memberNo);
 		
-		if( !bcrypt.matches(memberPw, pw) && memberId != memberEmail) {
+		if( !bcrypt.matches(memberPw, pw) || memberId != memberEmail) {
 			return 0;
 		} else {
 			return mapper.secession(memberNo);
@@ -114,7 +115,22 @@ public class MyPageServiceImpl implements MyPageService{
 			return mapper.changePw(member);
 		}
 	}
+
 	
-	
-	
+	// 내정보 수정
+	@Override
+	public int updateInfo(Member inputMember, String[] memberAddress) {
+		
+		// 입력 주소 있을 경우 형태 가공
+		
+		// 주소 입력 x
+		if(inputMember.getMemberAddress().equals(",,")) {
+			inputMember.setMemberAddress(null);
+		} else {
+			String address = String.join("^^^", memberAddress);
+			
+			inputMember.setMemberAddress(address);
+		}
+		return mapper.updateInfo(inputMember);
+	}
 }
