@@ -38,8 +38,6 @@ public interface MemberService {
 
 
 
-	Member selectTelBirth(Map<String, Object> map);
-
 
 
 

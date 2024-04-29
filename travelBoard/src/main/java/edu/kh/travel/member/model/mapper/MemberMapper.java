@@ -42,8 +42,16 @@ public interface MemberMapper {
 	public int checkNickname(String memberNickname);
 
 
-
-
 	public Member selectTelBirth(Map<String, Object> map);
+
+
+	
+
+
+
+
+
+
+
 
 }

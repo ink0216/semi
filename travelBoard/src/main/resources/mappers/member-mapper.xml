@@ -50,8 +50,6 @@ WHERE MEMBER_DEL_FL = 'N'
 AND MEMBER_NICKNAME = #{memberNickname}
 </select>
 
-
-
 <!-- 전화번호로 아이디 찾기  -->
 <select id="selectTelBirth" resultType ="Member">
 
@@ -62,6 +60,8 @@ AND MEMBER_TEL = #{memberTel}
 AND MEMBER_BIRTH = #{memberBirth}
 
 </select>
+
+
 
 
 

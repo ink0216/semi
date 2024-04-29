@@ -21,7 +21,7 @@ body {
 
 
 #inputTel {
-    width: 100%;
+    width: 300px;
     padding: 10px;
     margin-bottom: 30px;
     box-sizing: border-box;
@@ -37,7 +37,7 @@ body {
 
 
 #inputBirth {
-    width: 100%;
+    width: 300px;
     padding: 10px;
     margin-bottom: 30px;
     box-sizing: border-box;
@@ -52,9 +52,23 @@ body {
 
 #telnumber{
     font-size:25px;
+    margin-top:150px;
+    display:flex;
+    justify-content: center;
 }
 
 
 #birthday{
     font-size:25px;
+    display:flex;
+    justify-content: center;
+}
+
+
+
+#submit{
+    display:flex;
+    width:150px;
+    height:100px;
+
 }
