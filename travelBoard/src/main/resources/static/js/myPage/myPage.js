@@ -119,16 +119,14 @@ if(profile!=null){ // 프로필 이미지 존재할때
   }).open();
 }
 
-
-/* 주소 버튼 클릭시 실행되도록 변경*/
-document.querySelector("#searchAd").addEventListener("click",execDaumPostcode);
-
-
 // form태그
 const updateInfo = document.querySelector("#updateInfo");
 
 // #updateInfo 요소가 존재 할 때만 수행
 if(updateInfo!= null){
+  
+  /* 주소 버튼 클릭시 실행되도록 변경*/
+  document.querySelector("#searchAd").addEventListener("click",execDaumPostcode);
 
   // form 제출시
   updateInfo.addEventListener("submit", e =>{
@@ -230,7 +228,7 @@ if( changePw != null){
       return;
     }
 
-  })
+  });
 
 }
 
@@ -239,7 +237,7 @@ if( changePw != null){
 
 const secession = document.querySelector("#secession");
 
-if(secession != null)[
+if(secession != null){
 
   secession.addEventListener("submit", e =>{
 
@@ -247,15 +245,13 @@ if(secession != null)[
     const memberPw = document.querySelector("#memberPw");
     const agree = document.querySelector("#agree");
 
-    // 아이디 입력 유효성검사
-    if(memberId.value.trim().length == 0){
-      alert("아이디를 입력해주세요");
-      e.preventDefault();
-      return;
-    }
+    let str;
 
-    if(memberPw.value.trim().length==0){
-      alert("비밀번호를 입력해 주세요");
+    if(memberId.value.trim().length == 0) str("아이디를 입력해주세요");
+    else if(memberPw.value.trim().length ==0) str("비밀번호를 입력해 주세요");
+
+    if(str != undefined){
+      alert(str);
       e.preventDefault();
       return;
     }
@@ -275,8 +271,7 @@ if(secession != null)[
 
   })
 
-]
-
+}
 
 
 
