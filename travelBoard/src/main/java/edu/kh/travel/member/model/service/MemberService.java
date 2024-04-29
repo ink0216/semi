@@ -1,5 +1,7 @@
 package edu.kh.travel.member.model.service;
 
+import java.util.Map;
+
 import edu.kh.travel.member.model.dto.Member;
 
 public interface MemberService {
@@ -31,6 +33,15 @@ public interface MemberService {
 
 
 	int checkNickname(String memberNickname);
+
+
+
+
+
+	Member selectTelBirth(Map<String, Object> map);
+
+
+
 
 
 

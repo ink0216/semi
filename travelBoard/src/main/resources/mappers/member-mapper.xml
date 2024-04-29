@@ -28,7 +28,8 @@ DEFAULT,
 #{memberTel},
 #{memberAddress},
 DEFAULT,
-DEFAULT)
+DEFAULT,
+#{memberBirth})
 </insert>
 
 
@@ -47,6 +48,19 @@ SELECT COUNT(*)
 FROM "MEMBER"
 WHERE MEMBER_DEL_FL = 'N'
 AND MEMBER_NICKNAME = #{memberNickname}
+</select>
+
+
+
+<!-- 전화번호로 아이디 찾기  -->
+<select id="selectTelBirth" resultType ="Member">
+
+SELECT MEMBER_EMAIL
+FROM "MEMBER"
+WHERE MEMBER_DEL_FL = 'N'
+AND MEMBER_TEL = #{memberTel}
+AND MEMBER_BIRTH = #{memberBirth}
+
 </select>
 
 

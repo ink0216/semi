@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>아이디 찾기</title>
+    <link rel="stylesheet" href="/css/member/searchId-style.css">
+</head>
+<body>
+    <th:block th:replace="~{common/common}"></th:block>
+    <div>
+    <h1>아이디 찾기</h1>
+    </div>
+    <!-- 아이디 찾기하는데 필요한 요소 : 전화번호 입력  -->
+    
+    <form action="/member/searchId" method="GET" id="searchIdForm" name="selectTelBirth">
+    <div>
+        <div id="telnumber">전화번호</div>  
+        <input type="text" id="memberTel" name = "memberTel" placeholder = "전화번호">
+    </div>
+    <div>
+        <div id="birthday">생년월일</div> 
+        <input type="text" id="memberBirth" name = "memberBirth" placeholder = "생년월일 (예 : 19901231)">
+    </div>
+    <div>
+        
+        <button>제출하기</button>
+    </div>
+    </form>
+</body>
+</html>

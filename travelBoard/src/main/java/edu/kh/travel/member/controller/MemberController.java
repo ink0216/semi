@@ -1,6 +1,9 @@
 package edu.kh.travel.member.controller;
 
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,9 +21,11 @@ import edu.kh.travel.member.model.dto.Member;
 import edu.kh.travel.member.model.service.MemberService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("member")
 @Slf4j
 @SessionAttributes({"loginMember"}) //모델 중에서 같은 키값가지는 거 있으면 세션으로 올려라
@@ -110,6 +115,37 @@ public class MemberController {
 	}
 	
 	
+	
+	
+	
+	
+	/**
+	 * 아이디 찾기 페이지로 이동
+	 * @return
+	 */
+	@GetMapping("searchId")
+	public String searchId() {
+		
+		return "member/searchId";
+	}
+	
+	
+	
+	
+	
+	/**
+	 * 비밀번호 찾기 페이지로 이동
+	 * @return
+	 */
+	@GetMapping("searchPw")
+	public String searchPw() {
+		
+		return "member/searchPw";
+	}
+	
+	
+	
+	
 	/**
 	 * 회원가입 서비스
 	 * @return
@@ -189,5 +225,49 @@ public class MemberController {
 		return "redirect:/";
 		
 	}
+	
+	
+	
+	
+	/**
+	 * 아이디 찾기 서비스
+	 * @param memberTel
+	 * @return
+	 */
+	@GetMapping("selectTelBirth")
+	public String selectTelBirth(@RequestParam("memberTel") String memberTel,
+			@RequestParam("memberBirth") String memberBirth, Model model) {
+		
+		
+		
+		String path = null;
+		
+		Map<String, Object> map = new HashMap<>();
+		
+		Member member = service.selectTelBirth(map);
+		
+		map.put("memberTel", memberTel);
+		map.put("memberBirth", memberBirth);
+		
+	
+		
+		if(member == null) {
+			
+			path = "idSearchFail";
+			
+		} else {
+			
+			path = "idResult";
+			model.addAttribute("member",member);
+			
+		
+		}
+		
+		
+		return path;
+	}
+	
+	
+	
 
 }
