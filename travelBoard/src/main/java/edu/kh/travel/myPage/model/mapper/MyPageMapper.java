@@ -31,4 +31,10 @@ public interface MyPageMapper {
 	 */
 	int secession(int memberNo);
 
+	/** 내정보 수정
+	 * @param inputMember
+	 * @return
+	 */
+	int updateInfo(Member inputMember);
+
 }

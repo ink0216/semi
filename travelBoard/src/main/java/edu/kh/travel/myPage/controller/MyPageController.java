@@ -118,16 +118,34 @@ public class MyPageController {
 	 */
 	@PostMapping("info")
 	public String updateInfo(
-			@ModelAttribute Member member,
-			@SessionAttribute("loginMember")Member loginMember,
-			Model model) {
+		Member inputMember,
+		@SessionAttribute("loginMember")Member loginMember,
+		@RequestParam ("memberAddress") String[] memberAddress,
+		RedirectAttributes ra
+			) {
 		
+		// 로그인회원번호 추가
 		int memberNo = loginMember.getMemberNo();
-		member.setMemberNo(memberNo);
+		inputMember.setMemberNo(memberNo);
 		
-		//int result = service.updateInfo(member);
+		// 회원 정보 수정 서비스 호출
+		int result = service.updateInfo(inputMember,memberAddress);
 		
-		return null;
+		String message = null;
+		
+		if(result >0) {
+			message = "회원정보 수정 성공";
+			
+			loginMember.setMemberNickname(inputMember.getMemberNickname());
+			loginMember.setMemberTel(inputMember.getMemberTel());
+			loginMember.setMemberAddress(inputMember.getMemberAddress());
+		}else {
+			message = "회원정보 수정 실패";
+		}
+		
+		ra.addFlashAttribute("message",message);
+		
+		return "redirect:info";
 	}
 	
 	

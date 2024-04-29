@@ -32,15 +32,15 @@
           
           <div class="myPage-row">
             <label>현재 비밀번호 </label>
-            <input type="password" name="nowPw">
+            <input type="password" name="nowPw" id="nowPw">
           </div>
           <div class="myPage-row">
             <label>새 비밀번호 </label>
-            <input type="password" name="newPw">
+            <input type="password" name="newPw" id="newPw">
           </div>
           <div class="myPage-row">
             <label>새 비밀번호 확인 </label>
-            <input type="password" name="newPwCh">
+            <input type="password" name="newPwCh" id="newPwCh">
           </div>
 
 
@@ -56,6 +56,8 @@
 
   <!-- 푸터 -->
   <th:block th:replace="~{common/footer}"></th:block>
+
+  <script src="/js/myPage/myPage.js"></script>
   
 </body>
 </html>
