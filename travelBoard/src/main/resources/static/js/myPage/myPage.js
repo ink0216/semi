@@ -138,24 +138,48 @@ if(updateInfo!= null){
 }
 
 
-//-------------[회원 정보 변경]---------------
-
-/* 비밀번호 변경 */
+/* ---------- 비밀번호 변경 ---------- */
 
 const changePw = document.querySelector("#changePw");
 
-if(changePw != null){
+if( changePw != null){
 
-  const nowPw = document.querySelector("#newPw");
-  const newPw = document.querySelector("#newPw");
-  const newPwCh = document.querySelector("#newPwCh");
+  //제출 되었을 때
+  changePw.addEventListener("submit", e =>{
 
-  //
-  if( nowPw.value.trim().length == 0 )  str = "현재 비밀번호를 입력해 주세요";
-  else if( newPw.value.trim().length == 0 ) str = "새 비밀번호를 입력 해주세요";
-  else if( newPwCh.value.trim().length == 0 ) str = "새 비밀번호 확인을 입력 해주세요";
+    const nowPw = document.querySelector("#nowPw");
+    const newPw = document.querySelector("#newPw");
+    const newPwCh = document.querySelector("#newPwCh");
+
+    // 현재, 새 비번, 확인 전부 입력하기
+    let str;
+
+    if( nowPw.value.trim().length == 0) str="현재 비밀번호를 입력해 주세요";
+    else if ( newPw.value.trim().length == 0) str = "새 비밀번호를 입력해 주세요";
+    else if( newPwCh.value.trim().length == 0 ) str = "새 비밀번호 확인을 입력 해주세요";
+
+    if(str != undefined){
+      alert(str);
+      e.preventDefault();
+      return;
+    }
+
+    // 비밀번호 정규식 : 소/대문자 영문, 숫자, 특수문자 중 6~20 자리
+    const regExp = /^[a-zA-Z0-9!@#_-]{6,20}$/;
+    if( !regExp.test(newPw.value)){
+      alert("새 비밀번호가 유효하지 않습니다");
+      e.preventDefault();
+      return;
+    }
+
+    if(newPw.value != newPwCh.value){
+      alert("새 비밀번호가 확인과 일치하지 않습니다");
+      e.preventDefault();
+      return;
+    }
+
+  });
 
 }
-
 
 
