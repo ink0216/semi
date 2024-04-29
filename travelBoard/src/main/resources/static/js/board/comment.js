@@ -50,7 +50,6 @@ const selectCommentList = ()=>{
     */
    //REST API 사용
    //몇 번 게시글의 댓글을 볼 지 전달
-
    //GET방식 요청
     fetch("/comment?boardNo="+boardNo) //boardDetail.html 밑 script에 전역변수
     //자바의 리스트는 js에서 

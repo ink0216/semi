@@ -87,22 +87,14 @@
                             <img th:src="|${thumbnail.imgPath}${thumbnail.imgRename}|">
                             <a th:href="|${thumbnail.imgPath}${thumbnail.imgRename}|"
                             th:download="${thumbnail.imgOriginalName}">다운로드</a> 
-                            <!-- 다운로드는 원본명으로 됨 
-                            서버에 저장될 때에는 rename으로-->   
                         </div>
                     </div>
             </th:block>
                 
                 
                 <th:block th:if="${#lists.size(board.imageList)> start} ">
-                    <!-- 이미지가 몇 개 있는지 개수 -->
-                    <!-- 썸네일이 있으면 1, 없으면 0이라고 컨트롤러에서 설정한 start -->
                     <h5>업로드 이미지</h5>
                     <th:block th:each=" i : ${#numbers.sequence(start,#lists.size(board.imageList)-1)}">
-                        <!-- 4장 있었으면 #lists.size(board.imageList) ==4
-                        그럼 마지막 인덱스는 그것보다 1 작다-->
-                        <!-- start부터 list의 사이즈만큼 반복 -->
-                        <!-- 넘버즈 시퀀스 이용해야한다 -->
                         <div class="img-box">
                             <div class="boardImg">
                                 <img th:src="|${board.imageList[i].imgPath}${board.imageList[i].imgRename}|">   
@@ -134,8 +126,7 @@
                 <!-- loginMember가 있을 때에만 board.memberNo랑 비교 -->
                 <!-- 로그인한 사람이 번호랑 작성자의 번호가 같을 때에만 수정,삭제 버튼을 보여지게 하겠다 -->
                 <button id="updateBtn">수정</button>
-                <button id="deleteBtn">삭제(GET)</button>
-                <button id="deleteBtn2">삭제(POST)</button>
+                <button id="deleteBtn">삭제(POST)</button>
             </th:block>
                 <button id="goToListBtn">목록으로</button>
             </div>

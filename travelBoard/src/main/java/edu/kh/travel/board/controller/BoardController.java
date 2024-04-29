@@ -89,8 +89,6 @@ public class BoardController {
 			//서버 통신 때 보내줄 수 있다 서버로)
 			) throws ParseException {
 		//게시글 상세 조회 서비스 호출
-		//호출할 때 boardNo, contiCode를 매퍼까지 전달해줘야 하는데
-		//매퍼에는 파라미터 한 개만 보낼 수 있다!
 		//묶어서 보내기 가장 쉬운 것은 Map!!
 		Map<String, Object> map = new HashMap<>();
 		map.put("boardNo", boardNo);
