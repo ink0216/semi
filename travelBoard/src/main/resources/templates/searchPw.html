@@ -4,8 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>비밀번호 찾기</title>
+    <link rel="stylesheet" href="/css/member/searchPw-style.css">
 </head>
 <body>
+    <th:block th:replace="~{common/common}"></th:block>
+    <div>
+        <a href="/"><img src="/images/logo.jpg" alt="여행로고" width="300" height="300"></a>
+    </div>
+    <div id="pwSearchMessage">
     <h1>비밀번호 찾기</h1>
+    </div>
+
+     <!-- 이메일과 전화번호, 생년월일을 입력받음 -->
+
+    <form action="/selectEmailTelBirth" name="selectEmailTelBirth" id="selectEmailTelBirth">
+    <div>
+        <div id="email">이메일</div>
+        <input type="text" name = "inputEmail" id="inputEmail" placeholder="이메일">
+    </div>
+    <div>
+        <div id="telnumber">전화번호</div>  
+        <input type="text" name = "inputTel" id="inputTel" placeholder = "전화번호">
+    </div>
+    <div>
+        <div id="birthday">생년월일</div> 
+        <input type="text" name = "inputBirth" id="inputBirth" placeholder = "생년월일 (예 : 19901231)">
+    <div>
+    <button id="submit">제출하기</button>
+    </div>
+    </form>
+    <script src="/js/searchPw.js"></script>
+    
 </body>
 </html>

@@ -63,6 +63,19 @@ AND MEMBER_BIRTH = #{memberBirth}
 
 
 
+<!-- 이메일과 전화번호, 생년월일로 비밀번호 입력 화면으로 이동하게 하기 -->
+<select id= "selectEmailTelBirth" resultType = "Member">
+
+SELECT MEMBER_EMAIL
+FROM "MEMBER"
+WHERE MEMBER_DEL_FL = 'N'
+AND MEMBER_EMAIL = #{memberEmail}
+AND MEMBER_TEL = #{memberTel}
+AND MEMBER_BIRTH = #{memberBirth}
+
+</select>
+
+
 
 
 </mapper>

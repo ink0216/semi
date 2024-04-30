@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -60,6 +61,18 @@ public class MainController {
 		return "/searchId";
 	}
 	
+	
+	/**
+	 * 비밀번호 찾기 페이지로 이동
+	 * @return
+	 */
+	
+	@GetMapping("searchPw")
+	public String searchPw() {
+		
+		return "/searchPw";
+	}
+	
 
 	
 	
@@ -109,9 +122,84 @@ public class MainController {
 	}
 	
 	
+	
+	
+	
+	
+	
+	/**
+	 * 비밀번호 찾기를 위한 이메일, 전화번호, 생년월일 입력받기
+	 * @param inputEmail
+	 * @param inputTel
+	 * @param inputBirth
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("selectEmailTelBirth")
+	public String selectEmailTelBirth(
+			@RequestParam("inputEmail") String inputEmail,
+			@RequestParam("inputTel") String inputTel,
+			@RequestParam("inputBirth") String inputBirth, Model model) {
+	
 		
+		String path = null;
 		
+		Map<String, Object> map = new HashMap<>();
+		
+		map.put("memberEmail",inputEmail);
+		map.put("memberTel",inputTel);
+		map.put("memberBirth",inputBirth);
+		
+		Member member = service.selectEmailTelBirth(map);
+		
+		if(member == null) {
+			
+			path = "member/searchPw";
+			
+		} else {
+			
+			path = "member/searchPwReset";
+			
+			model.addAttribute("member",member);
+		}
+	
+		return path;
+		
+	
 	}
+	
+	
+	
+	/**
+	 * 비밀번호 변경하기
+	 * @param inputMember
+	 * @param paramMap
+	 * @param ra
+	 * @return
+	 */
+	@PostMapping("memberPwReset")
+	public String memberPwReset(
+			Member inputMember,
+			@RequestParam Map<String, Object> paramMap,
+			RedirectAttributes ra) {
+		
+		
+		
+		
+		
+		
+		return null; 
+	}
+	
+	
+	
+	
+	
+
+	
+	
+	
+}
 		
 	
 	

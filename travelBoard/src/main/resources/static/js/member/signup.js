@@ -119,7 +119,7 @@ memberEmail.addEventListener("input", e => {
 
     fetch("/member/checkEmail?memberEmail=" + inputEmail)
     .then(response => response.text())
-    .then(count => {
+    .then(count => { 
 
         if(count == 1){
             emailMessage.innerText = "이미 가입한 이메일입니다."

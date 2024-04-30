@@ -2,12 +2,25 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="edu.kh.travel.main.model.mapper.MainMapper">
 
-<!-- 전화번호로 아이디 찾기  -->
+<!-- 전화번호와 생년월일로 아이디 찾기  -->
 <select id="selectTelBirth" resultType ="Member">
 
 SELECT MEMBER_EMAIL
 FROM "MEMBER"
 WHERE MEMBER_DEL_FL = 'N'
+AND MEMBER_TEL = #{memberTel}
+AND MEMBER_BIRTH = #{memberBirth}
+
+</select>
+
+
+<!-- 이메일과 전화번호, 생년월일로 비밀번호 입력 화면으로 이동하게 하기 -->
+<select id= "selectEmailTelBirth" resultType = "Member">
+
+SELECT MEMBER_EMAIL
+FROM "MEMBER"
+WHERE MEMBER_DEL_FL = 'N'
+AND MEMBER_EMAIL = #{memberEmail}
 AND MEMBER_TEL = #{memberTel}
 AND MEMBER_BIRTH = #{memberBirth}
 

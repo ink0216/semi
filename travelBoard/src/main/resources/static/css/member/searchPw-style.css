@@ -1,0 +1,90 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    
+}
+
+
+#email{
+
+    margin-top:40px;
+    font-size:24px;
+}
+
+#telnumber{
+
+    font-size:24px;
+}
+
+#birthday{
+
+    font-size:24px;
+}
+
+
+
+#inputEmail{
+
+    width: 300px;
+    padding: 10px;
+    margin-bottom: 30px;
+    box-sizing: border-box;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    outline: none;
+    border-color: black;
+    border-width: 1px;
+    margin-top:10px;
+}
+
+#inputTel{
+    width: 300px;
+    padding: 10px;
+    margin-bottom: 30px;
+    box-sizing: border-box;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    outline: none;
+    border-color: black;
+    border-width: 1px;
+    margin-top:10px;
+
+}
+
+
+#inputBirth{
+    width: 300px;
+    padding: 10px;
+    margin-bottom: 30px;
+    box-sizing: border-box;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    outline: none;
+    border-color: black;
+    border-width: 1px;
+    margin-top:10px;
+
+}
+
+#submit{
+
+    justify-content: center;
+    width: 150px;
+    height: 60px;
+    margin-left: 75px;
+    border-radius: 50px;
+    background-color: skyblue;
+    border: 2px solid skyblue;
+    font-size: 20px;
+}
+
+
+

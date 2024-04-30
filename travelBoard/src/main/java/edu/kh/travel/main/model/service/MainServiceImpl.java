@@ -22,4 +22,11 @@ public class MainServiceImpl implements MainService{
 			return mapper.selectTelBirth(map);
 		}
 
+	
+	
+	@Override
+	public Member selectEmailTelBirth(Map<String, Object> map) {
+		
+		return mapper.selectEmailTelBirth(map);
+	}
 }

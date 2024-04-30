@@ -46,6 +46,10 @@ public interface MemberMapper {
 
 
 	
+	public Member selectEmailTelBirth(Map<String, Object> map);
+
+
+	
 
 
 
