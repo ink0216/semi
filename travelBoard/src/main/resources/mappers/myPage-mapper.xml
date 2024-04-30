@@ -39,7 +39,13 @@
 		MEMBER_DEL_FL = 'Y'
 		WHERE MEMBER_NO = #{memberNo}
 	</update>
-
+	
+	<!-- 내가쓴글 조회 -->
+	<select id="writing">
+		SELECT BOARD_NO, BOARD_TITLE,WRITE_DATE ,READ_COUNT 
+		FROM BOARD b 
+		WHERE MEMBER_NO = #{memberNo}
+	</select>
 	
 	
 </mapper>
