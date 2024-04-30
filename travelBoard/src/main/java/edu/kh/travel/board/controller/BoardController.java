@@ -38,6 +38,7 @@ public class BoardController {
 	
 	/**해당 게시판 전체 게시글 조회+검색 게시글 조회
 	 * @param contiCode
+	 * 
 	 * @param cp
 	 * @param model
 	 * @param paramMap
