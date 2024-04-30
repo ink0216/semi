@@ -34,18 +34,8 @@
                         <!-- unless : false일 때 수행하는 것 -->
                     <tbody>
                         <tr th:each=" board: ${boardList}" th:object="${board}">
-                            <!-- th:object="${board}" 쓰면 이 tr태그 내에서 *을 이용해서 
-                            필드명을 더 쉽게 꺼낼 수 있다 앞에 board. 안써도 된다-->
-                            <!-- tr태그가 조회한 개수만큼 반복해야한다 -->
-                            <!-- 하나씩 꺼낸 것을 board라고 부르겠다 -->
                             <td th:th:text="*{boardNo}">게시글 번호</td>
                             <td> 
-                                <!-- 썸네일 추가 예정 -->
-    <!-- 상세 조회 하려고 제목 클릭 시 (1번 게시판의 1988번 글!) 
-        /board/1/1988 이런 요청 주소를 보내게 만들거다 
-        
-    상세 조회 주소에 cp가 포함된 이유 : 상세조회에서 목록으로 버튼 클릭 시
-                                다시 해당 페이지 목록으로 돌아올 때 사용하려고-->
     <a th:unless="${param.key}" 
     th:href="@{/board/{contiCode}/{boardNo}(contiCode=${contiCode},boardNo=*{boardNo},cp=${pagination.currentPage})}" 
 
@@ -56,21 +46,7 @@
     (contiCode=${contiCode},boardNo=*{boardNo},cp=${pagination.currentPage}, key=${param.key}, query=${param.query})}" 
 
                                 th:text="*{boardTitle}">게시글 제목</a>
-                                <!-- param에 key가 있을 때(검색인 경우) -->
-                                <!-- , key=${param.key}, query=${param.query} -->
-                                <!-- cp는 왼쪽에 없어서 쿼리스트링으로 들어가는데 
-                                    상세 조회 주소에 cp가 포함된 이유
-                                    == 상세페이지 -> '목록으로 '버튼 클릭 시 목록 화면으로 돌아올 때 사용할거다
-                                3페이지 보고 있었으면 3페이지 목록으로 오도록-->
-                                <!-- 1번 공지게피한의 1998번글을 보겠다 -->
-                                <!-- /board/1/1998 : 현재 방법(PathVariable 이용하면 간단해짐) -->
-                                <!-- /board/list?code=1&no=1988 : 옛날방법 -->
-                                <!-- 이거 클릭 시 상세조회 요청 보내게 만들기! -->
-                                <!-- a태그 주소를 타임리프로 조작할거다 -->
                                 <th:block th:text="|[*{commentCount}]|"></th:block><!-- 댓글 수 -->
-                                <!-- 안에 텍스트 쓰고 싶은데 다른 문자랑 합쳐서 쓰고 싶으면
-                                양쪽에 | 씌워주면 된다(지금은 []랑 같이 합쳐서 썼다)-->
-                                <!-- [[*{commentCount}]] -->
                             </td>
 
                             <!-- 작성자 닉네임 -->
@@ -89,22 +65,7 @@
                     </tbody>
                 </th:block>
                 
-
-                
                     <th:block th:if="${#lists.size(boardList)==0}">
-                        <!-- 게시글이 존재하지 않을 때 -->
-                        <!-- 리스트를 조회했다 근데 게시글이 존재하지 않는 경우는
-                        boardList는 null일까 비어있을까
-                    조회 결과가 없어도 List<Board> 만들어져있음(0행)->비어있는 List가 반환된다
-                        여러 행 조회 시 결과가 없을 경우 == List가 비어있음 (null아님!!!)-->
-                        <!-- boardList.size()==0으로 해도 되지만 타임리프에서 권장 안하고
-                        타임리프에서는 #lists 권장! -->
-                        <!-- #lists : 타임리프에서 list 관련 기능을 제공하는 객체 -->
-                        <!-- 게시글이 존재하지 않을 때 -->
-                            <!-- ${boardList.size() == 0} -->
-                    <!-- ${#lists.size(boardList) == 0} -->
-                    <!-- ${#lists.isEmpty(boardList)} --> 
-                    <!-- 이 셋 중에 하나 쓰면 된다 -->
                     <thead>
                         <tr>
                             <th></th>
@@ -130,9 +91,6 @@
         <div class="btn-area">
             <!-- 로그인 상태일 때만 글쓰기 버튼 노출 -->
             <button id="insertBtn">글쓰기</button>     
-            <!-- session.loginMember 하면 null아니면 객체인데
-            타임리프는 객체가 있으면 true, null이면 false로 하기로 돼있어서 =!null 안써도 된다!!!
-            (자동으로 객체가 있을 때 라는 의미로 동작)-->                
         </div>
 
 
@@ -142,31 +100,17 @@
         <!-- 페이지 넘길 때 누르는 숫자 -->
         <div class="pagination-area">
             <ul class="pagination" th:unless="${param.key}" th:object="${pagination}">
-                <!-- 파라미터중에 key값이 없을 때 == 일반 목록 조회인 경우(검색X) ->이 페이지 네이션이 보이게 할거다 -->
-                <!-- 전달받은 것을 여기서 뜯어서 쓰겠따 -->
             
                 <!-- 첫 페이지로 이동 -->
                 <li><a th:href="@{/board/{contiCode}(contiCode=${contiCode}, cp=1)}">&lt;&lt;</a></li>
-                <!-- 왼쪽에 boardCode라고 써져있는데 그 boardCode는 @PathVariable이 올린거야 -->
-                <!-- 진짜 @PathVariable이 request scope로 써서 여기서 읽을 수 있다 -->
-                <!-- 왼쪽에 cp없으면 쿼리스트링으로 자동 변환된다 -->
-                <!-- &lt; : < -->
-                <!-- 두개 -> << -->
-                <!-- Spring el에서 주소 조합할 때에는 @를 쓴다 -->
 
                 <!-- 이전 목록의 마지막 번호로 이동 -->
                 <li><a th:href="@{/board/{contiCode}(contiCode=${contiCode},cp=*{prevPage})}">&lt;</a></li>
-                <!-- 원래 cp=${pagination.prevPage}로 해야되는데 너무 길어서
-                th:object로 하고 $를 *로 바꿔주면 앞의 pagination. 안써도 된다-->
                 <!-- 특정 페이지로 이동 -->
                 <!-- <th:block th:each=" i : ${#numbers.sequence(pagination.startPage,pagination.endPage)}"> -->
                 <th:block th:each=" i : *{#numbers.sequence(startPage,endPage)}">
-                    <!-- 위에  pagination을 object 해놔서 *로 하고 pagination. 안써도 된다-->
-                    <!-- $ 안의 pagination 앞에도 $ 써야 되는데 안써도 된다 밖에 있어서 -->
                     <!-- 현재 보고있는 페이지 -->
                     <li th:if="${i == pagination.currentPage}">
-                        <!-- <li th:if="${i} == *{currentPage}"> jsp el 에서는 ${}안에서 다 해결해야 했지만
-                            여기서는 if문으로 묶여 있어서 이렇게 해도 된다(따로따로 꺼내서 비교하는 것 가능하다!)-->
                         <a class="current" th:text="${i}">현재 페이지</a>
                     </li>
 
@@ -177,19 +121,7 @@
                         <!-- cp는 없으니까 쿼리스트링으로 넣을거야 -->
                     </li>
                 </th:block>
-<!--  이게 없어야 함!!!!(안그러면 1이 두 번 나온다!!!)
-                    일치하는 게시글이 없을 경우 
-                <th:block th:unless="*{startPage lt endPage}">
-                    <li>
-                        <a class="current">1</a>
-                    </li>
-                </th:block>
-                -->
-                <!-- <li> <a href="#">3</a> </li>
-                <li> <a href="#">4</a> </li>
-                <li> <a href="#">5</a> </li>
-                <li> <a href="#">6</a> </li>
-                #numbers.sequence(11,15) -> {11,12,13,14,15} 배열 반환 -> 향상된 for문으로 하나씩 꺼내서 출력 가능 -->
+
                 <!-- 다음 목록 시작 번호로 이동 -->
                 <li><a th:href="@{/board/{contiCode}(contiCode=${contiCode},cp=*{nextPage})}">&gt;</a></li>
 
@@ -198,32 +130,20 @@
             </ul>
 
             <ul class="pagination" th:if="${param.key}" th:object="${pagination}">
-                <!-- 파라미터중에 key값이 있을 때 == 검색인 경우(검색어가 있을 때) ->이 페이지 네이션이 보이게 할거다 -->
-                <!-- 전달받은 것을 여기서 뜯어서 쓰겠따 -->
             
                 <!-- 첫 페이지로 이동 -->
                 <li><a th:href="@{/board/{contiCode}(contiCode=${contiCode}, cp=1, key=${param.key}, query=${param.query})}">&lt;&lt;</a></li>
-                <!-- 왼쪽에 boardCode라고 써져있는데 그 boardCode는 @PathVariable이 올린거야 -->
-                <!-- 추가한 내용 :  , key=${param.key}, query=${param.query} -->
-                <!-- 진짜 @PathVariable이 request scope로 써서 여기서 읽을 수 있다 -->
-                <!-- 왼쪽에 cp없으면 쿼리스트링으로 자동 변환된다 -->
-                <!-- &lt; : < -->
-                <!-- 두개 -> << -->
-                <!-- Spring el에서 주소 조합할 때에는 @를 쓴다 -->
-
+            
                 <!-- 이전 목록의 마지막 번호로 이동 -->
                 <li><a th:href="@{/board/{contiCode}(contiCode=${contiCode},cp=*{prevPage}, key=${param.key}, query=${param.query})}">&lt;</a></li>
-                <!-- 원래 cp=${pagination.prevPage}로 해야되는데 너무 길어서
-                th:object로 하고 $를 *로 바꿔주면 앞의 pagination. 안써도 된다-->
+            
                 <!-- 특정 페이지로 이동 -->
                 <!-- <th:block th:each=" i : ${#numbers.sequence(pagination.startPage,pagination.endPage)}"> -->
                 <th:block th:if="*{startPage lt endPage}" th:each=" i : *{#numbers.sequence(startPage,endPage)}">
-                    <!-- 위에  pagination을 object 해놔서 *로 하고 pagination. 안써도 된다-->
-                    <!-- $ 안의 pagination 앞에도 $ 써야 되는데 안써도 된다 밖에 있어서 -->
+                
                     <!-- 현재 보고있는 페이지 -->
                     <li th:if="${i == pagination.currentPage}">
-                        <!-- <li th:if="${i} == *{currentPage}"> jsp el 에서는 ${}안에서 다 해결해야 했지만
-                            여기서는 if문으로 묶여 있어서 이렇게 해도 된다(따로따로 꺼내서 비교하는 것 가능하다!)-->
+                    
                         <a class="current" th:text="${i}">현재 페이지</a>
                     </li>
 
@@ -240,15 +160,7 @@
                         <a class="current">1</a>
                     </li>
                 </th:block>
-                <!-- <li> <a href="#">3</a> </li>
-                <li> <a href="#">4</a> </li>
-                <li> <a href="#">5</a> </li>
-                <li> <a href="#">6</a> </li>
-                <li> <a href="#">7</a> </li>
-                <li> <a href="#">8</a> </li>
-                <li> <a href="#">9</a> </li>
-                <li> <a href="#">10</a> </li> -->
-                <!-- #numbers.sequence(11,15) -> {11,12,13,14,15} 배열 반환 -> 향상된 for문으로 하나씩 꺼내서 출력 가능 -->
+                
                 <!-- 다음 목록 시작 번호로 이동 -->
                 <li><a th:href="@{/board/{contiCode}(contiCode=${contiCode},cp=*{nextPage}, key=${param.key}, query=${param.query})}">&gt;</a></li>
 
@@ -256,25 +168,15 @@
                 <li><a th:href="@{/board/{contiCode}(contiCode=${contiCode},cp=*{maxPage}, key=${param.key}, query=${param.query})}">&gt;&gt;</a></li>
             </ul>
         </div>
-        [[${contiCode}]]
+        <!-- [[${contiCode}]] -->
 
 
 
         <!-- 검색창 -->
         <form th:action="@{{contiCode}(contiCode=${contiCode})}" method="get" id="boardSearch">
-            <!-- 주소 조합할 때에는 @붙인다!!(a태그에서도) -->
-            <!-- 상대경로 방식! 
-            그 boardCode는 request scope에 존재하는 boardCode값을 넣을 거다
-            request scope에 있는 boardCode는 @PathVariable로 세팅된거다!!-->
-            <!-- 절대경로는 앞에서부터 주소 바꾸는것, 상대경로는 뒤에서부터 주소 바꾸는 것
-            boardController의 첫 메서드로 요청 보냄!-->
+        
 
             <select name="key" id="searchKey">
-                <!-- select도 input태그!!
-                input태그는 보통 name옆에 value를 쓰는데
-            select는 name은 select태그를 쓰고 value는 option 태그를 사용하는 특이한 형태의 input태그이다
-        parameter값은 select의 name속성값, value는 선택한 option태그의 value값이 된다!!!
-    -->
                 <option value="t">제목</option>
                 <option value="c">내용</option>
                 <option value="tc">제목+내용</option>

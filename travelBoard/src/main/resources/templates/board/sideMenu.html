@@ -3,7 +3,8 @@
     
 <section class="left-side">
   <ul class="list-group">
-    <li th:each=" country : ${countryList}" th:object="${country}">
+    <li>국가별 조회</li>
+    <li th:each=" country : ${countryList}" th:object="${country}" class="option">
       <a th:href="@{/board/{contiCode}(contiCode=${contiCode},
       countryCode=*{countryCode})}" th:text="*{countryName}">국가명</a>
     </li>
