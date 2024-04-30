@@ -3,40 +3,78 @@
 // 프로필 이미지 페이지 form 태그
 const profile = document.querySelector("#profile")
 
-let status = 1;
-let backupInput;
+// -1 : 초기 상태(변화없음)
+  // 0 : 프로필 이미지 삭제
+  //  1  : 새이미지 선택
+  let statusCheck = -1;
+
+  let backupInput;
 
 if(profile!=null){ // 프로필 이미지 존재할때
   
   // img
-  const profileImg = document.querySelector("#profileImg")
+  const profileImg = document.querySelector("#profileImg");
   // input type =  file
-  const imageInput = document.querySelector("#imageInput")
+  let imageInput = document.querySelector("#imageInput");
   // X 버튼 
   const deleteImage = document.querySelector("#deleteImage");
+
 
 
   // 값변화시 동작함수
   const changeImpageFn = e =>{
 
+    // 업로드 파일 최대크기 필터링
+    const maxSize = 1024 * 1024 * 5; 
 
     // 업로드된 파일 배열 저장
     const file = e.target.files[0];
 
     // -- 업로드 파일 없음
     if(file == undefined){
-      const some = backupInput.cloneNode(true);
+      // console.log("파일 선택후 취소됨");
+
+      const temp = backupInput.cloneNode(true);
 
       imageInput.after(backupInput);
-
       imageInput.remove(); 
+
+      imageInput = backupInput;
 
       imageInput.addEventListener("change",changeImpageFn);
 
-      backupInput = some;
+      backupInput = temp;
 
       return;
     }
+    // 선택파일 최대크기 초과시
+
+    if(file.size >maxSize){
+      alert("5MB 이하의 이미지 파일 선택해주세요");
+
+      if (statusCheck == -1){
+        imageInput.value = '';
+      }else{
+
+      const temp = backupInput.cloneNode(true);
+
+      imageInput.after(backupInput);
+      imageInput.remove(); 
+
+      imageInput = backupInput;
+
+      imageInput.addEventListener("change",changeImpageFn);
+
+      backupInput = temp;
+
+      return;
+
+      }
+    }
+
+
+
+
     // -- 선택 이미지 미리보기
     const reader = new FileReader();
 
@@ -48,18 +86,27 @@ if(profile!=null){ // 프로필 이미지 존재할때
 
       profileImg.setAttribute("src",url);
 
-      status = 1;
+      // 새이미지선택
+      statusCheck = 1;
 
       backupInput = imageInput.cloneNode(true);
     })
   }
-  
+
+
   
   imageInput.addEventListener("change", changeImpageFn);
+
   // X 버튼 클릭시 기본이미지 변경
   deleteImage.addEventListener("click", () =>{
     
     profileImg.src="/images/profile.jpg"
+
+    imageInput.value='';
+
+    backupInput = '';
+
+    statusCheck = 0;
     
   })
 
@@ -68,13 +115,13 @@ if(profile!=null){ // 프로필 이미지 존재할때
     let flag = true;
 
     // 기존 프로필 이미지가 없다가 새 이미지가 선택된 경우
-    if(loginMemberProfileImg == null && status == 1) flag=false;
+    if(loginMemberProfileImg == null && statusCheck == 1) flag=false;
 
     // 기존 프로필 이미지가 있다가 삭제한 경우
-    if(loginMemberProfileImg != null && status == 0) flag=false;
+    if(loginMemberProfileImg != null && statusCheck == 0) flag=false;
     
     // 기존 프로필 이미지가 있다가 새 이미지가 선택된 경우
-    if(loginMemberProfileImg != null && status == 1) flag=false;
+    if(loginMemberProfileImg != null && statusCheck == 1) flag=false;
 
 
     if(flag){ // flag 값이 true인 경우 
@@ -107,8 +154,6 @@ if(profile!=null){ // 프로필 이미지 존재할때
           } else { // 사용자가 지번 주소를 선택했을 경우(J)
               addr = data.jibunAddress;
           }
-
-         
 
           // 우편번호와 주소 정보를 해당 필드에 넣는다.
           document.getElementById('postcode').value = data.zonecode;
@@ -182,6 +227,17 @@ if(updateInfo!= null){
     if(!( result1 || result2)){
       alert("주소를 모두 입력 또는 모두 미입력해주세요");
       e.preventDefault();
+    }
+
+    // 주소 입력시 정규식
+    if( result2){
+      regExp = /^[0-9]{5}$/
+      if(!regExp.test(memberAddress[0].value)){
+        alert("우편번호 형식오류");
+        e.preventDefault();
+        return;
+      }
+      
     }
     
   })

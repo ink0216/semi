@@ -85,8 +85,8 @@ public class MyPageServiceImpl implements MyPageService{
 		String memberEmail = loginMember.getMemberEmail();
 		String pw = mapper.selectPw(memberNo);
 		
-		//   입력된 비번과 원래 비번이 맞지 않음   &&   원아이디랑 입력 아이디랑 안맞음 : 둘다 안
-		if( !bcrypt.matches(memberPw, pw) || memberId != memberEmail) {
+		//   입력된 비번과 원래 비번이 맞지 않음   &&   원아이디랑 입력 아이디랑 안맞음 
+		if( !bcrypt.matches(memberPw, pw) && memberId != memberEmail) {
 			return 0;
 		} else {
 			return mapper.secession(memberNo);

@@ -60,8 +60,11 @@
                 <span th:text="${session.loginMember.memberEmail}"></span>
               </div>
               <div class="myPage-row">
-                <label for="">주소 </label>
-                <span th:text="${address + ' ' + detailAddress}"></span>
+                <label>주소 </label>
+                <span>
+                  <span th:text="${address}"></span>
+                  <span th:text=" ${detailAddress}"></span>
+                </span>
               </div>
               <div class="myPage-row">
                 <label for="">가입일 </label>
@@ -83,6 +86,10 @@
 
   <!-- 푸터 -->
   <th:block th:replace="~{common/footer}"></th:block>
+  
+  <script th:inline="javascript">
+    const loginMemberProfileImg = /*[[${session.loginMember.profileImg}]]*/ "회원 프로필 이미지";
+  </script>
 
   
   <script src="/js/myPage/myPage.js"></script>
