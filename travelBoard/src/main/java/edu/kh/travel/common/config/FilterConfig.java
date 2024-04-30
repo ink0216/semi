@@ -23,7 +23,7 @@ public class FilterConfig {
 		
 		
 		// 게시판 기능이 작동 끝나면 "/editBoard/*"도 추가하기
-		String[] filteringUrl = {"/myPage/*"};
+		String[] filteringUrl = {"/myPage/*","/board/*"};
 		
 		
 		filter.setUrlPatterns(Arrays.asList(filteringUrl));

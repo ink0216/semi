@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -119,16 +120,6 @@ public class MemberController {
 	
 	
 	
-	/**
-	 * 아이디 찾기 페이지로 이동
-	 * @return
-	 */
-	@GetMapping("searchId")
-	public String searchId() {
-		
-		return "member/searchId";
-	}
-	
 	
 	
 	
@@ -229,43 +220,13 @@ public class MemberController {
 	
 	
 	
-	/**
-	 * 아이디 찾기 서비스
-	 * @param memberTel
-	 * @return
-	 */
-	@GetMapping("selectTelBirth")
-	public String selectTelBirth(@RequestParam("memberTel") String memberTel,
-			@RequestParam("memberBirth") String memberBirth, Model model) {
-		
-		
-		
-		String path = null;
-		
-		Map<String, Object> map = new HashMap<>();
-		
-		Member member = service.selectTelBirth(map);
-		
-		map.put("memberTel", memberTel);
-		map.put("memberBirth", memberBirth);
-		
 	
-		
-		if(member == null) {
-			
-			path = "idSearchFail";
-			
-		} else {
-			
-			path = "idResult";
-			model.addAttribute("member",member);
-			
-		
-		}
-		
-		
-		return path;
-	}
+	
+	
+	
+	
+
+	
 	
 	
 	

@@ -99,14 +99,9 @@ public class MemberServiceImpl implements MemberService{
 	
 	
 	
-	
 
 	
-	@Override
-	public Member selectTelBirth(Map<String, Object> map) {
-		
-		return mapper.selectTelBirth(map);
-	}
+
 	
 	
 	
