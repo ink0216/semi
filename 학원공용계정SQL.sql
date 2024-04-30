@@ -476,8 +476,13 @@ BEGIN
 END;
 ;
 SELECT NEXT_IMG_NO() FROM DUAL;
-
-
-
+--대륙별 국가 샘플 데이터 삽입
+INSERT INTO "COUNTRY" VALUES
+('US', '미국', 'NA');
+INSERT INTO "COUNTRY" VALUES
+('CA', '캐나다', 'NA');
+COMMIT;
+INSERT INTO "COUNTRY" VALUES
+('HK', '홍콩', 'AS');
 
 

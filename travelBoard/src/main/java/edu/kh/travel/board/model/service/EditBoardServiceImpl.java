@@ -17,6 +17,8 @@ import edu.kh.travel.board.model.dto.Board;
 import edu.kh.travel.board.model.dto.BoardImg;
 import edu.kh.travel.board.model.dto.Country;
 import edu.kh.travel.board.model.exception.BoardInsertException;
+import edu.kh.travel.board.model.exception.ImageDeleteException;
+import edu.kh.travel.board.model.exception.ImageUpdateException;
 import edu.kh.travel.board.model.mapper.EditBoardMapper;
 import edu.kh.travel.common.util.Utility;
 import lombok.RequiredArgsConstructor;
@@ -160,5 +162,58 @@ public class EditBoardServiceImpl implements EditBoardService{
 		return boardNo;
 		
 	}
-	
+	//게시글 수정
+	@Override
+	public int boardUpdate(Board inputBoard, List<MultipartFile> images, String deleteOrder) throws IllegalStateException, IOException {
+		int result = mapper.boardUpdate(inputBoard);
+		if(result==0) {
+			//게시글 부분만 insert하는 것 실패 시
+			return 0;
+		}
+		if(deleteOrder !=null && !deleteOrder.equals("")) {
+			Map<String , Object> map = new HashMap<>();
+			map.put("deleteOrder", deleteOrder);
+			map.put("boardNo", inputBoard.getBoardNo());
+			
+			result = mapper.deleteImage(map);
+			if(result==0) {
+				throw new ImageDeleteException();
+			}
+		}
+		List<BoardImg> uploadList = new ArrayList<>();
+		for(int i=0 ; i<images.size(); i++) {
+			if(!images.get(i).isEmpty()) {
+				String originalName = images.get(i).getOriginalFilename();
+				String rename = Utility.fileRename(originalName);
+				
+				BoardImg img = BoardImg.builder()
+								.imgOriginalName(originalName)
+								.imgRename(rename)
+								.imgPath(webPath)
+								.boardNo(inputBoard.getBoardNo())
+								.imgOrder(i)
+								.uploadFile(images.get(i))
+								.build();
+				
+				uploadList.add(img);
+				result = mapper.updateImage(img);
+				if(result==0) {
+					result = mapper.insertImage(img);
+				}
+			}
+			if(result==0) {
+				throw new ImageUpdateException();
+			}
+		}
+		if(uploadList.isEmpty()) {
+			return result;
+		}
+		if(result==uploadList.size()) {
+			for(BoardImg img : uploadList) {
+				img.getUploadFile().transferTo(new File(folderPath+img.getImgRename()));
+			}
+		}
+		
+		return result;
+	}
 }

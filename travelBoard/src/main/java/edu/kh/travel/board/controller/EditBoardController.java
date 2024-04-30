@@ -1,12 +1,14 @@
 package edu.kh.travel.board.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.kh.travel.board.model.dto.Board;
 import edu.kh.travel.board.model.dto.Country;
+import edu.kh.travel.board.model.service.BoardService;
 import edu.kh.travel.board.model.service.EditBoardService;
 import edu.kh.travel.member.model.dto.Member;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +32,7 @@ public class EditBoardController {
 //	@GetMapping("{boardCode:[0-9]+}/{boardNo:[0-9]+}") // /board/1/1998?cp=1 이런 식으로 요청 온다(상세 조회 요청 주소 모양)
 //	@GetMapping("/{selectContinent:[A-Z]{2}}")
 	private final EditBoardService service;
-	
+	private final BoardService boardService;
 //	@GetMapping("{contiCode:[A-Z]{2}}/insert")
 	@GetMapping("boardWrite")
 	public String insertBoard(
@@ -37,8 +40,12 @@ public class EditBoardController {
 			Model model
 			) {
 		//해당 대륙에 있는 대륙 이름,코드 얻어오는 서비스 호출
-		List<Country> countryList = service.countryList(contiCode);
+		List<Country> countryList2 = service.countryList(contiCode);
 		model.addAttribute("contiCode", contiCode);
+		model.addAttribute("countryList2", countryList2);
+		
+		List<Country> countryList = boardService.countryList(contiCode);
+		//넘어온 contiCode 값에 맞는 게시판의 게시글 목록 조회하는 서비스 호출
 		model.addAttribute("countryList", countryList);
 		return "board/boardWrite";
 	}
@@ -85,5 +92,81 @@ public class EditBoardController {
 				//상세조회하려면 boardCode, boardNo가 필요했다
 				//작성한 글의 boardNo 가져와야된다
 				return "redirect:"+path;
+	}
+	//게시글 수정 화면으로 전환
+	@GetMapping("{contiCode:[A-Z]{2}}/{boardNo:[0-9]+}/update")
+	public String update(
+			@PathVariable("contiCode") String contiCode,
+			@PathVariable("boardNo") int boardNo,
+			@SessionAttribute("loginMember") Member loginMember,
+			Model model,
+			RedirectAttributes ra
+			
+			) {
+		/* //현재 주소 : http://localhost/board/AS/6?cp=1
+        location.href=location.pathname.replace('board', 'editBoard') //get방식
+                        +"/update"+ location.search;
+		 * 
+		 * */
+		//해당 게시글 존재하는지 조회
+		Map<String, Object> map = new HashMap<>();
+		map.put("contiCode", contiCode);
+		map.put("boardNo", boardNo);
+		
+		Board board = boardService.selectOne(map);
+		String message = null;
+		String path = null;
+		if(board ==null) {
+			message="게시글이 존재하지 않습니다.";
+			path="redirect:/board/"+contiCode+"/"+boardNo; //상세 조회하는 경로
+			ra.addFlashAttribute("message", message);
+		}else if(board.getMemberNo() !=loginMember.getMemberNo()) {
+			message="자신이 작성한 글만 수정할 수 있습니다.";
+			path="redirect:/board/"+contiCode+"/"+boardNo; //상세 조회하는 경로
+			ra.addFlashAttribute("message", message);
+		}else {
+			//정상적인 경우
+			//해당 대륙에 있는 대륙 이름,코드 얻어오는 서비스 호출
+			List<Country> countryList2 = service.countryList(contiCode);
+			path = "board/boardUpdate";
+			model.addAttribute("board", board);
+			List<Country> countryList = boardService.countryList(contiCode);
+			//넘어온 contiCode 값에 맞는 게시판의 게시글 목록 조회하는 서비스 호출
+			model.addAttribute("countryList", countryList);
+			model.addAttribute("countryList2", countryList2);
+		}
+		return path;
+	}
+	
+	//게시글 수정
+	@PostMapping("{contiCode:[A-Z]{2}}/{boardNo:[0-9]+}/update")
+	public String update(
+			@PathVariable("contiCode") String contiCode,
+			@PathVariable("boardNo") int boardNo,
+			Board inputBoard,
+			@SessionAttribute("loginMember") Member loginMember,
+			@RequestParam("images") List<MultipartFile> images,
+			RedirectAttributes ra,
+			//새로 추가돼서 넘어온 두 개!
+			@RequestParam(value="deleteOrder", required=false) String deleteOrder ,
+			@RequestParam(value="querystring", required=false,defaultValue = "") String querystring ,
+			@RequestParam("countryNameSelect") String countryCode
+			) throws IllegalStateException, IOException {
+		inputBoard.setBoardNo(boardNo);
+		inputBoard.setMemberNo(loginMember.getMemberNo());
+		inputBoard.setCountryCode(countryCode);
+		
+		int result = service.boardUpdate(inputBoard, images, deleteOrder);
+		String message=null;
+		String path=null;
+		if(result>0) {
+			message="게시글이 수정 되었습니다.";
+			path = "redirect:/board/"+contiCode+"/"+boardNo; //상세 조회하는 경로
+		}else {
+			message="게시글 수정 실패...";
+			path ="redirect:update"; //수정 화면으로 전환
+		}
+		ra.addFlashAttribute("message", message);
+		return path;
 	}
 }

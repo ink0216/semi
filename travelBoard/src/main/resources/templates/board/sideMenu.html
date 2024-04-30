@@ -1,0 +1,17 @@
+<!-- 사이드 메뉴 -->
+<!-- 각페이지에서는 일단 a태그 상대경로로 연결중... -->
+    
+<section class="left-side">
+  <ul class="list-group">
+    <li th:each=" country : ${countryList}" th:object="${country}">
+      <a th:href="@{/board/{contiCode}(contiCode=${contiCode},
+      countryCode=*{countryCode})}" th:text="*{countryName}">국가명</a>
+    </li>
+    <!-- 
+th:href=
+"@{/board/{contiCode}/{boardNo}
+(contiCode=${contiCode},boardNo=*{boardNo},cp=${pagination.currentPage})}" 
+-->
+  
+  </ul>
+</section>

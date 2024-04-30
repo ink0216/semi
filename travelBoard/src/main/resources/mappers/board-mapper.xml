@@ -59,8 +59,10 @@
 	JOIN "COUNTRY" USING (COUNTRY_CODE)
 	JOIN "CONTINENT" USING (CONTI_CODE)
 	WHERE BOARD_DEL_FL='N'
-	AND CONTI_CODE=#{selectContinent}
-	
+	AND CONTI_CODE=#{contiCode}
+	<if test='countryCode !=NULL'>
+		AND COUNTRY_CODE = #{countryCode}
+		</if>
 	</select>
 	
 		<!-- 해당 대륙 게시판으로 이동 -->
@@ -92,6 +94,9 @@ SELECT BOARD_NO, BOARD_TITLE, MEMBER_NICKNAME, READ_COUNT,
 	JOIN "CONTINENT" USING (CONTI_CODE)
 	WHERE BOARD_DEL_FL = 'N'
 	AND CONTI_CODE = #{contiCode}
+	<if test='countryCode !=NULL'>
+		AND COUNTRY_CODE = #{countryCode}
+		</if>
 	ORDER BY BOARD_NO DESC
 	</select>
 	
@@ -165,7 +170,7 @@ SELECT BOARD_NO, BOARD_TITLE, MEMBER_NICKNAME, READ_COUNT,
 	JOIN "COUNTRY" R USING (COUNTRY_CODE)
 	JOIN "CONTINENT" T USING (CONTI_CODE)
 	WHERE BOARD_DEL_FL = 'N'
-	AND CONTI_CODE = #{selectContinent}
+	AND CONTI_CODE = #{contiCode}
 	<choose>
 		
 		<!-- 제목으로만 검색(key 값이 "t"인 경우일 때) 
@@ -199,11 +204,11 @@ SELECT BOARD_NO, BOARD_TITLE, MEMBER_NICKNAME, READ_COUNT,
 		
 		<!-- 해당 게시판에 존재하는 게시글의 나라 이름 종류 조회 -->
 		<select id="countryList">
-		SELECT DISTINCT COUNTRY_NAME
+		SELECT DISTINCT COUNTRY_NAME, COUNTRY_CODE
 		FROM "BOARD"
 		JOIN "COUNTRY" USING (COUNTRY_CODE)
 		JOIN "CONTINENT" USING (CONTI_CODE)
-		WHERE CONTI_CODE = #{selectContinent}
+		WHERE CONTI_CODE = #{contiCode}
 		
 		</select>
 	<!-- ===================================================================== -->
@@ -274,6 +279,13 @@ WHERE COMMENT_DEL_FL = 'N'
 	
 	</select>
 	
+	<!-- 해당 게시글의 국가명 조회 -->
+	<select id="countryName">
+	SELECT COUNTRY_NAME
+	FROM "COUNTRY"
+	JOIN "BOARD" USING (COUNTRY_CODE)
+	WHERE BOARD_NO = #{boardNo}
+	</select>
 	<!-- ===================================================================== -->
 	
 	

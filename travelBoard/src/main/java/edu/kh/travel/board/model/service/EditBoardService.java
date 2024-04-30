@@ -24,5 +24,14 @@ public interface EditBoardService {
 	 */
 	int boardInsert(Board inputBoard, List<MultipartFile> images)throws IllegalStateException, IOException;
 
+	/**게시글 수정
+	 * @param inputBoard
+	 * @param images
+	 * @param deleteOrder
+	 * @return
+	 */
+	int boardUpdate(Board inputBoard, List<MultipartFile> images, String deleteOrder)throws IllegalStateException, IOException;
+
+
 
 }

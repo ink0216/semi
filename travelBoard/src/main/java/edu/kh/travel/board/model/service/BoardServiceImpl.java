@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import edu.kh.travel.board.model.dto.Board;
+import edu.kh.travel.board.model.dto.Country;
 import edu.kh.travel.board.model.dto.Pagination;
 import edu.kh.travel.board.model.mapper.BoardMapper;
 import lombok.RequiredArgsConstructor;
@@ -27,9 +28,12 @@ public class BoardServiceImpl implements BoardService{
 	//전체 게시글 조회+검색 게시글 조회 Controller메서드(afterLogin)에서 수행하는 두 서비스
 	//해당 게시판 목록 해당 페이지로 이동+검색
 	@Override
-	public Map<String, Object> boardList(String selectContinent, int cp) {
+	public Map<String, Object> boardList(String contiCode, int cp,String countryCode) {
 		// 1. 지정된 게시판(boardCode)에서 삭제되지 않은 게시글 수를 조회 -> 그래야 총 몇 페이지 분량의 글이 있는 지 알 수 있어서!
-				int listCount = mapper.getListCount(selectContinent);
+				Map<String, String> map1 = new HashMap<>();
+				map1.put("countryCode", countryCode);
+				map1.put("contiCode", contiCode);
+				int listCount = mapper.getListCount(map1);
 				
 				// 2. 1번의 결과 + cp를 이용해서
 				//		Pagination 객체를 생성
@@ -63,7 +67,8 @@ public class BoardServiceImpl implements BoardService{
 				 * - 첫 번째 매개변수 -> 무조건 SQL 에 전달할 파라미터가 됨
 				 * - 두 번째 매개변수 -> RowBounds 객체 전달할 자리
 				 * */
-				List<Board> boardList = mapper.selectBoardList(selectContinent, rowBounds);
+				map1.put("contiCode", contiCode);
+				List<Board> boardList = mapper.selectBoardList(map1, rowBounds);
 				
 				// 4. 목록 조회 결과 + Pagination 객체를 Map으로 묶음
 				Map<String, Object> map = new HashMap<>();
@@ -76,7 +81,7 @@ public class BoardServiceImpl implements BoardService{
 	
 	//게시글 검색 서비스
 	@Override
-	public Map<String, Object> searchList(Map<String, Object> paramMap, int cp) {
+	public Map<String, Object> searchList(Map<String, Object> paramMap, int cp,String countryCode) {
 		// 1. 지정된 게시판(boardCode)에서 
 				//		검색 조건에 맞으면서
 				//		삭제되지 않은 게시글 수를 조회 -> 그래야 총 몇 페이지 분량의 글이 있는 지 알 수 있어서!
@@ -128,8 +133,8 @@ public class BoardServiceImpl implements BoardService{
 	
 	//해당 게시판에 존재하는 게시글의 나라 이름 종류 조회
 	@Override
-	public List<String> countryList(String selectContinent) {
-		return mapper.countryList(selectContinent);
+	public List<Country> countryList(String contiCode) {
+		return mapper.countryList(contiCode);
 	}
 	//------------------------------------------------------------------------------
 	//해당 게시글 상세 조회
@@ -151,6 +156,11 @@ public class BoardServiceImpl implements BoardService{
 			return mapper.selectReadCount(boardNo);
 		}
 		return -1;
+	}
+	//해당 게시글의 국가명 조회
+	@Override
+	public String countryName(int boardNo) {
+		return mapper.countryName(boardNo);
 	}
 	//------------------------------------------------------------------------------
 	

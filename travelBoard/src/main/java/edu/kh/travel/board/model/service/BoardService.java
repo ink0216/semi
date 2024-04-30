@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import edu.kh.travel.board.model.dto.Board;
+import edu.kh.travel.board.model.dto.Country;
 
 public interface BoardService {
 
@@ -15,24 +16,24 @@ public interface BoardService {
 	//------------------------------------------------------------------------------
 	//전체 게시글 조회+검색 게시글 조회 Controller메서드(afterLogin)에서 수행하는 두 서비스
 	/**해당 게시판 목록 해당 페이지로 이동
-	 * @param selectContinent
+	 * @param contiCode
 	 * @param cp
 	 * @return
 	 */
-	Map<String, Object> boardList(String selectContinent, int cp);
+	Map<String, Object> boardList(String contiCode, int cp,String countryCode);
 
 	/**게시글 검색 서비스
 	 * @param paramMap
 	 * @param cp
 	 * @return
 	 */
-	Map<String, Object> searchList(Map<String, Object> paramMap, int cp);
+	Map<String, Object> searchList(Map<String, Object> paramMap, int cp,String countryCode);
 
 	/**해당 게시판에 존재하는 게시글의 나라 이름 종류 조회
-	 * @param selectContinent
+	 * @param contiCode
 	 * @return
 	 */
-	List<String> countryList(String selectContinent);
+	List<Country> countryList(String contiCode);
 	//------------------------------------------------------------------------------
 
 	/**해당 게시글 상세 조회
@@ -46,5 +47,11 @@ public interface BoardService {
 	 * @return
 	 */
 	int updateReadCount(int boardNo);
+
+	/**해당 게시글의 국가명 조회
+	 * @param boardNo
+	 * @return
+	 */
+	String countryName(int boardNo);
 
 }
