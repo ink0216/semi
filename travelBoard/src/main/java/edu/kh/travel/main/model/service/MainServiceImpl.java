@@ -29,4 +29,8 @@ public class MainServiceImpl implements MainService{
 		
 		return mapper.selectEmailTelBirth(map);
 	}
+	
+	
+	
+	
 }
