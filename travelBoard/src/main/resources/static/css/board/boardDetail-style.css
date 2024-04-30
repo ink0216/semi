@@ -2,7 +2,7 @@
 .board-detail{
     width: 1000px;
     min-height: 700px;
-    border:  1px solid #ccc;
+    border:  1px solid skyblue;
     margin: 50px auto;
     padding: 20px;
 }
@@ -125,7 +125,7 @@
 
     font-weight: bold;
     border: 0;
-    background-color: #455ba8;
+    background-color: skyblue;
     color : white;
 
     cursor: pointer;
@@ -133,8 +133,8 @@
 
 .board-btn-area button:hover{
     background-color: white;
-    color : #455ba8;
-    border: 2px solid #455ba8;
+    color : skyblue;
+    border: 2px solid skyblue;
 }
 
 

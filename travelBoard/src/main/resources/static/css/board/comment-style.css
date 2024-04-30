@@ -19,7 +19,7 @@
 
 	font-weight: bold;
     border: 0;
-    background-color: #455ba8;
+    background-color: skyblue;
     color: white;
     cursor: pointer;
 }
@@ -46,7 +46,7 @@
 
 .comment-date{
 	font-size: 0.8em;
-	color: #aaa;
+	color: skyblue;
 }
 
 
@@ -63,7 +63,7 @@
 
     font-weight: bold;
     border: 0;
-    background-color: #455ba8;
+    background-color: skyblue;
     color : white;
 
     cursor: pointer;
@@ -71,8 +71,8 @@
 
 .comment-btn-area button:hover{
     background-color: white;
-    color : #455ba8;
-    border: 2px solid #455ba8;
+    color : skyblue;
+    border: 2px solid skyblue;
 }
 
 .update-textarea{
@@ -82,7 +82,7 @@
 }
 
 .comment-row{
-	border-top : 1px solid #ccc;
+	border-top : 1px solid skyblue;
 	padding : 15px 0;
 }
 
