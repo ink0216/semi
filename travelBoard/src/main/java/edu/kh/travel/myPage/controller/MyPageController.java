@@ -220,6 +220,14 @@ public class MyPageController {
 		
 	}
 	
+
+	// 내가쓴 글 목록 조회...??
+	@PostMapping("wrting")
+	public String wrtingList() {
+		
+		return null;
+	}
+	
 	
 	
 	

@@ -29,31 +29,44 @@
       <section class="myPage-main">
         <h1 class="myPage-title">내가 쓴 글</h1>
 
+        <form action="writing" method="POST" name="myPageFrm" id="writing">
 
+          <div class="list-writing">
+            <table class="list-table">
+              <thead>
+                <tr>
+                  <th>글번호</th>
+                  <th>글제목</th>
+                  <th>작성일</th>
+                  <th>조회수</th>
+                  <th>좋아요</th>
+                </tr>
+              </thead>
+  
+              <!-- 내가쓴 글 목록 조회... -->
+              <tbody>
+                <th:block th:if="${#lists.isEmpty(boardList)}">
+                  <tr>
+                      <th colspan="6">게시글이 존재하지 않습니다.</th>
+                  </tr>
+                </th:block>
 
-        <div class="list-writing">
-          <table class="list-table">
-            <thead>
-              <tr>
-                <th>글번호</th>
-                <th>글제목</th>
-                <th>작성일</th>
-                <th>조회수</th>
-                <th>좋아요</th>
-              </tr>
-            </thead>
+                <th:block th:unless="${#lists.isEmpty(boardList)}">
+                  <tr th:each="board : ${boardList}" th:object="${board}">
+                    <td th:text="*{boardNo}">글번호</td>
+                    <td th:text="*{boardTitle}">글제목</td>
+                    <td th:text="*{writeDate}">작성일</td>
+                    <td th:text="*{readCount}">조회수</td>
+                    <td th:text="*{}">좋아요</td>
+                  </tr>
 
+                </th:block>
 
-            <tbody>
-              
-            </tbody>
-          
-          </table>
-        </div>
-      
-
-        
-        
+              </tbody>
+            
+            </table>
+          </div>
+        </form>
           
       </section>
       
@@ -62,6 +75,8 @@
 
   <!-- 푸터 -->
   <th:block th:replace="~{common/footer}"></th:block>
+
+  <script src="/js/myPage/myPage.js"></script>
   
 </body>
 </html>
