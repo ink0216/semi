@@ -8,7 +8,7 @@
     .left-side{
         width: 15%;
         border-right: 2px solid #ffffff;
-        background-color: rgb(217, 235, 229);
+        background-color: skyblue;
         margin-top : 300px;
         float: left;
         z-index: 10;
@@ -28,7 +28,13 @@
       .list-group > li{
         height: 50px;
         font-size: 18px;
-      }
+        text-align: center;
+        font-weight: bold;
+        color: blue;
+        }
+        .list-group > li:first-child{
+            border-bottom: 1px solid blue;
+        }
       
       .list-group > li > a{
         color:black;
