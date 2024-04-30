@@ -52,9 +52,10 @@ body {
 
 #telnumber{
     font-size:25px;
-    margin-top:150px;
+    margin-top:80px;
     display:flex;
     justify-content: center;
+    margin-bottom:20px;
 }
 
 
@@ -62,6 +63,7 @@ body {
     font-size:25px;
     display:flex;
     justify-content: center;
+    margin-bottom:20px;
 }
 
 
@@ -72,8 +74,8 @@ body {
     width:150px;
     height: 60px;
     margin-left:75px;
-    border-radius:20px;
-    background-color:none;
+    border-radius:50px;
+    background-color:skyblue;
     border: 2px solid skyblue;
     font-size:20px;
     

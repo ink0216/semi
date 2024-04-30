@@ -11,6 +11,8 @@ public interface MainService {
 
 	Member selectTelBirth(Map<String, Object> map);
 
+	Member selectEmailTelBirth(Map<String, Object> map);
+
 
 
 

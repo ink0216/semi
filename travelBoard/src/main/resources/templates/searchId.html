@@ -8,9 +8,13 @@
 </head>
 <body>
     <th:block th:replace="~{common/common}"></th:block>
+    <div>
+        <a href="/"><img src="/images/logo.jpg" alt="여행로고" width="300" height="300"></a>
+    </div>
     <div class="idSearchMessage">
     <h1>아이디 찾기</h1>
     </div>
+ 
     <!-- 아이디 찾기하는데 필요한 요소 : 전화번호/생년월일 입력  -->
     
     <form action="/selectTelBirth" name="selectTelBirth" id="selectTelBirth">
@@ -29,5 +33,5 @@
     </form>
     <script src="/js/searchId.js"></script>
 </body>
-<!-- "/member/searchId" -->
+
 </html>

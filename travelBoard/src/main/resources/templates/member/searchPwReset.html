@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/member/searchPwReset-style.css">
+</head>
+<body>
+    <a href="/"><img src="/images/logo.jpg" alt="여행로고" width="300" height="300"></a>
+    <div id="pwInputMessage">
+    <h1>비밀번호 재설정</h1>
+    </div>
+
+    <!-- 기존의 비밀번호를 입력한 비밀번호/비밀번호 확인으로 변경하기 -->
+
+
+    <form action="/memberPwReset" method="POST" name="pwReset" id="pwReset">
+    <div>
+        <div id="inputPwReset">비밀번호</div>
+        <input type="password" name = "memberPwReset" id = "memberPwReset" placeholder = "비밀번호">
+    </div>
+    <div>
+        <div id="inputPwResetConfirm">비밀번호 확인</div>
+        <input type="password" name = "memberPwResetConfirm" id= "memberPwResetConfirm" placeholder = "비밀번호 확인">
+    </div>
+    <div>
+        <button id="submit">비밀번호 재설정</button>
+    </div>
+    
+    </form>
+    <div id="pwMessage">
+        영어, 숫자, 특수문자(!,@,#,-,_) 6~20글자 사이로 입력해주세요.
+    </div>
+
+<script src="/js/searchPwReset.js"></script>
+
+    
+</body>
+</html>
