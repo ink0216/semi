@@ -1,0 +1,41 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    
+}
+
+
+#email{
+    border:1px solid black;
+    margin-top:40px;
+
+}
+
+#emailMessage{
+
+    font-size:20px;
+    display:flex;
+    justify-content: center;
+}
+
+#gotoMainBtn{
+    margin-top:50px;
+    justify-content: center;
+    width: 220px;
+    height: 50px;
+    margin-left:220px;
+    border-radius: 50px;
+    background-color: skyblue;
+    border: 2px solid skyblue;
+    font-size: 15px;
+    margin-bottom:30px;
+}
+
+#gotoMainBtn:hover{
+    cursor:pointer;
+}

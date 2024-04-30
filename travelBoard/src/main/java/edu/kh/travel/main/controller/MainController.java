@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -154,7 +155,7 @@ public class MainController {
 		
 		if(member == null) {
 			
-			path = "member/searchPw";
+			path = "member/pwSearchFail";
 			
 		} else {
 			
@@ -171,25 +172,24 @@ public class MainController {
 	
 	
 	/**
-	 * 비밀번호 변경하기
+	 * 비밀번호 변경하기(
 	 * @param inputMember
 	 * @param paramMap
 	 * @param ra
 	 * @return
 	 */
+	@ResponseBody
 	@PostMapping("memberPwReset")
-	public String memberPwReset(
-			Member inputMember,
-			@RequestParam Map<String, Object> paramMap,
-			RedirectAttributes ra) {
+	public String memberPwReset()
+			 
+	
+	{
 		
-		
-		
-		
-		
-		
-		return null; 
+		return null;
 	}
+	
+	
+	
 	
 	
 	
