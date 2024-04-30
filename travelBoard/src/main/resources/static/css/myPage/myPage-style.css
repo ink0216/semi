@@ -107,6 +107,7 @@
   margin: 50px 0;
   
   border: none;
+  border-radius: 50px;
   font-size: 20px;
   font-weight: bold;
 
@@ -165,7 +166,8 @@ form[name='myPageFrm']{
   height: 40px;
   margin: 5px;
   
-  border: 1px solid black;
+  border: 1px solid skyblue;
+  border-radius: 50px;
   background-color: skyblue;
   color: white;
   font-size: 14px;
@@ -173,6 +175,11 @@ form[name='myPageFrm']{
   
   justify-content: center;
   align-content: center;
+}
+
+.profile-btn> #pi:hover{
+  background-color:white;
+  color: rgb(110, 171, 196);
 }
 
 #imageInput{ display: none;}

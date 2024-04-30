@@ -35,18 +35,18 @@
             <label for="">
               아이디 확인
             </label>
-            <input type="text" name="memberId">
+            <input type="text" name="memberId" id="memberId">
           </div>
 
           <div class="myPage-row">
             <label for="">
               비밀번호 확인
             </label>
-            <input type="text" name="memberPw">
+            <input type="text" name="memberPw" id="memberPw">
           </div>
 
           <div class="secession-agree">
-            <input type="checkbox" class="agree">
+            <input type="checkbox" class="agree" id="agree">
             탈퇴에 동의하십니까?
           </div>
 
@@ -62,6 +62,8 @@
 
   <!-- 푸터 -->
   <th:block th:replace="~{common/footer}"></th:block>
+
+  <script src="/js/myPage/myPage.js"></script>
   
 </body>
 </html>

@@ -49,7 +49,7 @@ public class MyPageController {
 		return "myPage/myPage-profile";
 	}
 	
-	// 내정보 변경 페이지 이동
+	// 회원정보 변경 페이지 이동
 	@GetMapping("info")
 	public String info(
 		@SessionAttribute("loginMember")Member loginMember,
@@ -66,6 +66,7 @@ public class MyPageController {
 			model.addAttribute("address", arr[1]);
 			model.addAttribute("detailAddress", arr[2]);
 		}
+		
 		return "myPage/myPage-info";
 	}
 	
@@ -74,11 +75,13 @@ public class MyPageController {
 	public String changePw() {
 		return "myPage/myPage-changePw";
 	}
+	
 	// 회원 탈퇴 페이지 이동
 	@GetMapping("secession")
 	public String secession() {
 		return "myPage/myPage-secession";
 	}
+	
 	// 내가쓴글 목록 이동
 	@GetMapping("writing")
 	public String writing() {
@@ -98,7 +101,6 @@ public class MyPageController {
 		@SessionAttribute("loginMember")Member loginMember,
 		RedirectAttributes ra)throws IllegalStateException, IOException {
 		
-		
 		int result = service.updateProfile(profileImg,loginMember);
 		
 		String message = null;
@@ -113,7 +115,7 @@ public class MyPageController {
 	}
 	
 	
-	/** 내정보 수정
+	/** 회원정보 수정
 	 * @return
 	 */
 	@PostMapping("info")
@@ -173,7 +175,7 @@ public class MyPageController {
 			message = "비밀번호가 변경되었습니다";
 			path = "myPage/profile";
 		} else {
-			message = "비밀번호가 일치 하지 않습니다";
+			message = "비밀번호가 일치하지 않습니다";
 			path = "myPage/changePw";
 		}
 		
@@ -197,8 +199,6 @@ public class MyPageController {
 		@SessionAttribute("loginMember")Member loginMember,
 		RedirectAttributes ra,
 		SessionStatus status) {
-		
-		int memberNo = loginMember.getMemberNo();
 		
 		int result = service.secession(memberId, memberPw, loginMember);
 

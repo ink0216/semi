@@ -56,7 +56,7 @@
               placeholder="우편번호" id="postcode"
               th:value="${postcode}">
             
-              <button type="button">검색</button>
+              <button type="button" id="searchAd">검색</button>
           </div>
 
           <div class="myPage-row info-address">
@@ -83,7 +83,7 @@
   <!-- 푸터 -->
   <th:block th:replace="~{common/footer}"></th:block>
 
+  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
   <script src="/js/myPage/myPage.js"></script>
-  
 </body>
 </html>
