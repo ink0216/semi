@@ -67,8 +67,19 @@ body {
 
 
 #submit{
-    display:flex;
+   
+    justify-content: center;
     width:150px;
-    height:100px;
+    height: 60px;
+    margin-left:75px;
+    border-radius:20px;
+    background-color:none;
+    border: 2px solid skyblue;
+    font-size:20px;
+    
 
+}
+
+#submit:hover{
+    cursor:pointer;
 }

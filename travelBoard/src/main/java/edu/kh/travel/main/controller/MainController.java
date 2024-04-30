@@ -80,10 +80,13 @@ public class MainController {
 		
 		Map<String, Object> map = new HashMap<>();
 		
+		
+		
 		map.put("memberTel", inputTel);
 		map.put("memberBirth", inputBirth);
 		
 		Member member = service.selectTelBirth(map);
+	
 		
 		
 	
