@@ -19,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.kh.travel.board.model.dto.Board;
 import edu.kh.travel.board.model.dto.BoardImg;
+import edu.kh.travel.board.model.dto.Country;
 import edu.kh.travel.board.model.service.BoardService;
 import edu.kh.travel.member.model.dto.Member;
 import jakarta.servlet.http.Cookie;
@@ -33,21 +34,22 @@ public class BoardController {
 	
 	private final BoardService service;
 //	@GetMapping("{boardCode:[0-9]+}/{boardNo:[0-9]+}") // /board/1/1998?cp=1 이런 식으로 요청 온다(상세 조회 요청 주소 모양)
-//	@GetMapping("/{selectContinent:[A-Z]{2}}")
+//	@GetMapping("/{contiCode:[A-Z]{2}}")
 	
 	/**해당 게시판 전체 게시글 조회+검색 게시글 조회
-	 * @param selectContinent
+	 * @param contiCode
 	 * @param cp
 	 * @param model
 	 * @param paramMap
 	 * @return
 	 */
-	@GetMapping("{selectContinent:[A-Z]{2}}")
+	@GetMapping("{contiCode:[A-Z]{2}}")
 	public String afterLogin(
-			@PathVariable("selectContinent") String selectContinent,
+			@PathVariable("contiCode") String contiCode,
 			@RequestParam(value="cp", required=false, defaultValue="1") int cp,
 			Model model,
-			@RequestParam Map<String, Object> paramMap //파라미터 다 한꺼번에 받음(key, query 포함)
+			@RequestParam Map<String, Object> paramMap, //파라미터 다 한꺼번에 받음(key, query 포함)
+			@RequestParam(value="countryCode", required=false) String countryCode
 			) {
 		//조회 서비스 호출 후 결과 반환 받기
 				//반환돼야 하는 결과가 두 개인데 
@@ -55,25 +57,25 @@ public class BoardController {
 				Map<String, Object> map =null;
 				if(paramMap.get("key")==null) {
 					//검색 아니니까 게시글 전체 조회(몇 페이지 분량)
-					map=service.boardList(selectContinent,cp);
+					map=service.boardList(contiCode,cp,countryCode);
 				}else {
 					//검색을 한 경우
-					paramMap.put("selectContinent", selectContinent);
+					paramMap.put("contiCode", contiCode);
 					
 					//검색 서비스 호출
-					map = service.searchList(paramMap,cp);
+					map = service.searchList(paramMap,cp, countryCode);
 				}
 		// 해당 게시판 나라 목록 조회하는 서비스 호출 수 model에 추가로 세팅해서 보내기
-		List<String> countryList = service.countryList(selectContinent);
-		//넘어온 selectContinent 값에 맞는 게시판의 게시글 목록 조회하는 서비스 호출
+		List<Country> countryList = service.countryList(contiCode);
+		//넘어온 contiCode 값에 맞는 게시판의 게시글 목록 조회하는 서비스 호출
 		model.addAttribute("countryList", countryList);
 		model.addAttribute("pagination", map.get("pagination"));
 		model.addAttribute("boardList", map.get("boardList"));
-		model.addAttribute("contiCode", selectContinent);
+		model.addAttribute("contiCode", contiCode);
 		return "board/boardList";
 	}
 //	@GetMapping("{boardCode:[0-9]+}/{boardNo:[0-9]+}") // /board/1/1998?cp=1 이런 식으로 요청 온다(상세 조회 요청 주소 모양)
-//	@GetMapping("/{selectContinent:[A-Z]{2}}")
+//	@GetMapping("/{contiCode:[A-Z]{2}}")
 	//게시글 상세 조회
 	// /board/AS/6 상세 조회 요청 주소!
 	@GetMapping("{contiCode:[A-Z]{2}}/{boardNo:[0-9]+}")
@@ -195,7 +197,10 @@ public class BoardController {
 				}
 			}
 			/************* 쿠키를 이용한 조회수 증가(끝) **************/
+			//해당 게시글의 국가명 조회하는 서비스 호출
+			String countryName = service.countryName(boardNo);
 			path="board/boardDetail"; //html로 forward
+			model.addAttribute("countryName", countryName);
 			model.addAttribute("board", board); //조회한 board를 넘긴다
 			//board안에는 게시글 상세 조회 + imageList + commentList에 다 들어있다
 			
@@ -216,6 +221,9 @@ public class BoardController {
 				}
 				//if문 실행 안된 경우는 썸네일이 없는 경우인데, el에서는 빈칸으로 나와서 신경 안써도 된다
 				model.addAttribute("thumbnail", thumbnail);
+				List<Country> countryList = service.countryList(contiCode);
+				//넘어온 contiCode 값에 맞는 게시판의 게시글 목록 조회하는 서비스 호출
+				model.addAttribute("countryList", countryList);
 				
 				//썸네일이 있을 때/없을 때
 				//출력되는 이미지(썸네일 제외하고) 시작 인덱스를 계산,지정하는 코드
@@ -228,6 +236,9 @@ public class BoardController {
 				//썸네일의 유무에 따라 아래의 사진 네 칸을 어떤 인덱스로 채울 지 로직을 만든거다
 				
 			}
+			List<Country> countryList = service.countryList(contiCode);
+			//넘어온 contiCode 값에 맞는 게시판의 게시글 목록 조회하는 서비스 호출
+			model.addAttribute("countryList", countryList);
 		}
 		return path;
 	}

@@ -44,7 +44,7 @@ public class MemberController {
 			RedirectAttributes ra,
 			Model model,
 			@RequestParam(value = "saveId", required = false) String saveId,
-			@RequestParam("selectContinent") String selectContinent,
+			@RequestParam("contiCode") String contiCode,
 			HttpServletResponse resp) {
 		
 		
@@ -84,7 +84,7 @@ public class MemberController {
 			//ra.addFlashAttribute("message","해당 회원이 존재합니다!!!!");
 			
 			
-			path = "/board/"+selectContinent;
+			path = "/board/"+contiCode;
 			
 		}
 	

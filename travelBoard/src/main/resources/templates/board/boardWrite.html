@@ -11,7 +11,7 @@
 <body>
     <main>
         <th:block th:replace="~{common/header}"></th:block>
-
+        <th:block th:replace="~{board/sideMenu}"></th:block>
         <!-- <form th:action="@{/editBoard/{boardCode}/insert(boardCode=${boardCode})}"  -->
             <!-- 아래의 form 태그 주소는 상대경로, POST방식 요청
             파일 업로드할 때에는 무조건 POST방식으로 해야한다!
@@ -23,7 +23,7 @@
             method="POST"  class="board-write" id="boardWriteFrm" enctype="multipart/form-data">  
             select
             <select name="countryNameSelect">
-                <option th:each=" country: ${countryList}" th:text="${country.countryName}" th:value="${country.countryCode}">대륙별 국가이름</option>
+                <option th:each=" country2: ${countryList2}" th:text="${country2.countryName}" th:value="${country2.countryCode}">대륙별 국가이름</option>
             </select>
             <!-- 제목 -->
             <h1 class="board-title">

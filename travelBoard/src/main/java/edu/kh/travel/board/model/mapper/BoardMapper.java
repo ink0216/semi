@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.RowBounds;
 
 import edu.kh.travel.board.model.dto.Board;
+import edu.kh.travel.board.model.dto.Country;
 
 @Mapper
 public interface BoardMapper {
@@ -20,17 +21,17 @@ public interface BoardMapper {
 	//------------------------------------------------------------------
 	//게시글 목록 조회 서비스(boardList)에서 사용되는 여러 매퍼들 
 	/**삭제되지 않은 게시글 수 조회
-	 * @param selectContinent
+	 * @param contiCode
 	 * @return
 	 */
-	int getListCount(String selectContinent);
+	int getListCount(Map<String, String> map1);
 
 	/**특정 게시판의 지정된 페이지 게시글 목록 조회
-	 * @param selectContinent
+	 * @param contiCode
 	 * @param rowBounds
 	 * @return count
 	 */
-	List<Board> selectBoardList(String selectContinent, RowBounds rowBounds);
+	List<Board> selectBoardList(Map<String, String> map1, RowBounds rowBounds);
 
 
 	/**검색 조건에 맞는 게시글 수 조회하기(카운트한 결과값이 반환된다)
@@ -49,10 +50,10 @@ public interface BoardMapper {
 	List<Board> selectSearchList(Map<String, Object> paramMap, RowBounds rowBounds);
 	
 	/**해당 게시판에 존재하는 게시글의 나라 이름 종류 조회
-	 * @param selectContinent
+	 * @param contiCode
 	 * @return
 	 */
-	List<String> countryList(String selectContinent);
+	List<Country> countryList(String contiCode);
 	//------------------------------------------------------------------
 
 
@@ -75,6 +76,13 @@ public interface BoardMapper {
 	 * @return
 	 */
 	int selectReadCount(int boardNo);
+
+
+	/**해당 게시글의 국가명 조회
+	 * @param boardNo
+	 * @return
+	 */
+	String countryName(int boardNo);
 
 
 	
