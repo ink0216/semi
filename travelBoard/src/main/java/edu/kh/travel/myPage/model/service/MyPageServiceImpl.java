@@ -11,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import edu.kh.travel.board.model.dto.Board;
 import edu.kh.travel.common.util.Utility;
 import edu.kh.travel.member.model.dto.Member;
 import edu.kh.travel.myPage.model.mapper.MyPageMapper;
@@ -134,4 +135,12 @@ public class MyPageServiceImpl implements MyPageService{
 		}
 		return mapper.updateInfo(inputMember);
 	}
+	
+	
+	// 내가쓴글 조회
+	@Override
+	public int writing(Board board, int memberNo) {
+		return mapper.writing(board,memberNo);
+	}
+	
 }

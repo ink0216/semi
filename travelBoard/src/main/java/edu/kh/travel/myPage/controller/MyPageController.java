@@ -16,6 +16,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import edu.kh.travel.board.model.dto.Board;
 import edu.kh.travel.member.model.dto.Member;
 import edu.kh.travel.myPage.model.service.MyPageService;
 import lombok.RequiredArgsConstructor;
@@ -85,6 +86,8 @@ public class MyPageController {
 	// 내가쓴글 목록 이동
 	@GetMapping("writing")
 	public String writing() {
+		
+		
 		return "myPage/myPage-writing";
 	}
 	
@@ -216,6 +219,10 @@ public class MyPageController {
 		}
 		
 	}
+	
+	
+	
+	
 	
 	
 

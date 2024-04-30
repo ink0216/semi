@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import edu.kh.travel.board.model.dto.Board;
 import edu.kh.travel.member.model.dto.Member;
 
 public interface MyPageService {
@@ -44,6 +45,15 @@ public interface MyPageService {
 	 * @return
 	 */
 	int updateInfo(Member inputMember, String[] memberAddress);
+
+
+
+	/**
+	 * @param board
+	 * @param memberNo
+	 * @return
+	 */
+	int writing(Board board, int memberNo);
 
 
 
