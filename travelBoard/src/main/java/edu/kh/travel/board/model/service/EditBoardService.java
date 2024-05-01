@@ -32,6 +32,12 @@ public interface EditBoardService {
 	 */
 	int boardUpdate(Board inputBoard, List<MultipartFile> images, String deleteOrder)throws IllegalStateException, IOException;
 
+	/**게시글 삭제
+	 * @param map
+	 * @return
+	 */
+	int boardDelete(Map<String, Object> map);
+
 
 
 }

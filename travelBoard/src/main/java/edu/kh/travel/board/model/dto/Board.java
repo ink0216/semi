@@ -37,7 +37,8 @@ public class Board {
 	private int commentCount;
 	private int likeCount;
 	
-	
+	// CONTINENT 테이블 조인
+	private String contiCode;
 	//--추가 예정
 	//게시글 상세 조회 시 게시글 작성자 프로필 이미지 미리보기
 	private String profileImg; //MEMBER테이블에 있다

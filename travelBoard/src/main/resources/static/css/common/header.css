@@ -13,6 +13,9 @@
     flex-direction: row;
     justify-content: space-between;
 }
+.searchAll{
+    cursor: pointer;
+}
 .left{
     width: 20%;
     display: flex;

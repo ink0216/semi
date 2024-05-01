@@ -169,4 +169,33 @@ public class EditBoardController {
 		ra.addFlashAttribute("message", message);
 		return path;
 	}
+	
+	//게시글 삭제
+	@PostMapping("{contiCode:[A-Z]+}/{boardNo:[0-9]+}/delete")
+	public String boardDelete(
+			@PathVariable("contiCode") String contiCode,
+			@PathVariable("boardNo") int boardNo,
+			@RequestParam(value="cp", required = false, defaultValue = "1") int cp,
+			@SessionAttribute("loginMember") Member loginMember,
+			RedirectAttributes ra
+			) {
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("contiCode", contiCode);
+		map.put("boardNo", boardNo);
+		map.put("memberNo", loginMember.getMemberNo());
+		
+		int result = service.boardDelete(map);
+		String message= null;
+		String path = null;
+		if(result>0) {
+			path = String.format("/board/%s", contiCode);
+			message="삭제 되었습니다.";
+		}else {
+			path = String.format("/board/%s/%d?cp=%d", contiCode,boardNo,cp);
+			message="삭제 실패";
+		}
+		ra.addFlashAttribute("message", message);
+		return "redirect:"+path;
+	}
 }

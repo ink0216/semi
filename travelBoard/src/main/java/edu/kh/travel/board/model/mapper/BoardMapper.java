@@ -105,6 +105,21 @@ public interface BoardMapper {
 	 */
 	int selectLikeCount(Integer integer);
 
+	// ---------------------------------------------------------------
+	/**헤더 검색창에서 게시글 제목으로 검색(대륙에 상관 없이)한 게시글 수 얻어오기
+	 * @param query1
+	 * @return
+	 */
+	int searchAllCount(String query1);
+
+
+	/**헤더 검색창에서 게시글 제목으로 검색(대륙에 상관 없이)한 게시글 리스트 조회
+	 * @param query1
+	 * @param rowBounds
+	 * @return
+	 */
+	List<Board> searchAllList(String query1, RowBounds rowBounds);
+
 
 	
 
