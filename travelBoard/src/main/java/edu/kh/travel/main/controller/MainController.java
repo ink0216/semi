@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -16,11 +17,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.kh.travel.main.model.service.MainService;
 import edu.kh.travel.member.model.dto.Member;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
-
 public class MainController {
 	
 	private final MainService service;
@@ -139,10 +140,10 @@ public class MainController {
 	 * @return
 	 */
 	@PostMapping("selectEmailTelBirth")
-	public String selectEmailTelBirth(
+	public String selectEmailTelBirth(Member inputMember,
 			@RequestParam("inputEmail") String inputEmail,
 			@RequestParam("inputTel") String inputTel,
-			@RequestParam("inputBirth") String inputBirth, Model model) {
+			@RequestParam("inputBirth") String inputBirth, Model model, HttpSession session) {
 	
 		
 		String path = null;
@@ -163,6 +164,9 @@ public class MainController {
 			
 			path = "member/searchPwReset";
 			
+		
+			
+			session.setAttribute("memberEmail",inputEmail);
 			
 			model.addAttribute("member",member);
 		}
@@ -173,7 +177,7 @@ public class MainController {
 	}
 	
 	
-	
+
 	
 	/**
 	 * 비밀번호 변경하기(이메일을 얻어옴)
@@ -182,32 +186,38 @@ public class MainController {
 	 * @param ra
 	 * @return
 	 */
-	@ResponseBody
+	
+	
 	@PostMapping("memberPwReset")
 	public String memberPwReset(
-			@RequestParam Map<String, Object> map,
-			Member inputMember,
-			RedirectAttributes ra)
+			@RequestParam Map<String, Object> paramMap,
+			HttpSession session, Model model)
 	{
-		String memberEmail = inputMember.getMemberEmail();
 		
-		int result = service.memberPwReset(map, memberEmail);
+		
+		String memberEmail = (String)session.getAttribute("memberEmail");
+		
+		model.addAttribute("memberEmail", memberEmail);
+		
+		int result = service.memberPwReset(paramMap, memberEmail);
 		
 		
 		String path = null;
 		
+		
+		
 		if(result > 0) {
 			
 			path = "member/pwResult";
+			
 		} else {
 			
-			path = "/searchPw";
+			path = "member/pwSearchFail";
 		}
 		
+
 	
-		
-		return path;
-		
+		return path;	
 	
 		
 		
@@ -215,7 +225,7 @@ public class MainController {
 		
 	}
 	
-	
+}
 	
 	
 	
@@ -226,7 +236,8 @@ public class MainController {
 	
 	
 	
-}
+
+
 		
 	
 	

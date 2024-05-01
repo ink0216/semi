@@ -29,7 +29,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 @RequestMapping("member")
 @Slf4j
-@SessionAttributes({"loginMember"}) 
+@SessionAttributes({"loginMember"}) //모델 중에서 같은 키값가지는 거 있으면 세션으로 올려라
  //모델 중에서 같은 키값가지는 거 있으면 세션으로 올려라
 //->Model객체 : 이렇게 해서 request랑 session scope 둘 다 커버 가능!!!!!!
 //자바에서의 중괄호 == 배열 ->스트링 배열로 여러 키 등록해놓을 수 있다 ->밑의 모델이 세션으로 된다 

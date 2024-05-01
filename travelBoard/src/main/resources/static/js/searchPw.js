@@ -5,6 +5,10 @@ const inputBirth = document.querySelector("#inputBirth");
 
 const selectEmailTelBirth = document.querySelector("#selectEmailTelBirth");
 
+
+/* 이메일 인증번호 주고받기 */
+
+
 selectEmailTelBirth.addEventListener("submit", e => {
 
     if(document.querySelector("#inputEmail").value.trim().length ==0){
@@ -32,4 +36,6 @@ selectEmailTelBirth.addEventListener("submit", e => {
 });
 
 
+
+/* 비밀번호 찾기를 위한 이메일 인증 */
 
