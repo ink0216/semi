@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>비밀번호 변경</title>
+  <title>내가 쓴 글</title>
   
   <th:block th:replace="~{common/common}"></th:block>
   <link rel="stylesheet" href="/css/myPage/myPage-style.css">
@@ -36,6 +36,7 @@
               <thead>
                 <tr>
                   <th>글번호</th>
+                  <th>나라명</th>
                   <th>글제목</th>
                   <th>작성일</th>
                   <th>조회수</th>
@@ -51,14 +52,20 @@
                   </tr>
                 </th:block>
 
-                <th:block th:unless="${#lists.isEmpty(boardList)}">
-                  <tr th:each="board : ${boardList}" th:object="${board}">
-                    <td th:text="*{boardNo}">글번호</td>
-                    <td th:text="*{boardTitle}">글제목</td>
-                    <td th:text="*{writeDate}">작성일</td>
-                    <td th:text="*{readCount}">조회수</td>
-                    <td th:text="*{}">좋아요</td>
-                  </tr>
+
+                  <th:block th:unless="${#lists.isEmpty(boardList)}">
+                    <tr th:each = "board : ${boardList}" th:object="${board}">
+                      <td th:text="*{boardNo}">글번호</td>
+                      <td th:text="*{countryName}">나라명</td>
+                      <td >
+                        <a href="" th:text="*{boardTitle}">글제목</a>
+                      </td>
+                      <td th:text="*{writeDate}">작성일</td>
+                      <td th:text="*{readCount}">조회수</td>
+                      <td th:text="*{likeCount}">좋아요</td>
+                    </tr>
+
+                  </th:block>
 
                 </th:block>
 

@@ -1,6 +1,7 @@
 package edu.kh.travel.myPage.model.service;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -48,12 +49,13 @@ public interface MyPageService {
 
 
 
-	/**
-	 * @param board
+	/** 내가쓴 글 조회
 	 * @param memberNo
 	 * @return
 	 */
-	int writing(Board board, int memberNo);
+	List<Board> writing(int memberNo);
+
+
 
 
 

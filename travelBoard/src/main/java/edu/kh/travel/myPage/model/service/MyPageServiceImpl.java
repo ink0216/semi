@@ -2,6 +2,7 @@ package edu.kh.travel.myPage.model.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -139,8 +140,8 @@ public class MyPageServiceImpl implements MyPageService{
 	
 	// 내가쓴글 조회
 	@Override
-	public int writing(Board board, int memberNo) {
-		return mapper.writing(board,memberNo);
+	public List<Board> writing(int memberNo) {
+		return mapper.writing(memberNo);
 	}
 	
 }
