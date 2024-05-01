@@ -85,6 +85,27 @@ public interface BoardMapper {
 	String countryName(int boardNo);
 
 
+	/**좋아요 삭제
+	 * @param map
+	 * @return
+	 */
+	int deleteBoardLike(Map<String, Integer> map);
+
+
+	/**좋아요 삽입
+	 * @param map
+	 * @return
+	 */
+	int insertBoardLike(Map<String, Integer> map);
+
+
+	/**해당 게시글의 좋아요 수 조회
+	 * @param integer
+	 * @return
+	 */
+	int selectLikeCount(Integer integer);
+
+
 	
 
 }

@@ -281,16 +281,9 @@ VALUES(SEQ_MEMBER_NO.NEXTVAL,
 			NULL,
 			DEFAULT
 			);
-SELECT * FROM "MEMBER";
 --국가 샘플 데이터 삽입
 INSERT INTO "COUNTRY"
 VALUES('KO','대한민국','AS');
-
-INSERT INTO "COUNTRY"
-VALUES('JP','일본','AS');
-
-INSERT INTO "COUNTRY"
-VALUES('CN','중국','AS');
 --게시글 번호 시퀀스 생성
 CREATE SEQUENCE SEQ_BOARD_NO NOCACHE;
 --게시글 샘플 데이터 삽입
@@ -305,53 +298,14 @@ VALUES(SEQ_BOARD_NO.NEXTVAL,
 			'CN'
 );
 
-INSERT INTO "BOARD"
-VALUES(SEQ_BOARD_NO.NEXTVAL,
-			'중국 2번 게시글입니다.',
-			'중국 2번 게시글 내용입니다.',
-			DEFAULT,
-			0,
-			DEFAULT,
-			3,
-			'CN'
-);
-SELECT * FROM "BOARD";
 
 --BOARD_IMG 테이블용 시퀀스 생성
 CREATE SEQUENCE SEQ_IMG_NO NOCACHE;
 --BOARD_IMG 테이블에 샘플 데이터 삽입
 INSERT INTO BOARD_IMG 
 VALUES (SEQ_IMG_NO.NEXTVAL,
-				0,
-				'뚱이1.webp',
-				6,
-				'/images/board/'
-);
-INSERT INTO BOARD_IMG 
-VALUES (SEQ_IMG_NO.NEXTVAL,
 				1,
 				'스폰지밥2.gif',
-				6,
-				'/images/board/'
-);
-INSERT INTO BOARD_IMG 
-VALUES (SEQ_IMG_NO.NEXTVAL,
-				2,
-				'뚱이3.gif',
-				6,
-				'/images/board/'
-);
-INSERT INTO BOARD_IMG 
-VALUES (SEQ_IMG_NO.NEXTVAL,
-				3,
-				'박명수4.jpg',
-				6,
-				'/images/board/'
-);
-INSERT INTO BOARD_IMG 
-VALUES (SEQ_IMG_NO.NEXTVAL,
-				4,
-				'박명수5.jpg',
 				6,
 				'/images/board/'
 );
@@ -386,15 +340,6 @@ CREATE SEQUENCE SEQ_COMMENT_NO NOCACHE;
 --댓글 샘플 데이터 삽입
 INSERT INTO "COMMENT" 
 VALUES (SEQ_COMMENT_NO.NEXTVAL, 
-				'6번 게시글의 1번 부모 댓글',
-				DEFAULT,
-				DEFAULT,
-				3,
-				6,
-				NULL
-				);
-INSERT INTO "COMMENT" 
-VALUES (SEQ_COMMENT_NO.NEXTVAL, 
 				'6번 게시글의 2번 부모의 1번 댓글의 1번 자식 댓글',
 				DEFAULT,
 				DEFAULT,
@@ -406,15 +351,6 @@ VALUES (SEQ_COMMENT_NO.NEXTVAL,
 			SET COMMENT_CONTENT  = '6번 게시글의 1번 부모의 1번 댓글'
 			WHERE COMMENT_NO =4;
 			SELECT * FROM "COMMENT";
-		INSERT INTO "COMMENT" 
-VALUES (SEQ_COMMENT_NO.NEXTVAL, 
-				'테스트 댓글',
-				DEFAULT,
-				DEFAULT,
-				3,
-				6,
-				NULL
-				);
 COMMIT;
 --상세 조회되는 게시글의 모든 이미지 조회하기
 SELECT * 
@@ -481,16 +417,20 @@ INSERT INTO "COUNTRY" VALUES
 ('US', '미국', 'NA');
 COMMIT;
 
-INSERT INTO "COUNTRY" VALUES
-('UK', '영국', 'EU');
 UPDATE "COUNTRY" SET 
 COUNTRY_NAME ='남아프리카공화국'
 WHERE COUNTRY_NAME ='남아공';
-SELECT * FROM COUNTRY
-WHERE CONTI_CODE ='EU';
 --국가명 자료형 바꾸는 구문
 ALTER TABLE COUNTRY 
 MODIFY COUNTRY_NAME VARCHAR2(100);
+
+--좋아요 테이블 LIKE에 샘플 데이터 삽입
+INSERT INTO "LIKE" VALUES (19,3);
+COMMIT;
+SELECT * FROM "LIKE";
+SELECT * FROM "MEMBER";
+
+
 
 
 -- 내가쓴글 조회 구문

@@ -92,10 +92,10 @@ if(deleteBtn != null){
         alert("취소됨")
         return;
     }
-
+    // /board/AS/21?cp=1 -> /editBoard/AS/21/delete?cp=1 
     const url = location.pathname.replace("board","editBoard")  + "/delete"; 
 
-    // form태그 생성
+    // form태그 생성 
     const form = document.createElement("form");
     form.action = url;
     form.method = "POST";
