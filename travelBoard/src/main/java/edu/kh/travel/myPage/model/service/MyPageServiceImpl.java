@@ -2,9 +2,11 @@ package edu.kh.travel.myPage.model.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.crypto.bcrypt.BCrypt;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import edu.kh.travel.board.model.dto.Board;
+import edu.kh.travel.board.model.dto.Pagination;
 import edu.kh.travel.common.util.Utility;
 import edu.kh.travel.member.model.dto.Member;
 import edu.kh.travel.myPage.model.mapper.MyPageMapper;
@@ -138,10 +141,21 @@ public class MyPageServiceImpl implements MyPageService{
 	}
 	
 	
+	
 	// 내가쓴글 조회
 	@Override
-	public List<Board> writing(int memberNo) {
-		return mapper.writing(memberNo);
+	public Map<String, Object> writing(int memberNo, int cp) {
+		
+		int listCount = mapper.getListCount(memberNo);
+		
+		Pagination pagination = new Pagination(listCount,cp);
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("pagination", pagination);
+		List<Board> boardList = mapper.writing(memberNo);
+		map.put("boardList", boardList);
+		return map;
+		
 	}
 	
 }
