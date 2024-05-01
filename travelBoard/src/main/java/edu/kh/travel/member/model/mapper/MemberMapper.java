@@ -52,7 +52,12 @@ public interface MemberMapper {
 	public Member login(Map<String, Object> map);
 
 
-	public String memberPwReset(String memberEmail);
+	public int memberPwReset(Map<String, Object> paramMap);
+
+
+	public String selectPw(String memberEmail);
+	
+
 
 
 
