@@ -60,4 +60,10 @@ public interface BoardService {
 	 */
 	int boardLike(Map<String, Integer> map);
 
+	/**헤더 검색창에서 게시글 제목으로 검색(대륙에 상관 없이)
+	 * @param query1
+	 * @return
+	 */
+	Map<String, Object> searchAll(String query1,int cp);
+
 }
