@@ -1,6 +1,7 @@
 package edu.kh.travel.myPage.controller;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
@@ -85,7 +86,16 @@ public class MyPageController {
 	
 	// 내가쓴글 목록 이동
 	@GetMapping("writing")
-	public String writing() {
+	public String writing(
+		@SessionAttribute("loginMember")Member loginMember,
+		Model model) {
+		
+		int memberNo = loginMember.getMemberNo();
+		
+		List<Board> boardList = service.writing(memberNo);
+		
+		
+		model.addAttribute("boardList",boardList);
 		
 		
 		return "myPage/myPage-writing";
@@ -221,16 +231,6 @@ public class MyPageController {
 	}
 	
 
-	// 내가쓴 글 목록 조회...??
-	@PostMapping("wrting")
-	public String wrtingList() {
-		
-		return null;
-	}
-	
-	
-	
-	
 	
 	
 

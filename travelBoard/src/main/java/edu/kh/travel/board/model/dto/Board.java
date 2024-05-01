@@ -30,6 +30,9 @@ public class Board {
 	//MEMBER 테이블 조인
 	private String memberNickname;
 	
+	//COUNTRY 테이블 조인
+	private String countryName;
+	
 	//목록 조회 시 상관 서브 쿼리 결과
 	private int commentCount;
 	private int likeCount;
