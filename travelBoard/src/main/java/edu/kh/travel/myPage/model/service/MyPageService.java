@@ -47,13 +47,18 @@ public interface MyPageService {
 	 */
 	int updateInfo(Member inputMember, String[] memberAddress);
 
-
+	
 
 	/** 내가쓴 글 조회
 	 * @param memberNo
+	 * @param cp 
 	 * @return
 	 */
-	List<Board> writing(int memberNo);
+	Map<String, Object> writing(int memberNo, int cp);
+
+
+
+	
 
 
 

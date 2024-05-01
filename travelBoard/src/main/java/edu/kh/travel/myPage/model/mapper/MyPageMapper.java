@@ -3,6 +3,7 @@ package edu.kh.travel.myPage.model.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.session.RowBounds;
 
 import edu.kh.travel.board.model.dto.Board;
 import edu.kh.travel.member.model.dto.Member;
@@ -41,11 +42,18 @@ public interface MyPageMapper {
 	int updateInfo(Member inputMember);
 
 
-
 	/**
+	 * @param memberNo 
+	 * @return
+	 */
+	int getListCount(int memberNo);
+
+	/** 내가쓴 글
 	 * @param memberNo
+	 * @param rowBounds 
 	 * @return
 	 */
 	List<Board> writing(int memberNo);
+
 
 }

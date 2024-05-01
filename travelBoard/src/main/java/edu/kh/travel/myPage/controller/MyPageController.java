@@ -84,19 +84,25 @@ public class MyPageController {
 		return "myPage/myPage-secession";
 	}
 	
-	// 내가쓴글 목록 이동
+	
+	/**내가쓴글 목록 이동
+	 * @param loginMember : memberNo 이용
+	 * @param cp : 현재 페이지
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("writing")
 	public String writing(
 		@SessionAttribute("loginMember")Member loginMember,
+		@RequestParam(value="cp", required=false, defaultValue="1") int cp,
 		Model model) {
 		
 		int memberNo = loginMember.getMemberNo();
 		
-		List<Board> boardList = service.writing(memberNo);
+		Map<String, Object> map = service.writing(memberNo,cp);
 		
-		
-		model.addAttribute("boardList",boardList);
-		
+		model.addAttribute("boardList",map.get("boardList"));
+		model.addAttribute("pagination",map.get("pagination"));
 		
 		return "myPage/myPage-writing";
 	}

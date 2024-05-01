@@ -40,15 +40,24 @@
 		WHERE MEMBER_NO = #{memberNo}
 	</update>
 	
+	  <!-- 게시글 수 조회 -->
+  <select id="getListCount" >
+	SELECT COUNT(*)
+	FROM "BOARD"
+	WHERE BOARD_DEL_FL = 'N'
+	AND MEMBER_NO = #{memberNo}
+  </select>
+	
 	<!-- 내가쓴글 조회 -->
 	<select id="writing">
 		SELECT BOARD_NO,COUNTRY_NAME, BOARD_TITLE,WRITE_DATE ,READ_COUNT,
 				(SELECT COUNT(*)
-				FROM "LIKE" 
-				WHERE BOARD_NO=#{boardNo}) LIKE_COUNT
-		FROM BOARD
+				FROM "LIKE" L
+				WHERE L.BOARD_NO  = B.BOARD_NO) LIKE_COUNT
+		FROM "BOARD" B
 		JOIN COUNTRY USING (COUNTRY_CODE)
 		WHERE MEMBER_NO = #{memberNo}
+		AND BOARD_DEL_FL = 'N'
 		ORDER BY BOARD_NO DESC 
 	</select>
 	
