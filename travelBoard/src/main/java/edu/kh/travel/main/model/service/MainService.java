@@ -13,7 +13,9 @@ public interface MainService {
 
 	Member selectEmailTelBirth(Map<String, Object> map);
 
-	int memberPwReset(Map<String, Object> map, String memberEmail);
+	int memberPwReset(Map<String, Object> paramMap, String memberEmail);
+
+//	int memberPwReset(Map<String, Object> map, String memberEmail);
 
 	
 

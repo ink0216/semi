@@ -79,8 +79,6 @@ public class BoardController {
 		model.addAttribute("countryCode", countryCode);
 		return "board/boardList";
 	}
-//	@GetMapping("{boardCode:[0-9]+}/{boardNo:[0-9]+}") // /board/1/1998?cp=1 이런 식으로 요청 온다(상세 조회 요청 주소 모양)
-//	@GetMapping("/{contiCode:[A-Z]{2}}")
 	//게시글 상세 조회
 	// /board/AS/6 상세 조회 요청 주소!
 	@GetMapping("{contiCode:[A-Z]{2}}/{boardNo:[0-9]+}")
@@ -114,9 +112,6 @@ public class BoardController {
 		}else {//조회 결과가 있을 경우
 			
 			/************* 쿠키를 이용한 조회수 증가(시작) **************/
-			// 1. 비회원(로그인 안 한 회원)이 조회했거나 로그인한 회원의 글이 아닌 경우
-			// 자신이 쓴 글을 읽을 때에는 조회수 안늘리게 만들겠다
-			// 1번은 글쓴이를 뺀 다른 사람인 경우임!!!!
 			if(loginMember == null || 
 					loginMember.getMemberNo() !=board.getMemberNo()
 					//게시글 쓴 사람의 회원번호(board.getMemberNo())랑 로그인한 회원의 회원 번호(loginMember.getMemberNo())가 다를 때
@@ -148,12 +143,6 @@ public class BoardController {
 					// "readBoardNo"가 요청 받은 쿠키에 존재할 때
 					// 새 쿠키 생성("readBoardNo", [20][30][400][2000]) 이런 식으로 읽은 게시물 번호를 점점 늘려나갈거다
 					if(c.getValue().indexOf("["+boardNo+"]")==-1) {
-						//다른 글 읽었는데 현재 글은 처음 읽은 경우
-						
-						//값 중에서 이거랑 똑같은 게 있는 지 찾아서 있으면 인덱스번호가 반환됨
-						//값 중에서 이거랑 똑같은 게 없으면 -1이 반환됨
-						
-						//해당 글 번호를 쿠키에 누적해서 더함 여기서는 +=을 쓸 수 없어서
 						c.setValue(c.getValue()+"["+boardNo+"]");
 						result = service.updateReadCount(boardNo);
 					}
@@ -167,11 +156,6 @@ public class BoardController {
 					//쿠키 파일에 대한 기본 설정
 					// 적용 경로 설정
 					c.setPath("/"); // "/" 이하 경로 요청 시(모든 요청 주소) 쿠키 서버로 전달
-					//어떤 요청 주소에 대해서 쿠키를 담아서 서버로 제출을 시킬건지
-					
-					//쿠키에는 수명이 있는데 오늘 밤 23시 59분 59초까지만 쿠키가 유지되게 만들기
-					//내일이 되면 쿠키가 사라져서 다시 조회수를 늘릴 수 있게 된다
-					//하루에 한 번 씩만 특정 게시글의 조회수를 늘릴 수 있는 계산
 					
 					// 수명 지정
 					Calendar cal = Calendar.getInstance(); // 싱글톤 패턴
@@ -196,11 +180,6 @@ public class BoardController {
 
 					resp.addCookie(c); // 응답 객체를 이용해서 클라이언트에게 전달
 					
-					//쿠키를 이용해서 오늘 읽은 글은 또 못읽음
-					//내가 작성한 글이 아닌 남이 작성한 글을 읽을 때에만 조회수 늘어남
-					//한 브라우저로 올릴 수 있는 조회수는 게시글 당 하루 한번밖에 안된다
-					//다른 브라우저로 들어오면 올릴 수 있다(크롬, 엣지,...)
-					//그래서 같은 브라우저로 다른 사람 아이디 로그인해서 해도 조회수 안늘어난다
 				}
 			}
 			/************* 쿠키를 이용한 조회수 증가(끝) **************/
@@ -220,7 +199,6 @@ public class BoardController {
 				/*우리가 imageList의 0번 인덱스를 썸네일로 하기로 우리가 임의로 정했다
 				 * imageList의 0번 인덱스 == 가장 빠른 순서(imgOrder)*/
 				if(board.getImageList().get(0).getImgOrder()==0) {
-					//List[0] 얻어옴
 					//이미지 목록의 첫 번째 행의 순서가 0이다 == 썸네일인 경우
 					//썸네일이 없는 경우는, 0번 인덱스 없을 거다
 					thumbnail = board.getImageList().get(0); //길게 말하기 힘드니까 thumbnail이라는 변수에 저장해둘게
@@ -261,5 +239,22 @@ public class BoardController {
 			//안에 memberNo, boardNo, likeCheck 있다
 			) {
 		return service.boardLike(map);
+	}
+	/**헤더의 검색창으로 검색 시 전체 대륙에서 제목검색으로 
+	 * 게시글 상세 조회 
+	 * + 자기 글일 경우, 게시글 수정 
+	 * @return
+	 */
+	@PostMapping("searchAll")
+	public String searchAll(
+			@RequestParam("query1") String query1,
+			@RequestParam(value="cp", required=false, defaultValue="1") int cp,
+			Model model
+			) {
+		Map<String, Object> map = service.searchAll(query1,cp);
+		model.addAttribute("boardList", map.get("boardList"));
+		model.addAttribute("pagination", map.get("pagination"));
+		model.addAttribute("query1", query1);
+		return "/board/boardList";
 	}
 }

@@ -77,10 +77,22 @@ AND MEMBER_BIRTH = #{memberBirth}
 
 
 
+<select id = "selectPw" resultType="Member">
+SELECT MEMBER_PW 
+FROM "MEMBER"
+WHERE MEMBER_EMAIL = #{memberEmail}
+AND MEMBER_DEL_FL = 'N'
+
+</select>
+
+
+
+
 <update id="memberPwReset">
 UPDATE "MEMBER"
-SET MEMBER_PW = #{encPw}
+SET MEMBER_PW = #{memberPwReset}
 WHERE MEMBER_EMAIL = #{memberEmail}
+AND MEMBER_DEL_FL = 'N'
 
 </update>
 

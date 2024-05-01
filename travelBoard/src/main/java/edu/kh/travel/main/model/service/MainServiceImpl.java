@@ -38,34 +38,29 @@ public class MainServiceImpl implements MainService{
 	
 	
 	
-//	@Override
-//	public int memberPwReset(Map<String, Object> map, String memberEmail) {
-//		
-//		String beforepw = mapper.memberPwReset(memberEmail);
-//		
-//		String nowPw = (String)map.get("nowPw");
-//		
-//		if( !bcrypt.matches(nowPw,pw)) {
-//			
-//			return 0;
-//		} else {
-//			String newPw = bcrypt.encode((String)map.get("newPw"));
-//			
-//			map.put("encPw", encPw);
-//			map.put("memberNo", memberEmail);
-//			
-//			return mapper.memberPwReset(paramMap);
-//			
-//		
-//		
-//	}
-//	
 	@Override
-	public int memberPwReset(Map<String, Object> map, String memberEmail) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int memberPwReset(Map<String, Object> paramMap, String memberEmail) {
+		
+		
+		
+		
+		
+		String memberPwReset =  bcrypt.encode((String)paramMap.get("memberPwReset"));
+		
+		paramMap.put("memberPwReset", memberPwReset);
+		paramMap.put("memberEmail", memberEmail);
+		
+		
+		
+		
+		
+		return mapper.memberPwReset(paramMap);
+	
+	
+	
+
+
+	
 	}
-	
-	
 	
 }
