@@ -9,6 +9,7 @@ import edu.kh.travel.member.model.dto.Member;
 @Mapper
 public interface MainMapper {
 	
-	public Member selectTelBirth(Map<String, Object> map);
+
+	
 
 }

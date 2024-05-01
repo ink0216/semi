@@ -164,7 +164,7 @@ public class MyPageController {
 	@PostMapping("changePw")
 	public String changePw(
 		@RequestParam Map<String, Object> map,
-		@SessionAttribute("loginMember")Member loginMember,
+		@SessionAttribute("loginMember") Member loginMember,
 		RedirectAttributes ra) {
 		
 		int memberNo = loginMember.getMemberNo();

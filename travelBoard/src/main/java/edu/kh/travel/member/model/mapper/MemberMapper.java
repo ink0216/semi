@@ -49,6 +49,18 @@ public interface MemberMapper {
 	public Member selectEmailTelBirth(Map<String, Object> map);
 
 
+	public Member login(Map<String, Object> map);
+
+
+	public String memberPwReset(String memberEmail);
+
+
+
+
+
+
+
+
 	
 
 
