@@ -27,7 +27,7 @@ public interface BoardService {
 	 * @param cp
 	 * @return
 	 */
-	Map<String, Object> searchList(Map<String, Object> paramMap, int cp,String countryCode);
+	Map<String, Object> searchList(Map<String, Object> paramMap, int cp);
 
 	/**해당 게시판에 존재하는 게시글의 나라 이름 종류 조회
 	 * @param contiCode
@@ -53,5 +53,11 @@ public interface BoardService {
 	 * @return
 	 */
 	String countryName(int boardNo);
+
+	/**게시글 좋아요 체크/ 해제
+	 * @param map
+	 * @return
+	 */
+	int boardLike(Map<String, Integer> map);
 
 }

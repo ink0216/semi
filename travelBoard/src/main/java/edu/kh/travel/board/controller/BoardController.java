@@ -12,8 +12,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -33,8 +36,6 @@ import lombok.RequiredArgsConstructor;
 public class BoardController {
 	
 	private final BoardService service;
-//	@GetMapping("{boardCode:[0-9]+}/{boardNo:[0-9]+}") // /board/1/1998?cp=1 이런 식으로 요청 온다(상세 조회 요청 주소 모양)
-//	@GetMapping("/{contiCode:[A-Z]{2}}")
 	
 	/**해당 게시판 전체 게시글 조회+검색 게시글 조회
 	 * @param contiCode
@@ -62,9 +63,11 @@ public class BoardController {
 				}else {
 					//검색을 한 경우
 					paramMap.put("contiCode", contiCode);
-					
+					if(countryCode !=null) {
+						paramMap.put("countryCode", countryCode);
+					}
 					//검색 서비스 호출
-					map = service.searchList(paramMap,cp, countryCode);
+					map = service.searchList(paramMap,cp);
 				}
 		// 해당 게시판 나라 목록 조회하는 서비스 호출 수 model에 추가로 세팅해서 보내기
 		List<Country> countryList = service.countryList(contiCode);
@@ -73,6 +76,7 @@ public class BoardController {
 		model.addAttribute("pagination", map.get("pagination"));
 		model.addAttribute("boardList", map.get("boardList"));
 		model.addAttribute("contiCode", contiCode);
+		model.addAttribute("countryCode", countryCode);
 		return "board/boardList";
 	}
 //	@GetMapping("{boardCode:[0-9]+}/{boardNo:[0-9]+}") // /board/1/1998?cp=1 이런 식으로 요청 온다(상세 조회 요청 주소 모양)
@@ -96,6 +100,8 @@ public class BoardController {
 		Map<String, Object> map = new HashMap<>();
 		map.put("boardNo", boardNo);
 		map.put("contiCode", contiCode);
+		int memberNo = loginMember.getMemberNo();
+		map.put("memberNo", memberNo);
 		
 		Board board = service.selectOne(map);
 		String path=null;
@@ -242,5 +248,18 @@ public class BoardController {
 			model.addAttribute("countryList", countryList);
 		}
 		return path;
+	}
+	
+	/**게시글 좋아요 체크/해제
+	 * @param map
+	 * @return
+	 */
+	@PostMapping("like")
+	@ResponseBody
+	public int boardLike(
+			@RequestBody Map<String, Integer> map
+			//안에 memberNo, boardNo, likeCheck 있다
+			) {
+		return service.boardLike(map);
 	}
 }

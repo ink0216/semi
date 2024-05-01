@@ -11,6 +11,7 @@
 <body>
     <th:block th:replace="~{common/header}"></th:block>
     <th:block th:replace="~{board/sideMenu}"></th:block>
+    <!-- <h1 th:text="|${contiName} 게시판 - ${countryList.countryName}|"></h1> -->
     <h1 th:text="|${contiName} 게시판|"></h1>
     <section class="board-list">
         <!-- 검색 구현 후 사용 -->
@@ -184,7 +185,7 @@
             </select>
 
             <input type="text" name="query"  id="searchQuery" placeholder="검색어를 입력해주세요.">
-
+            <input type="hidden" name="countryCode" th:value="${countryCode}">
             <button>검색</button>
         </form>
 

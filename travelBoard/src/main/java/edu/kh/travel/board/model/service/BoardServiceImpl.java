@@ -81,7 +81,7 @@ public class BoardServiceImpl implements BoardService{
 	
 	//게시글 검색 서비스
 	@Override
-	public Map<String, Object> searchList(Map<String, Object> paramMap, int cp,String countryCode) {
+	public Map<String, Object> searchList(Map<String, Object> paramMap, int cp) {
 		// 1. 지정된 게시판(boardCode)에서 
 				//		검색 조건에 맞으면서
 				//		삭제되지 않은 게시글 수를 조회 -> 그래야 총 몇 페이지 분량의 글이 있는 지 알 수 있어서!
@@ -161,6 +161,25 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public String countryName(int boardNo) {
 		return mapper.countryName(boardNo);
+	}
+	
+	//게시글 좋아요 체크/해제
+	@Override
+	public int boardLike(Map<String, Integer> map) {
+		int result = 0;
+		if(map.get("likeCheck")==1) { //그 회원이 그 게시글에 좋아요 눌렀던 경우
+			result = mapper.deleteBoardLike(map); //또 클릭했으니까 지우기
+		}
+		else { //그 회원이 그 게시글에 좋아요 안눌렀던 경우
+			result = mapper.insertBoardLike(map); //또 클릭했으니까 삽입하기
+		}
+		if(result>0) {
+			//좋아요 삭제나 삽입이 성공한 경우
+			//해당 게시글의 좋아요 수 조회해서 반환해주기
+			return mapper.selectLikeCount(map.get("boardNo"));
+		}
+		//좋아요 삭제나 삽입이 실패한 경우
+		return -1;
 	}
 	//------------------------------------------------------------------------------
 	
