@@ -77,5 +77,15 @@ AND MEMBER_BIRTH = #{memberBirth}
 
 
 
+<update id="memberPwReset">
+UPDATE "MEMBER"
+SET MEMBER_PW = #{encPw}
+WHERE MEMBER_EMAIL = #{memberEmail}
+
+</update>
+
+
+
+
 
 </mapper>

@@ -1,5 +1,7 @@
 package edu.kh.travel.myPage.model.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import edu.kh.travel.board.model.dto.Board;
@@ -38,11 +40,12 @@ public interface MyPageMapper {
 	 */
 	int updateInfo(Member inputMember);
 
-	/**내가 쓴글 조회
-	 * @param board
+
+
+	/**
 	 * @param memberNo
 	 * @return
 	 */
-	int writing(Board board, int memberNo);
+	List<Board> writing(int memberNo);
 
 }

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.kh.travel.main.model.service.MainService;
@@ -19,6 +20,7 @@ import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
+
 public class MainController {
 	
 	private final MainService service;
@@ -83,7 +85,7 @@ public class MainController {
 	 * @param memberTel
 	 * @return
 	 */
-	@GetMapping("selectTelBirth")
+	@PostMapping("selectTelBirth")
 	public String selectTelBirth(
 			@RequestParam("inputTel") String inputTel,
 			@RequestParam("inputBirth") String inputBirth, Model model) {
@@ -136,7 +138,7 @@ public class MainController {
 	 * @param model
 	 * @return
 	 */
-	@GetMapping("selectEmailTelBirth")
+	@PostMapping("selectEmailTelBirth")
 	public String selectEmailTelBirth(
 			@RequestParam("inputEmail") String inputEmail,
 			@RequestParam("inputTel") String inputTel,
@@ -161,6 +163,7 @@ public class MainController {
 			
 			path = "member/searchPwReset";
 			
+			
 			model.addAttribute("member",member);
 		}
 	
@@ -171,8 +174,9 @@ public class MainController {
 	
 	
 	
+	
 	/**
-	 * 비밀번호 변경하기(
+	 * 비밀번호 변경하기(이메일을 얻어옴)
 	 * @param inputMember
 	 * @param paramMap
 	 * @param ra
@@ -180,12 +184,35 @@ public class MainController {
 	 */
 	@ResponseBody
 	@PostMapping("memberPwReset")
-	public String memberPwReset()
-			 
-	
+	public String memberPwReset(
+			@RequestParam Map<String, Object> map,
+			Member inputMember,
+			RedirectAttributes ra)
 	{
+		String memberEmail = inputMember.getMemberEmail();
 		
-		return null;
+		int result = service.memberPwReset(map, memberEmail);
+		
+		
+		String path = null;
+		
+		if(result > 0) {
+			
+			path = "member/pwResult";
+		} else {
+			
+			path = "/searchPw";
+		}
+		
+	
+		
+		return path;
+		
+	
+		
+		
+		
+		
 	}
 	
 	
