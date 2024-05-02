@@ -38,6 +38,12 @@ public interface EditBoardService {
 	 */
 	int boardDelete(Map<String, Object> map);
 
+	/**해당 대륙코드에 맞는 대륙명 얻어오기
+	 * @param contiCode
+	 * @return
+	 */
+	String contiName(String contiCode);
+
 
 
 }

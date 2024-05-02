@@ -222,4 +222,10 @@ public class EditBoardServiceImpl implements EditBoardService{
 	public int boardDelete(Map<String, Object> map) {
 		return mapper.boardDelete(map);
 	}
+	
+	//해당 대륙코드에 맞는 대륙명 얻어오기
+	@Override
+	public String contiName(String contiCode) {
+		return mapper.contiName(contiCode);
+	}
 }

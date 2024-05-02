@@ -18,10 +18,11 @@
             enctype ="application/x-www-form-urlencoded" ->제출되는 데이터를 다 문자열로 제출
                         ->파일은 문자열이 아니어서 이걸로 하면 파일의 제목만 제출되는 문제가 있다-->
                         <!-- multipart/form-data이거 하면 파일 외는 다 문자열로 제출되고 파일은 파일로 -->
+        <h1 th:text="|${contiName} 게시판|"></h1>
         <form action="insert" 
             th:object="${board}"
             method="POST"  class="board-write" id="boardWriteFrm" enctype="multipart/form-data">  
-            select
+            국가를 선택하세요 : 
             <select name="countryNameSelect">
                 <option th:each=" country2: ${countryList2}" th:text="${country2.countryName}" th:value="${country2.countryCode}">대륙별 국가이름</option>
             </select>

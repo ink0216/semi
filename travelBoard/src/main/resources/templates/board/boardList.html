@@ -331,7 +331,7 @@
 
 
         <!-- 검색창 -->
-        <form th:action="@{{contiCode}(contiCode=${contiCode})}" method="get" id="boardSearch">
+        <form th:action="@{{contiCode}(contiCode=*{contiCode})}" method="get" id="boardSearch">
         
 
             <select name="key" id="searchKey">
@@ -342,7 +342,7 @@
             </select>
 
             <input type="text" name="query"  id="searchQuery" placeholder="검색어를 입력해주세요.">
-            <input type="hidden" name="countryCode" th:value="${countryCode}">
+            <!-- <input type="hidden" name="countryCode" th:value="${countryCode}"> -->
             <button>검색</button>
         </form>
 

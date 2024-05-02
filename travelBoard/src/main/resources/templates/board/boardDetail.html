@@ -18,10 +18,11 @@
     <main>
         <th:block th:replace="~{common/header}"></th:block>
         <th:block th:replace="~{board/sideMenu}"></th:block>
+        <h1 th:text="|${contiName} 게시판|"></h1>
         <section class="board-detail" th:object="${board}">  
             <!-- 제목 -->
-            <h1 class="board-title" 
-            th:text="|${countryName} ) *{boardTitle}|">  게시글 제목  </h1>
+            <h2 class="board-title" 
+            th:text="|${countryName} ) *{boardTitle}|">  게시글 제목  </h2>
             <!-- 프로필 + 닉네임 + 작성일 + 조회수 -->
             <div class="board-header">
                 <div class="board-writer">

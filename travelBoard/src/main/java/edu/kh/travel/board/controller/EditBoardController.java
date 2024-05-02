@@ -44,6 +44,10 @@ public class EditBoardController {
 		model.addAttribute("contiCode", contiCode);
 		model.addAttribute("countryList2", countryList2);
 		
+		//해당 대륙코드에 따른 대륙명 얻어오는 서비스 호출
+		String contiName = service.contiName(contiCode);
+		model.addAttribute("contiName", contiName);
+		
 		List<Country> countryList = boardService.countryList(contiCode);
 		//넘어온 contiCode 값에 맞는 게시판의 게시글 목록 조회하는 서비스 호출
 		model.addAttribute("countryList", countryList);
