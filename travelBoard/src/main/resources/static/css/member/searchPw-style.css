@@ -17,7 +17,7 @@ body {
 }
 
 #telnumber{
-
+    margin-top:15px;
     font-size:24px;
 }
 
@@ -80,7 +80,7 @@ body {
 
 }
 
-#inputAuthKey{
+#authKey{
     width: 300px;
     padding: 10px;
     margin-bottom: 30px;
@@ -139,3 +139,6 @@ body {
 
     cursor:pointer;
 }
+
+.confirm{color : green;}
+.error{color:red;}

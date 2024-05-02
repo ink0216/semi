@@ -90,6 +90,10 @@ element.style{
     
 }
 
+a{
+    text-decoration: none;
+    color:black;
+}
 
 /* .fa-circle-info:hover{
     cursor:pointer
@@ -119,16 +123,16 @@ label[for="toggle"]{
 .explain{
     position: absolute;
     width: 450px;
-    height: 200px;
+    height: 130px;
     margin-top: 5px;
     border: 2px solid skyblue;
     background-color: white;
-    top:250px;
+    top:300px;
     
     
     border-radius: 10px;
     text-align: left;
-    left: 400px;
+    left: 360px;
 }
 
 
