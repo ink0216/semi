@@ -195,6 +195,10 @@ if(updateInfo!= null){
       return;
     }
 
+
+    })
+
+
     // 전화번호 유효성 검사
     if(memberTel.value.trim().length==0){
       alert("전화번호를 입력해 주세요");
@@ -303,7 +307,7 @@ if(secession != null){
 
     let str;
 
-    if(memberId.value.trim().length == 0) str("아이디를 입력해주세요");
+    if(memberId.value.trim().length == 0) str("아이디를 입력해주세요")
     else if(memberPw.value.trim().length ==0) str("비밀번호를 입력해 주세요");
 
     if(str != undefined){
@@ -318,7 +322,7 @@ if(secession != null){
       return;
     }
 
-    if( !confirm("정말 탈퇴하시겠습니다?")){ //취소 선택시
+    if( !confirm("정말 탈퇴하시겠습니까?")){ //취소 선택시
       alert("취소 되었습니다");
       e.preventDefault();
       return;

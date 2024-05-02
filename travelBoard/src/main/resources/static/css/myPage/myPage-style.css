@@ -1,7 +1,7 @@
 .main-content{
 
   display: flex;
-  width: 1000px;
+  width: 1200px;
   min-height: 750px;
   margin: 5px ;
 }
@@ -238,6 +238,9 @@ button:hover{
 .list-table tr > *{
   height: 50px;
   text-align: center;
+}
+.list-table tr > :nth-child(3){
+  max-width: 200px;
 }
 
 .list-table > thead{
