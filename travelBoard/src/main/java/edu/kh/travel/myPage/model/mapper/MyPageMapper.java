@@ -51,9 +51,10 @@ public interface MyPageMapper {
 	/** 내가쓴 글
 	 * @param memberNo
 	 * @param rowBounds 
+	 * @param rowBounds 
 	 * @return
 	 */
-	List<Board> writing(int memberNo);
+	List<Board> writing(int memberNo, RowBounds rowBounds);
 
 
 }
