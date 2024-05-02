@@ -215,6 +215,8 @@ SELECT BOARD_NO, BOARD_TITLE, MEMBER_NICKNAME, READ_COUNT,COUNTRY_NAME,
 		JOIN "COUNTRY" USING (COUNTRY_CODE)
 		JOIN "CONTINENT" USING (CONTI_CODE)
 		WHERE CONTI_CODE = #{contiCode}
+		AND BOARD_DEL_FL = 'N'
+		ORDER BY COUNTRY_NAME 
 		
 		</select>
 	<!-- ===================================================================== -->
