@@ -148,11 +148,17 @@ public class MyPageServiceImpl implements MyPageService{
 		
 		int listCount = mapper.getListCount(memberNo);
 		
-		Pagination pagination = new Pagination(listCount,cp);
+		Pagination pagination = new Pagination(cp,listCount);
+		
+		int limit = pagination.getLimit(); //limit 얻어오기
+		int offset = (cp-1)*limit;
+		//3페이지 보고싶으면 앞의 20개는 건너뛰고 열 개 조회하면 됨
+		
+		RowBounds rowBounds = new RowBounds(offset, limit); 
 		
 		Map<String, Object> map = new HashMap<>();
 		map.put("pagination", pagination);
-		List<Board> boardList = mapper.writing(memberNo);
+		List<Board> boardList = mapper.writing(memberNo,rowBounds);
 		map.put("boardList", boardList);
 		return map;
 		
