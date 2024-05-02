@@ -59,7 +59,7 @@
 	<!-- 게시글 이미지 새 이미지로 수정 -->
 	<update id="updateImage">
 		UPDATE "BOARD_IMG"
-		SET IMG_ORIGINAL_NAME = #{imgOriginalName},
+		SET 
 		IMG_RENAME = #{imgRename}
 		WHERE BOARD_NO = #{boardNo}
 		AND IMG_ORDER = #{imgOrder}
@@ -69,8 +69,8 @@
 	<!-- 게시글에 새 이미지 삽입 1행씩 -->
 	<insert id="insertImage">
 		INSERT INTO "BOARD_IMG"
-		VALUES(NEXT_IMG_NO(), #{imgPath}, #{imgOriginalName}, 
-		#{imgRename}, #{imgOrder}, #{boardNo})
+		VALUES(NEXT_IMG_NO(), #{imgOrder}, 
+		#{imgRename}, #{boardNo}, #{imgPath})
 	</insert>
 	
 	<!--게시글 삭제  -->
@@ -80,4 +80,9 @@
 		WHERE BOARD_NO     = #{boardNo}
 		AND MEMBER_NO    = #{memberNo}
 	</delete>
+	
+	<!-- 해당 대륙코드에 맞는 대륙명 얻어오기 -->
+	<select id="contiName">
+		SELECT CONTI_NAME FROM "CONTINENT" WHERE CONTI_CODE = #{contiCode}
+	</select>
 </mapper>

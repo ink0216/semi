@@ -12,9 +12,10 @@
     <main>
         <th:block th:replace="~{common/header}"></th:block>
         <th:block th:replace="~{board/sideMenu}"></th:block>
+        <h1 th:text="|${contiName} 게시판|"></h1>
         <form th:action="@{update}" th:object="${board}" method="POST" 
             class="board-write" id="boardUpdateFrm" enctype="multipart/form-data">  
-            select
+            국가를 선택하세요 : 
             <select name="countryNameSelect">
                 <option th:each=" country2: ${countryList2}" th:text="${country2.countryName}" th:value="${country2.countryCode}">대륙별 국가이름</option>
             </select>

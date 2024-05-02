@@ -6,7 +6,11 @@
     margin: 50px auto;
     padding: 20px;
 }
-
+h1{
+    color : skyblue;
+    margin-left : 250px;
+    margin-top: 50px;
+}
 /* ******************************************************** */
     /* 사이드 메뉴 */
 
