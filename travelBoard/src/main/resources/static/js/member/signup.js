@@ -70,7 +70,7 @@ memberEmail.addEventListener("input", e => {
 
   
     // 이메일 인증을 성공하고 이메일이 변경된 경우
-    checkObj.authkey = false;
+    checkObj.authKey = false;
     document.querySelector("#authKeyMessage").innerText = "";
 
     // 공백을 제거한 이메일 입력이 없는 경우
@@ -562,37 +562,37 @@ const signUpForm = document.querySelector("#signUpForm");
 
 
 signUpForm.addEventListener("submit",e => {
-for(let key in checkObj){
+    for(let key in checkObj){
 
-    let str; 
-
-    if(!checkObj[key]){
-    // 메시지 출력용 변수
         
 
-    switch(key){
-        case "memberEmail" : str = "이메일이 유효하지 않습니다."; break;
-        case "authKey" : str = "이메일이 인증되지 않았습니다."; break;
-        case "memberPw" : str = "비밀번호가 유효하지 않습니다."; break;
-        case "memberPwConfirm" : str = "비밀번호 확인이 유효하지 않습니다."; break;
-        case "memberNickname" : str = "닉네임이 유효하지 않습니다."; break;
-        case "memberTel" : str = "전화번호가 유효하지 않습니다."; break;
-        case "memberBirth" : str = "생년월일이 유효하지 않습니다."; break;
+        if(!checkObj[key]){
+        // 메시지 출력용 변수
+            let str; 
+
+            alert(key);
+
+            switch(key){
+                case "memberEmail" : str = "이메일이 유효하지 않습니다."; break;
+                case "authKey" : str = "이메일이 인증되지 않았습니다."; break;
+                case "memberPw" : str = "비밀번호가 유효하지 않습니다."; break;
+                case "memberPwConfirm" : str = "비밀번호 확인이 유효하지 않습니다."; break;
+                case "memberNickname" : str = "닉네임이 유효하지 않습니다."; break;
+                case "memberTel" : str = "전화번호가 유효하지 않습니다."; break;
+                case "memberBirth" : str = "생년월일이 유효하지 않습니다."; break;
+            }
+            alert(str);
+
+
+            document.getElementById(key).focus();
+
+            e.preventDefault();
+            return;
+        }
     }
-    alert(str);
 
 
-    document.getElementById(key).focus();
-
-    e.preventDefault();
-    return;
-}
-}
-
-
-}
-
-);
+});
 
 
 
