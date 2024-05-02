@@ -68,3 +68,8 @@ body {
     font-size: 20px;
     margin-bottom:30px;
 }
+
+#submit:hover{
+
+    cursor:hover;
+}
