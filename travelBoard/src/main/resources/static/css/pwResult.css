@@ -10,9 +10,10 @@ body {
 }
 
 
-#gotoBackBtn{
 
-    width:110px;
+#gotoMain{
+
+    width:170px;
     height:45px;
     background-color: skyblue;
     border:1px solid skyblue;
@@ -21,7 +22,7 @@ body {
     margin-left:15px;
 }
 
+#gotoMain:hover{
 
-#gotoBackBtn:hover{
     cursor:pointer;
 }

@@ -3,16 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ID 찾기</title>
+    <title>이메일 찾기</title>
     <link rel="stylesheet" href="/css/idResult.css">
 </head>
 <body>
-   
+
+   <!-- <p id= "emailMessage" th:text="${member.memberEmail}"></p> -->
+
+   <!-- "${text[0]} + '*' + #strings.substring(text, 2)}" -->
 
     <h1>입력한 정보와 일치하는 이메일을 찾았습니다.
         <div id="email">
            
-        <p id= "emailMessage" th:text="${member.memberEmail}"></p>
+            <p id= "emailMessage" th:text= "${member.memberEmail.substring(0, 1)} + '*' + ${member.memberEmail.substring(2)}"></p>
            
         </div>
     

@@ -564,11 +564,11 @@ const signUpForm = document.querySelector("#signUpForm");
 signUpForm.addEventListener("submit",e => {
 for(let key in checkObj){
 
-   
+    let str; 
 
     if(!checkObj[key]){
     // 메시지 출력용 변수
-        let str; 
+        
 
     switch(key){
         case "memberEmail" : str = "이메일이 유효하지 않습니다."; break;
@@ -636,7 +636,7 @@ checkAuthKeyBtn.addEventListener("click",() => {
 
         clearInterval(authTimer);
 
-        authKeyMessage.classList.innerText = "이메일이 인증되었습니다.";
+        authKeyMessage.innerText = "이메일이 인증되었습니다.";
 
         authKeyMessage.classList.remove("error");
 
