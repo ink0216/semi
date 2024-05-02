@@ -24,7 +24,7 @@ select{
         width: 15%;
         border-right: 2px solid #ffffff;
         background-color: skyblue;
-        margin-top : 300px;
+        margin-top : 150px;
         float: left;
         z-index: 10;
     }
