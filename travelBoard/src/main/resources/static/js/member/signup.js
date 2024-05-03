@@ -46,10 +46,10 @@ const checkObj = {
     "memberEmail" : false,
     "memberPw" : false,
     "memberPwConfirm" : false,
+    "memberBirth" : false,
     "memberNickname" : false,
     "memberTel" : false,
     "authKey" : false,
-    "memberBirth" : false
 };
 
 const memberEmail = document.querySelector("#memberEmail");
@@ -258,6 +258,58 @@ memberPwConfirm.addEventListener("input", () => {
  
     checkObj.memberPwConfirm = false;
   });
+
+
+
+/* 생년월일 관련 유효성 검사 */
+
+const memberBirth = document.querySelector("#memberBirth");
+const birthMessage = document.querySelector("#birthMessage");
+
+
+memberBirth.addEventListener("input", e =>{
+
+    const inputBirth = e.target.value;
+
+
+    // 생년월일을 입력안했을 경우
+    if(inputBirth.trim().length == 0) {
+
+        birthMessage.innerText = "생년월일을 입력해주세요."
+        birthMessage.classList.remove('confirm','error');
+        checkObj.memberBirth = false;
+        memberBirth.value = "";
+        return;
+    }
+
+
+    // 생년월일 정규식
+    const regExp = /^(19[0-9][0-9]|20\d{2})(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/;
+
+
+    // 입력한 생년월일이 정규식과 맞지않음
+
+    if(!regExp.test(inputBirth)){
+
+        birthMessage.innerText = "올바른 생년월일 형식이 아닙니다.";
+
+        birthMessage.classList.add('error');
+
+        birthMessage.classList.remove('confirm');
+
+        checkObj.memberBirth = false;
+
+        return;
+
+    }
+    birthMessage.innerText = "올바른 생년월일 형식입니다.";
+    birthMessage.classList.add('confirm');
+    birthMessage.classList.remove('error');
+    checkObj.memberBirth = true;
+
+
+});
+
 
 
 
@@ -499,56 +551,6 @@ function addZero(number){
 
 
 
-/* 생년월일 관련 유효성 검사 */
-
-const memberBirth = document.querySelector("#memberBirth");
-const birthMessage = document.querySelector("#birthMessage");
-
-
-memberBirth.addEventListener("input", e =>{
-
-    const inputBirth = e.target.value;
-
-
-    // 생년월일을 입력안했을 경우
-    if(inputBirth.trim().length === 0) {
-
-        birthMessage.innerText = "생년월일을 입력해주세요."
-        birthMessage.classList.remove('confirm','error');
-        checkObj.memberBirth = false;
-        memberBirth.value = "";
-        return;
-    }
-
-
-    // 생년월일 정규식
-    const regExp = /^(19[0-9][0-9]|20\d{2})(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/;
-
-
-    // 입력한 생년월일이 정규식과 맞지않음
-
-    if(!regExp.test(inputBirth)){
-
-        birthMessage.innerText = "올바른 생년월일 형식이 아닙니다.";
-
-        birthMessage.classList.add('error');
-
-        birthMessage.classList.remove('confirm');
-
-        checkObj.memberBirth = false;
-
-        return;
-
-    }
-    birthMessage.innerText = "올바른 생년월일 형식입니다.";
-    birthMessage.classList.add('confirm');
-    birthMessage.classList.remove('error');
-    checkObj.memberBirth = true;
-
-
-});
-
-
 
 
 
@@ -570,16 +572,16 @@ signUpForm.addEventListener("submit",e => {
         // 메시지 출력용 변수
             let str; 
 
-            alert(key);
+        
 
             switch(key){
                 case "memberEmail" : str = "이메일이 유효하지 않습니다."; break;
                 case "authKey" : str = "이메일이 인증되지 않았습니다."; break;
                 case "memberPw" : str = "비밀번호가 유효하지 않습니다."; break;
                 case "memberPwConfirm" : str = "비밀번호 확인이 유효하지 않습니다."; break;
+                case "memberBirth" : str = "생년월일이 유효하지 않습니다."; break;
                 case "memberNickname" : str = "닉네임이 유효하지 않습니다."; break;
                 case "memberTel" : str = "전화번호가 유효하지 않습니다."; break;
-                case "memberBirth" : str = "생년월일이 유효하지 않습니다."; break;
             }
             alert(str);
 
