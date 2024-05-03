@@ -196,8 +196,7 @@ if(updateInfo!= null){
     }
 
 
-    })
-
+    
 
     // 전화번호 유효성 검사
     if(memberTel.value.trim().length==0){
